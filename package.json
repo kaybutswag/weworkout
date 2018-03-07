@@ -1,0 +1,23 @@
+{
+  "name": "weworkout",
+  "version": "1.0.0",
+  "description": "Find a workout buddy",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaybutswag/weworkout.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaybutswag/weworkout/issues"
+  },
+  "homepage": "https://github.com/kaybutswag/weworkout#readme",
+  "dependencies": {
+    "mysql2": "^1.5.2"
+  }
+}
