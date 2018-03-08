@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+		<link rel="stylesheet" href="/css/style.css" type="text/css" />
+		<title>Kinections | Profile</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="/js/logic.js"></script>
+	</head>
+	<body>
+
+		<header>
+			<button id="people">People</button>
+			<!-- will be replaced by the logo -->
+			<h1>Kinections</h1>
+			<button id="kinections">Kinections</button>
+		</header>
+
+		<!-- temporary to display header/body separation -->
+		<hr>
+
+		<form>
+
+			<h2>Tell us about yourself!</h2>
+			<label for="name">First Name: </label>
+			<input type="text" name="name" value="John"><br>
+
+			<label for="picture">Image Upload</label><br>
+			<!-- I don't know how we do this -->
+			<input type="file" name="picture" accept="image/*">
+			<button id="image upload">Upload</button><br>
+
+			<label for="gender">Gender</label><br>
+			<input type="radio" name="gender" value="male" checked> Male<br>
+ 			<input type="radio" name="gender" value="female"> Female<br>
+			<input type="radio" name="gender" value="other"> Other<br>
+			
+			<label for="age">Age: </label>
+			<input type="number" name="age" value="25"><br>
+			
+			<!-- search form will default to this location if we are unable to determine their current location -->
+			<!-- will need some tooling to validate and give us usable info -->
+			<label for="location">Primary Location: </label>
+			<input type="text" name="location" value="Austin, TX"><br>
+
+			<!-- will need to be reworked into a drop down or search field of some sort because of the number of options -->
+			<label for="interests">How do you like to be active?</label><br>
+			<input type="checkbox" name="interests" value="weightlift">Weightlifting<br>
+			<input type="checkbox" name="interests" value="run">Running<br>
+			<input type="checkbox" name="interests" value="walk">Walking<br>
+			<input type="checkbox" name="interests" value="swim">Swimming<br>
+			<input type="checkbox" name="interests" value="surf">Surfing<br>
+			<input type="checkbox" name="interests" value="bike">Biking<br>
+			<input type="checkbox" name="interests" value="dance">Dancing<br>
+			<input type="checkbox" name="interests" value="rock">Rock Climbing<br>
+			<input type="checkbox" name="interests" value="gymnastics">Gymnastics<br>
+			<input type="checkbox" name="interests" value="bowl">Bowling<br>
+			<input type="checkbox" name="interests" value="row">Rowing<br>
+			<input type="checkbox" name="interests" value="tennis">Tennis<br>
+			<input type="checkbox" name="interests" value="baseball">Baseball<br>
+			<input type="checkbox" name="interests" value="basketball">Basketball<br>
+			<input type="checkbox" name="interests" value="football">Football<br>
+			<input type="checkbox" name="interests" value="soccer">Soccer<br>
+			<input type="checkbox" name="interests" value="rugby">Rugby<br>
+			<input type="checkbox" name="interests" value="volleyball">Volleyball<br>
+			<input type="checkbox" name="interests" value="golf">Golf<br>
+			<input type="checkbox" name="interests" value="hockey">Hockey<br>
+			<input type="checkbox" name="interests" value="ice">Ice Skating<br>
+			<input type="checkbox" name="interests" value="skateboard">Skateboarding<br>
+
+
+
+
+			<h3>Ability Level (optional)</h3>
+			<label for="bench">Max Bench Press: </label>
+			<input type="number" name="bench" value="100">(lbs)<br>
+
+			<label for="squat">Max Squat: </label>
+			<input type="number" name="squat" value="150">(lbs)<br>
+			
+			<label for="deadlift">Max Deadlift: </label>
+			<input type="number" name="deadlift" value="175">(lbs)<br>
+			
+			<label for="runMile">Fastest Mile (running): </label>
+			<input type="number" name="runMile" value="8">(minutes)<br>
+
+			<h3>Short Bio</h3>
+			<textarea name="bio" cols=50 rows=10>Some awesome things about me...</textarea><br>
+
+			<input type="submit" name="submit" value="submit">
+
+		</form>
+	</body>
+</html>
