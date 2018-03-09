@@ -18,4 +18,9 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/profile.html"));
   });
 
+  // blog route loads blog.html
+  app.get("/maps", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/maps.html"));
+  });
+
 };
