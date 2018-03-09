@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/kaybutswag/weworkout#readme",
   "dependencies": {
-    "mysql2": "^1.5.2"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mysql2": "^1.5.2",
+    "sequelize": "^4.35.2"
   }
 }
