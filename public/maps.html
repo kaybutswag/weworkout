@@ -20,6 +20,73 @@
   <body>
     <div id="map"></div>
     <script>
+    var users = [
+      {
+      "firstName":"Jack",
+      "img":"https://thegreenprogram.com/uploads/attachments/cisc7g4v50042gzgzfe1a15j9-charles-white1.100.0.399.399.full.jpg",
+      "gender":"Male",
+      "age":"18",
+      "location": {"lat": 30.267153, "lng": -97.74306079999997},
+      "activities":[
+         "running",
+         "swimming"
+      ],
+      "bench":"225",
+      "squat":"300",
+      "deadlift":"250",
+      "fastestMile":"7",
+      "activityForToday": "weights",
+      "available": "true",
+      "workoutWindowStart" : "2:00 pm",
+      "workoutWindowEnd" : "4:00 pm",
+      "bio":"Lift to failure",
+      "email":"sample1@gmail.com",
+      "password":"password1"
+   },
+   {
+      "firstName":"Jenny",
+      "img":"http://adventuresinbrainsurgery.com/wp-content/uploads/2013/03/Jenny-Head-HiRez.jpg",
+      "gender":"Female",
+      "age":"19",
+      "location":{"lat": 30.287153, "lng": -97.72306079999997},
+      "activities":[
+         "yoga",
+         "quidditch"
+      ],
+      "bench":"50",
+      "squat":"45",
+      "deadlift":"20",
+      "fastestMile":"9",
+      "activityForToday": "running",
+      "available": "true",
+      "workoutWindowStart" : "8:00 am",
+      "workoutWindowEnd" : "11:00 am",
+      "bio":"Quidditch for live.",
+      "email":"sample2@gmail.com",
+      "password":"password2"
+   },
+   {
+      "firstName":"Alberto",
+      "img":"https://pbs.twimg.com/profile_images/448954576457052160/aPD68Gau.jpeg",
+      "gender":"Male",
+      "age":"19",
+      "location":{"lat": 30.237153, "lng": -97.79306079999997},
+      "activities":[
+         "weights",
+         "cardio"
+      ],
+      "bench":"50",
+      "squat":"45",
+      "deadlift":"20",
+      "fastestMile":"9",
+      "activityForToday": "running",
+      "available": "true",
+      "workoutWindowStart" : "8:00 am",
+      "workoutWindowEnd" : "11:00 am",
+      "bio":"No pain no gain",
+      "email":"sample2@gmail.com",
+      "password":"password2"
+   }]
       // Note: This example requires that you consent to location sharing when
       // prompted by your browser. If you see the error "The Geolocation service
       // failed.", it means you probably did not give permission for the browser to
@@ -32,24 +99,42 @@
         });
         infoWindow = new google.maps.InfoWindow;
         //markers
-        var markers = [
-          {lat: 30.267153, lng: -97.74306079999997},
-          {lat: 30.287153, lng: -97.72306079999997},
-          {lat: 30.247153, lng: -97.76306079999997},
-        ];
+        // var markers = [
+        //   {lat: 30.267153, lng: -97.74306079999997},
+        //   {lat: 30.287153, lng: -97.72306079999997},
+        //   {lat: 30.247153, lng: -97.76306079999997},
+        // ];
+        var markers = [];
+        for(var i=0; i<users.length; i++){
+          markers.push(users[i].location)
+        }
         var content = "My Match ";
+        var image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPRzjlzH4hzp6H3P2vR3j5QzZApE8gQJfmA9Rwl07Z5AzAFkx8CQ"
         for(var i=0; i<markers.length; i++){
-          var test = new google.maps.Marker({
-            position: markers[i],
-            map: map
-          });
-          var infowindow = new google.maps.InfoWindow();
-          google.maps.event.addListener(test,'click', (function(test,content,infowindow, i){
-            return function() {
-              infowindow.setContent(content + i);
-              infowindow.open(map,test);
-            };
-          })(test,content,infowindow, i));
+          if(users[i].available === "true"){
+            if(users[i].gender === 'Male'){
+            var test = new google.maps.Marker({
+              position: markers[i],
+              map: map,
+              icon:  "https://a7babzorona.de/file/icon/19.gif"
+            });
+            }
+            else{
+            var test = new google.maps.Marker({
+              position: markers[i],
+              map: map,
+              icon: image
+            });
+            }
+
+            var infowindow = new google.maps.InfoWindow();
+            google.maps.event.addListener(test,'click', (function(test,content,infowindow, i){
+              return function() {
+                infowindow.setContent('<IMG style="padding-right:10px;" HEIGHT="100PX" WIDTH="100PX" BORDER="0" ALIGN="Left" SRC=' + users[i].img+ '><span> My name is ' + users[i].firstName + "<br>" + users[i].bio + " <br> <br>Workout Window: " + users[i].workoutWindowStart + "-" +  users[i].workoutWindowEnd +"</span>");
+                infowindow.open(map,test);
+              };
+            })(test,content,infowindow, i));
+          }
         }
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
