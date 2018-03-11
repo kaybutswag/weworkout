@@ -15,6 +15,24 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         len: [8]
       }
+    },
+    latitude: {
+      type: DataTypes.DOUBLE,
+      allowNull: true,
+      defaultValue: null,
+      validate: {
+        min: -90,
+        max: 90
+      }
+    },
+    longitude: {
+      type: DataTypes.DOUBLE,
+      allowNull: true,
+      defaultValue: null,
+      validate: {
+        min: -180,
+        max: 180
+      }
     }
   });
   return User;

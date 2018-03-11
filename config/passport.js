@@ -13,18 +13,14 @@ passport.use(new LocalStrategy(
 				email: email
 			}
 		}).then(function(dbUser){
-			if(!dbUser)
-				return done(null, false,
-				{
-					message: "Sorry. We could not find that user."
-				});
+			if(!dbUser) {
+				return done(null, false, "user");
+			}
 			else if(dbUser.password !== password)
-				return done(null, false, 
-				{
-					message: "The password you entered is incorrect."
-				});
-			else
-				return done(null, dbUser);
+				return done(null, false, "password");
+			else {
+				return done(null, dbUser, "correct");
+			}
 		});
 	}
 ));
