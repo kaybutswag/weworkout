@@ -1,76 +1,72 @@
 var db = require("../models");
+var passport = require("../config/passport.js")
 
-// This is from blog example
-// =============================================================
 module.exports = function(app) {
 
   // GET route for getting all of the posts
-  app.get("/api/posts/", function(req, res) {
-    db.Post.findAll({})
-    .then(function(dbPost) {
-      res.json(dbPost);
+  app.post("/api/test-new-user", function(req, res, next) {
+    var newEmail = req.body.email;
+    var newPassword = req.body.password;
+    var newLatitude = req.body.latitude;
+    var newLongitude = req.body.longitude;
+
+    if(newLatitude === "")
+      newLatitude = null;
+    if(newLongitude === "")
+      newLongitude = null;
+
+    db.User.create({
+      email: newEmail,
+      password: newPassword,
+      latitude: newLatitude,
+      longitude: newLongitude
+    }).then(function() {
+      req.login({email: newEmail}, function(err){
+        if(err)
+          res.json(err);
+        else
+          res.end();
+      });
+    }).catch(function(error){
+      res.json(error); 
     });
   });
 
-  // Get route for returning posts of a specific category
-  app.get("/api/posts/category/:category", function(req, res) {
-    db.Post.findAll({
-      where: {
-        category: req.params.category
+  app.post("/api/test-login-user", function(req, res, next) {
+    passport.authenticate("local", function(error, user, info){
+      if(error)
+        return res.json("error");
+      else if (user === false){
+        return res.json(info);
       }
-    })
-    .then(function(dbPost) {
-      res.json(dbPost);
-    });
-  });
-
-  // Get rotue for retrieving a single post
-  app.get("/api/posts/:id", function(req, res) {
-    db.Post.findOne({
-      where: {
-        id: req.params.id
+      else {
+        req.login(user, function(err){
+          if(err)
+            return next(err);
+          else
+            return res.json(info);
+        });
       }
-    })
-    .then(function(dbPost) {
-      res.json(dbPost);
-    });
+    })(req, res, next);
   });
 
-  // POST route for saving a new post
-  app.post("/api/posts", function(req, res) {
-    console.log(req.body);
-    db.Post.create({
-      title: req.body.title,
-      body: req.body.body,
-      category: req.body.category
-    })
-    .then(function(dbPost) {
-      res.json(dbPost);
-    });
-  });
-
-  // DELETE route for deleting posts
-  app.delete("/api/posts/:id", function(req, res) {
-    db.Post.destroy({
+  app.put("/api/update-location", function(req, res) {
+    db.User.update({
+      latitude: req.body.latitude,
+      longitude: req.body.longitude
+    }, {
       where: {
-        id: req.params.id
+        email: req.user.email
       }
-    })
-    .then(function(dbPost) {
-      res.json(dbPost);
+    }).then(function(response){
+      console.log("updated location");
+      res.end();
     });
   });
 
-  // PUT route for updating posts
-  app.put("/api/posts", function(req, res) {
-    db.Post.update(req.body,
-      {
-        where: {
-          id: req.body.id
-        }
-      })
-    .then(function(dbPost) {
-      res.json(dbPost);
-    });
+  app.get("/logout", function(req, res){
+    req.logout();
+    res.redirect("/test-login");
   });
+  
 };

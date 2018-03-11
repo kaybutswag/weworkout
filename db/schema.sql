@@ -1,3 +1,1 @@
-DROP DATABASE IF EXISTS users;
-
-CREATE DATABASE users;
+CREATE DATABASE kinnections_users;
