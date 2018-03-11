@@ -16,8 +16,14 @@ module.exports = function(app) {
   app.get("/test-success", isAuthenticated, function(req, res) {
     res.sendFile(path.join(__dirname, "../public/test-success.html"));
   });
+  
+//   app.get("/maps", function(req, res) {
+//     res.sendFile(path.join(__dirname, "../public/maps.html"));
+//   });
 
   app.get("/*", function(req, res) {
     res.redirect("/test-login");
   });
+  
+
 };
