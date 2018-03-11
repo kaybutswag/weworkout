@@ -5,6 +5,7 @@ module.exports = function(app) {
 
   // GET route for getting all of the posts
   app.post("/api/test-new-user", function(req, res, next) {
+    var lastid;
     var newEmail = req.body.email;
     var newPassword = req.body.password;
     var newLatitude = req.body.latitude;
@@ -20,7 +21,9 @@ module.exports = function(app) {
       password: newPassword,
       latitude: newLatitude,
       longitude: newLongitude
-    }).then(function() {
+    }).then(function(result) {
+      lastid=result.dataValues.id;
+      runMatch(lastid);
       req.login({email: newEmail}, function(err){
         if(err)
           res.json(err);
@@ -30,7 +33,19 @@ module.exports = function(app) {
     }).catch(function(error){
       res.json(error); 
     });
+
+
+
+    
   });
+
+function runMatch(lastid){
+db.Match.create({
+      alt_id: lastid
+    }).catch(function(error){
+      res.json(error); 
+    });
+  }
 
   app.post("/api/test-login-user", function(req, res, next) {
     passport.authenticate("local", function(error, user, info){
