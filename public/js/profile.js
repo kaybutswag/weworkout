@@ -1,5 +1,4 @@
 var expanded = false;
-var reader = new FileReader();
 
 function showCheckboxes() {
   var checkboxes = document.getElementById("checkboxes");

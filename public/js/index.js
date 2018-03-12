@@ -63,8 +63,8 @@ $(document).ready(function(){
 			password: password
 		};
 
-		$("#email").val("");
-		$("#password").val("");
+		$("input[name=email]").val("");
+		$("input[name=password]").val("");
 
 		$.ajax({
 			type: "POST",

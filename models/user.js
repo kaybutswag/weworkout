@@ -33,10 +33,6 @@ module.exports = function(sequelize, DataTypes) {
         min: -180,
         max: 180
       }
-    },
-    profilepic: {
-      type: DataTypes.TEXT("long"),
-      defaultValue: null
     }
   });
   return User;

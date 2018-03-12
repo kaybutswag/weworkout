@@ -36,14 +36,19 @@ module.exports = function(app) {
   });  
 
 function runMatch(lastid){
+
 db.Match.create({
       mainid: lastid
-    }).DB.Form.create({
+    }).catch(function(error){
+      res.json(error);
+    });
+
+db.Form.create({
       mainid: lastid
     }).catch(function(error){
       res.json(error); 
     });
-  }
+}
 
   app.post("/api/login-user", function(req, res, next) {
     passport.authenticate("local", function(error, user, info){

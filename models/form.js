@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER
     },
     img: {
-      type: DataTypes.BLOB
+      type: DataTypes.TEXT("long")
     },
     primaryLocation: {
       type: DataTypes.STRING
