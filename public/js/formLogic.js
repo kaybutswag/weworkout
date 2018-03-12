@@ -11,15 +11,20 @@ $(document).ready(function(){
     basketball, football, soccer, rugby, volleyball, golf, hockey, ice, skateboard];
 
     for (i=0;i<activities.length;i++){
+
+        var actName="'#"+activities[i]+"'";
     	
-    	if($('input.activity').is('checked')){
-    		var activities[i]=true;
+    	if($(actName).is('checked')){
+            window[activities[i]] = true;
     	}
     	else {
-    		var activities[i]=true;
+    		window[activities[i]] = false;
     	}
 
     }
+
+    var bio=$("#bio").val();
+
 
 	var newForm = {
 	mainid: mainid,
