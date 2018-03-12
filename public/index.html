@@ -16,7 +16,7 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 
 		<!-- jquery -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery.js"></script>
 	</head>
 	<body>
 		<header></header>
@@ -26,11 +26,13 @@
 				<form>
 					<img class="loginLogo" src="img/logoTransparent.png"><br>
 					<label for="email">Email</label><br>
-					<input type="text" name="email" value="someone@email.com"><br>
+					<input type="text" name="email" placeholder="someone@email.com"><br>
 					<label for="password">Password</label><br>
-					<input type="password" name="password" value="password"><br>
-					<input class="signIn" type="submit" name="signIn" value="Sign In">
-					<input class="signUp" type="submit" name="signUp" value="Sign Up">
+					<input type="password" name="password" placeholder="password"><br>
+					<button class="signIn" type="submit" name="signIn">Sign In</button>
+					<button class="signUp" type="submit" name="signUp">Sign Up</button>
+					<br>
+					<p></p>
 				</form>
 			</div>
 		</div>
@@ -40,6 +42,6 @@
 		<div class="foot"></div>
 
 		<!-- javascript -->
-		<script src="/js/logic.js"></script>
+		<script type = "text/javascript" src = "js/index.js"> </script>
 	</body>
 </html>

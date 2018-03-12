@@ -3,14 +3,13 @@ var passport = require("../config/passport.js")
 
 module.exports = function(app) {
 
-  // GET route for getting all of the posts
-  app.post("/api/test-new-user", function(req, res, next) {
+  // POST route to add new user to User table and log user in
+  app.post("/api/new-user", function(req, res, next) {
     var lastid;
     var newEmail = req.body.email;
     var newPassword = req.body.password;
     var newLatitude = req.body.latitude;
     var newLongitude = req.body.longitude;
-    var newImage = req.body.profilepic;
 
     if(newLatitude === "")
       newLatitude = null;
@@ -22,7 +21,6 @@ module.exports = function(app) {
       password: newPassword,
       latitude: newLatitude,
       longitude: newLongitude,
-      profilepic: newImage
     }).then(function(result) {
       lastid = result.dataValues.id;
       runMatch(lastid);
@@ -35,9 +33,6 @@ module.exports = function(app) {
     }).catch(function(error){
       res.json(error); 
     });
-
-
-
     
   });
 
@@ -49,7 +44,7 @@ db.Match.create({
     });
   }
 
-  app.post("/api/test-login-user", function(req, res, next) {
+  app.post("/api/login-user", function(req, res, next) {
     passport.authenticate("local", function(error, user, info){
       if(error)
         return res.json("error");
@@ -92,7 +87,7 @@ db.Match.create({
 
   app.get("/logout", function(req, res){
     req.logout();
-    res.redirect("/test-login");
+    res.redirect("/");
   });
   
 };

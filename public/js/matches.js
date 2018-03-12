@@ -23,7 +23,7 @@ function updateUserLocation(latitude, longitude) {
 		data: updateEmail
 	}).then(function(error){
 		if(error)
-			("#location-unavailable").text("Could not update your location");
+			("p").text("Could not update your location");
 	});
 }
 
@@ -37,15 +37,6 @@ function displayProfPic() {
 }
 
 $(document).ready(function(){
-	$("#logout").on("click", function(){
-		$.ajax({
-			method: "GET",
-			url: "/logout"
-		}).then(function(data){
-			window.location.reload();
-		});
-	});
-
 	updateLocation();
 	displayProfPic();
 });
