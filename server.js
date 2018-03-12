@@ -9,6 +9,7 @@ var PORT = process.env.PORT || 8000;
 
 var db = require("./models");
 
+app.use(bodyParser({limit: "50mb"}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static("public"));

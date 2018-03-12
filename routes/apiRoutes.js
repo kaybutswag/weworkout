@@ -3,8 +3,8 @@ var passport = require("../config/passport.js")
 
 module.exports = function(app) {
 
-  // GET route for getting all of the posts
-  app.post("/api/test-new-user", function(req, res, next) {
+  // POST route to add new user to User table and log user in
+  app.post("/api/new-user", function(req, res, next) {
     var lastid;
     var newEmail = req.body.email;
     var newPassword = req.body.password;
@@ -20,9 +20,9 @@ module.exports = function(app) {
       email: newEmail,
       password: newPassword,
       latitude: newLatitude,
-      longitude: newLongitude
+      longitude: newLongitude,
     }).then(function(result) {
-      lastid=result.dataValues.id;
+      lastid = result.dataValues.id;
       runMatch(lastid);
       req.login({email: newEmail}, function(err){
         if(err)
@@ -32,20 +32,25 @@ module.exports = function(app) {
       });
     }).catch(function(error){
       res.json(error); 
-    });  
-  });
+    });
+  });  
 
 function runMatch(lastid){
+
 db.Match.create({
       mainid: lastid
-    }).DB.Form.create({
+    }).catch(function(error){
+      res.json(error);
+    });
+
+db.Form.create({
       mainid: lastid
     }).catch(function(error){
       res.json(error); 
     });
-  }
+}
 
-  app.post("/api/test-login-user", function(req, res, next) {
+  app.post("/api/login-user", function(req, res, next) {
     passport.authenticate("local", function(error, user, info){
       if(error)
         return res.json("error");
@@ -141,12 +146,21 @@ app.post("/api/user-form", function(req, res, next) {
         email: req.user.email
       }
     }).then(function(response){
-      console.log("updated location");
       res.end();
     });
   });
 
-    app.put("/api/update-location", function(req, res) {
+  app.post("/api/get-prof-pic", function(req, res){
+    db.User.findOne({
+      where: {
+        email: req.user.email
+      }
+    }).then(function(response){
+      res.json(response.profilepic);
+    });
+  });
+
+  app.put("/api/update-location", function(req, res) {
     db.User.update({
       latitude: req.body.latitude,
       longitude: req.body.longitude
@@ -155,15 +169,13 @@ app.post("/api/user-form", function(req, res, next) {
         email: req.user.email
       }
     }).then(function(response){
-      console.log("updated location");
       res.end();
     });
   });
 
-
   app.get("/logout", function(req, res){
     req.logout();
-    res.redirect("/test-login");
+    res.redirect("/");
   });
   
 };

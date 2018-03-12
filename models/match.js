@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
   var Match = sequelize.define("Match", {
-    alt_id: {
+    mainid: {
       type: DataTypes.INTEGER,
       allowNull: false,
       unique: true,
