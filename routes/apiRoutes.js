@@ -32,16 +32,14 @@ module.exports = function(app) {
       });
     }).catch(function(error){
       res.json(error); 
-    });
-
-
-
-    
+    });  
   });
 
 function runMatch(lastid){
 db.Match.create({
-      alt_id: lastid
+      mainid: lastid
+    }).DB.Form.create({
+      mainid: lastid
     }).catch(function(error){
       res.json(error); 
     });
