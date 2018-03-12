@@ -27,10 +27,13 @@ function createNewUser(email, password, latitude, longitude) {
 		data: newUser
 	}).then(function(error){
 		if(error){
-			if(error.errors[0].path === "email")
-				$(".modal p").text("The email you entered is not valid.");
-			else if(error.errors[0].path === "password")
-				$(".modal p").text("The password you entered is not valid.");
+			if("errors" in error) {
+				if(error.errors[0].path === "email")
+					$(".modal p").text("The email you entered is not valid.");
+				else
+					$(".modal p").text("The password you entered is not valid.");
+				console.log(error);
+			}
 			else
 				$(".modal p").text("There was an error. Please try again.");
 		}
