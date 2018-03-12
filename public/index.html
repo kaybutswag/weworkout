@@ -5,50 +5,44 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/css/style.css" type="text/css"/>
 		<title>Kinections | Sign In</title>
+
+		<!-- reset -->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+		<!-- font -->
+		<!-- <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,800" rel="stylesheet"> -->
+		<link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
+
+		<!-- our css -->
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+		<!-- jquery -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<script src="/js/logic.js"></script>
 	</head>
-<body>
-	<h1>Welcome to Kinnections</h1>
-	<h2>Log In to Find a Fitness Partner</h2>
+	<body>
+		<header></header>
 
-	<form>
-		<label for = "email">Email:</label>
-		<input type = "email", name = "user-email" id = "email" placeholder = "Email">
-		<br><br>
-		<label for = "password">Password:</label>
-		<input type = "password", name = "user-password" id = "password" placeholder = "Password">
-		<br><br>
-		<button type = "button" class = "btn btn-primary" id = "submit-login">Submit</button>
-		<button type = "button" class = "btn btn-primary" id = "create-account">Don't Have an Account?</button> 
-		<p></p>
-	</form>
-
-	<div class = "modal fade" id = "create-account-form" tabindex = "-1" role = "dialog">
-		<div class = "modal-dialog" role = "document">
-			<div class = "modal-content">
-				<div class = "modal-header">
-					<h2 class = "modal-title">Create an Account</h2>
-				</div>
-				<div class = "modal-body">
-					<form>
-						<label for = "new-email">Email:</label>
-						<input type = "email", name = "new-email" id = "new-email" placeholder = "Email">
-						<br><br>
-						<label for = "new-password">Password:</label>
-						<input type = "password", name = "new-password" id = "new-password" placeholder = "Password">
-						<br><br>
-					</form>
-				</div>
-				<div class = "modal-footer">
-					<button type = "button" class = "btn btn-primary">Submit</button>
-					<p></p>
-				</div>
+		<div>
+			<div class="signInPanel">		
+				<form>
+					<img class="loginLogo" src="img/logoTransparent.png"><br>
+					<label for="email">Email</label><br>
+					<input type="text" name="email" value="someone@email.com"><br>
+					<label for="password">Password</label><br>
+					<input type="password" name="password" value="password"><br>
+					<input class="signIn" type="submit" name="signIn" value="Sign In">
+					<input class="signUp" type="submit" name="signUp" value="Sign Up">
+				</form>
 			</div>
 		</div>
-	</div> 
 
-	<script type = "text/javascript" src = "js/test-login-logic.js"> </script>
-</body>
+		<footer><h1 class="title">Kinections</h1></footer>
+
+		<div class="foot"></div>
+
+		<!-- javascript -->
+		
+	</body>
 </html>
