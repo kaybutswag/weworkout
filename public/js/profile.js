@@ -12,6 +12,10 @@ function showCheckboxes() {
   }
 }
 
+function clearContents(element) {
+  element.value = '';
+}
+
 function previewFile(input) {
 	if(input.files && input.files[0]) {
 		reader.onload = function() {
