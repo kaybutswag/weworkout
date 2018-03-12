@@ -9,6 +9,7 @@ module.exports = function(app) {
     var newPassword = req.body.password;
     var newLatitude = req.body.latitude;
     var newLongitude = req.body.longitude;
+    var newImage = req.body.profilepic;
 
     if(newLatitude === "")
       newLatitude = null;
@@ -19,7 +20,8 @@ module.exports = function(app) {
       email: newEmail,
       password: newPassword,
       latitude: newLatitude,
-      longitude: newLongitude
+      longitude: newLongitude,
+      profilepic: newImage
     }).then(function() {
       req.login({email: newEmail}, function(err){
         if(err)
@@ -59,8 +61,17 @@ module.exports = function(app) {
         email: req.user.email
       }
     }).then(function(response){
-      console.log("updated location");
       res.end();
+    });
+  });
+
+  app.post("/api/get-prof-pic", function(req, res){
+    db.User.findOne({
+      where: {
+        email: req.user.email
+      }
+    }).then(function(response){
+      res.json(response.profilepic);
     });
   });
 

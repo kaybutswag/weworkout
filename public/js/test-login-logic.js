@@ -1,3 +1,5 @@
+var reader = new FileReader();
+
 function getLocation(email, password) {
 	if(navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position){
@@ -18,7 +20,8 @@ function createNewUser(email, password, latitude, longitude) {
 		email: email,
 		password: password,
 		latitude: latitude,
-		longitude: longitude
+		longitude: longitude,
+		profilepic: reader.result
 	};
 
 	$.ajax({
@@ -27,10 +30,14 @@ function createNewUser(email, password, latitude, longitude) {
 		data: newUser
 	}).then(function(error){
 		if(error){
-			if(error.errors[0].path === "email")
-				$(".modal p").text("The email you entered is not valid.");
-			else if(error.errors[0].path === "password")
-				$(".modal p").text("The password you entered is not valid.");
+			if("errors" in error) {
+				if(error.errors[0].path === "email")
+					$(".modal p").text("The email you entered is not valid.");
+				else if(error.errors[0].path === "password")
+					$(".modal p").text("The password you entered is not valid.");
+				else if(error.errors[0].path === "profilepic")
+					$(".modal p").text("Please include a picture of yourself.");
+			}
 			else
 				$(".modal p").text("There was an error. Please try again.");
 		}
@@ -41,9 +48,23 @@ function createNewUser(email, password, latitude, longitude) {
 	});
 }
 
+function previewFile(input) {
+	if(input.files && input.files[0]) {
+		reader.onload = function() {
+			var previewImage = $("<img width = '40%' height = 'auto'>");
+			previewImage.attr("src", reader.result);
+			$("#image-holder").empty();
+			$("#image-holder").append(previewImage);
+		};
+
+	reader.readAsDataURL(input.files[0]);
+	}
+}
+
 $(document).ready(function(){	
 	$("#create-account").on("click", function(){
 		$("#create-account-form").modal("show");
+		$("#image-holder").empty();
 		$(".modal p").empty();
 	});
 
@@ -87,5 +108,10 @@ $(document).ready(function(){
 				window.location.replace("/test-success");
 			}
 		});
+	});
+
+	$("#new-profpic").change(function(){
+		$(".modal form img").remove();
+		previewFile(this);
 	});
 });

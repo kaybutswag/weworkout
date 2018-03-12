@@ -27,6 +27,15 @@ function updateUserLocation(latitude, longitude) {
 	});
 }
 
+function displayProfPic() {
+	$.ajax({
+		type: "POST",
+		url: "/api/get-prof-pic"
+	}).then(function(dataURL){
+		$("img").attr("src", dataURL);
+	});
+}
+
 $(document).ready(function(){
 	$("#logout").on("click", function(){
 		$.ajax({
@@ -38,4 +47,5 @@ $(document).ready(function(){
 	});
 
 	updateLocation();
+	displayProfPic();
 });
