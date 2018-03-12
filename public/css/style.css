@@ -1,0 +1,187 @@
+body {
+	/*font-family: 'Nanum Gothic', sans-serif;*/
+	font-family: 'Lato', sans-serif;
+	background-image: url('../img/signIn.jpg');
+	/*breaks at smaller widths*/
+	background-size: 120%;
+	background-repeat: no-repeat;
+	background-position: inherit;
+	color: #212121;
+	font-size: 20px;
+	box-sizing: border-box;
+}
+
+input[name="email"], input[type="password"], textarea, input[type="number"], select[name="gender"] {
+	border: 1px #212121 solid;
+	padding: 5px;
+}
+
+input[name="email"], input[type="password"], textarea {
+	margin: 10px;
+	width: 70%;
+}
+
+#ageInput {
+	width: 30px;
+}
+
+input[type="number"] {
+	width: 50px;
+}
+
+header, footer {
+	position: fixed;
+	width: 100%;
+	background-color: white;
+	height: 8%;
+}
+
+header {
+	top: 0;
+}
+
+footer {
+	bottom: 0;
+}
+
+h3 {
+	font-weight: 900;
+}
+
+input[value="First Name"] {
+	background-color: rgba(0,0,0,0);
+	border: 1px solid #212121;
+	font-size: 2em;
+}
+
+.content, .headerDiv {
+	display: flex;
+	justify-content: space-around;
+}
+
+.content {
+	background-color: rgba(255,255,255,.5);
+	/*not reactive*/
+	margin: 120px 250px;
+	flex-wrap: wrap;
+}
+
+.imgInput {
+	background-color: #ddd;
+	width: 100%;
+	height: 350px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.loginLogo {
+	width: 90px;
+	margin-bottom: 10px;
+}
+
+.signUp, .signIn, #people, #kinections, input[name="profileSubmit"] {
+	border: none;
+	color: white;
+	padding: 10px;
+	margin: 10px;
+	font-size: .9em;
+}
+
+.signUp, #people {
+	background-color: #6476fa;
+}
+
+.signIn, #kinections {
+	background-color: #66ab5f;
+}
+
+.headLogo {
+	max-width: 75px;
+	max-height: 75px;
+}
+
+input[name="profileSubmit"] {
+	background-color: #d88080;
+}
+
+/*@media (min-width: 12450px) {
+	.signInPanel {
+
+	}
+}
+*/
+.signInPanel {
+	margin: 12% auto;
+	text-align: center;
+	width: 14%;
+	height: 34%;
+	font-weight: 800;
+	background-color: rgba(255,255,255,.5);
+	padding: 20px;
+	/*this isn't responsive*/
+	min-width: 300px;
+}
+
+.title {
+	margin-top: -133px;
+	/*have to adjust with midea query*/
+	margin-left: 100px;
+	color: white;
+	font-weight: 800;
+	font-size: 150px;
+}
+
+.box1, .box2 {
+	background-color: rgba(255, 255, 255, 1);
+	margin: 100px;
+	padding: 20px;
+	margin: 20px;
+}
+
+.box1 {
+	flex: 1;
+}
+
+.box2 {
+	flex: 2;
+}
+
+/*for drop checkboxes*/
+.multiselect {
+  width: 200px;
+}
+
+.selectBox {
+  position: relative;
+}
+
+.selectBox select {
+  width: 100%;
+  font-weight: bold;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#checkboxes {
+  display: none;
+  position: fixed;
+  border: 1px #212121 solid;
+  z-index: 100;
+  background-color: white;
+  padding: 5px;
+}
+
+#checkboxes label {
+  display: block;
+}
+
+#checkboxes label:hover {
+  background-color: #ddd;
+}
