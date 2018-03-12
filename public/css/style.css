@@ -9,14 +9,23 @@ body {
 	color: #212121;
 	font-size: 20px;
 	box-sizing: border-box;
+	height: 100%;
 }
 
-input[name="email"], input[type="password"], textarea, input[type="number"], select[name="gender"] {
+textarea {
+	width: 100%;
+	height: 130px;
+	resize: none;
+	font-family: 'Lato', sans-serif;
+	font-size: 20px;
+}
+
+input[name="email"], input[type="password"], textarea, input[type="number"], select[name="gender"], input[placeholder="First Name"], input[name="location"], select {
 	border: 1px #212121 solid;
 	padding: 5px;
 }
 
-input[name="email"], input[type="password"], textarea {
+input[name="email"], input[type="password"], {
 	margin: 10px;
 	width: 70%;
 }
@@ -33,7 +42,7 @@ header, footer {
 	position: fixed;
 	width: 100%;
 	background-color: white;
-	height: 8%;
+	height: 70px;
 }
 
 header {
@@ -45,16 +54,30 @@ footer {
 }
 
 h3 {
+	margin-top: 10px;
+	margin-bottom: 10px;
 	font-weight: 900;
 }
 
-input[value="First Name"] {
-	background-color: rgba(0,0,0,0);
-	border: 1px solid #212121;
+h2{
 	font-size: 2em;
+	font-weight: 600;
 }
 
-.content, .headerDiv {
+input[placeholder="First Name"] {
+	font-size: 2em;
+	max-width: 328px;
+}
+
+break {
+	display: inline-block;
+	flex-basis: 100%;
+	width: 0px; 
+	height: 0px; 
+	overflow: hidden;
+}
+
+.content, .headerDiv, .abilityInput {
 	display: flex;
 	justify-content: space-around;
 }
@@ -63,16 +86,38 @@ input[value="First Name"] {
 	background-color: rgba(255,255,255,.5);
 	/*not reactive*/
 	margin: 120px 250px;
-	flex-wrap: wrap;
+	flex-flow: row wrap;
+
 }
 
-.imgInput {
+.imgPlace {
 	background-color: #ddd;
 	width: 100%;
-	height: 350px;
+	padding-top: 80%;
+	position: relative; 
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.imageForm {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.centerCropped {
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  height: 100%;
+  width: 100%;
+}
+
+.userImg {
+	width: 100%;
+	height: 350px;
 }
 
 .loginLogo {
@@ -80,7 +125,12 @@ input[value="First Name"] {
 	margin-bottom: 10px;
 }
 
-.signUp, .signIn, #people, #kinections, input[name="profileSubmit"] {
+.headLogo {
+	max-width: 70px;
+	max-height: 70px;
+}
+
+.signUp, .signIn, #profile, #kinections, #kinect, #reject, input[name="profileSubmit"], #logout {
 	border: none;
 	color: white;
 	padding: 10px;
@@ -88,29 +138,24 @@ input[value="First Name"] {
 	font-size: .9em;
 }
 
-.signUp, #people {
+.signUp, #profile {
 	background-color: #6476fa;
 }
 
-.signIn, #kinections {
+.signIn, #kinections, #kinect, input[name="profileSubmit"] {
 	background-color: #66ab5f;
 }
 
-.headLogo {
-	max-width: 75px;
-	max-height: 75px;
+#kinect, #reject {
+	font-size: 2em;
+	font-weight: 700;
+	padding: 20px;
 }
 
-input[name="profileSubmit"] {
-	background-color: #d88080;
+#logout, #reject {
+	background-color: #fa7070;
 }
 
-/*@media (min-width: 12450px) {
-	.signInPanel {
-
-	}
-}
-*/
 .signInPanel {
 	margin: 12% auto;
 	text-align: center;
@@ -125,7 +170,7 @@ input[name="profileSubmit"] {
 
 .title {
 	margin-top: -133px;
-	/*have to adjust with midea query*/
+	/*have to adjust with media query*/
 	margin-left: 100px;
 	color: white;
 	font-weight: 800;
@@ -145,6 +190,10 @@ input[name="profileSubmit"] {
 
 .box2 {
 	flex: 2;
+}
+
+.abilityDiv {
+	flex: 1;
 }
 
 /*for drop checkboxes*/

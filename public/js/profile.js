@@ -10,3 +10,7 @@ function showCheckboxes() {
     expanded = false;
   }
 }
+
+function clearContents(element) {
+  element.value = '';
+}

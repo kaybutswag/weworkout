@@ -21,7 +21,7 @@
 
 		<header>
 			<div class="headerDiv">			
-				<button id="people">People</button>
+				<button id="profile">Profile</button>
 				<!-- will be replaced by the logo -->
 				<img class="headLogo" src="img/logoBlack.png">
 				<button id="kinections">Kinections</button>
@@ -30,13 +30,11 @@
 		
 		<form class="content">
 			<div class="box1">
-					<div class="imgInput">
-						<!-- I don't know how we do this -->
-						<input type="file" name="picture" accept="image/*">
-						<button id="image upload">Upload</button>
-					</div>
+					<div class="imgPlace"></div>
+					<input type="file" name="picture" accept="image/*">
+					<button id="imageUpload">Upload</button>
 
-					<input type="text" name="name" value="First Name" id="firstName"><br>
+					<input type="text" name="name" placeholder="First Name" id="firstName"><br>
 			</div>
 
 			<div class="box2">
@@ -51,18 +49,21 @@
 				</select>
 				
 				<label for="age">Age: </label>
-				<input type="number" name="age" value="25" id="ageInput">
+				<input type="number" name="age" id="ageInput"><br>
 				
 				<!-- search form will default to this location if we are unable to determine their current location -->
 				<!-- will need some tooling to validate and give us usable info -->
 				<label for="location">Primary Location: </label>
-				<input type="text" name="location" value="Austin, TX" id="location"><br>
 
-				<label for="interests">How do you like to be active?</label><br>
+				<input type="text" name="location" placeholder="City, State" id="location"><br>
+
+				<h3>
+					<label for="interests">How do you like to be active?</label><br>
+				</h3>
 				<div class="multiselect">
 					<div class="selectBox" onclick="showCheckboxes()">
 						<select>
-							<option>Select an option</option>
+							<option>Select an activity</option>
 						</select>
 						<div class="overSelect"></div>
 					</div>
@@ -118,25 +119,15 @@
 					</div>
 				</div>
 
-				<h3>Ability Level (optional)</h3>
-				<label for="bench">Max Bench Press: </label>
-				<input type="number" name="bench" value="100">(lbs)<br>
-
-				<label for="squat">Max Squat: </label>
-				<input type="number" name="squat" value="150">(lbs)<br>
-				
-				<label for="deadlift">Max Deadlift: </label>
-				<input type="number" name="deadlift" value="175">(lbs)<br>
-				
-				<label for="runMile">Fastest Mile (running): </label>
-				<input type="number" name="runMile" value="8">(minutes)<br>
-
 				<h3>Short Bio</h3>
-				<textarea name="bio" id="bio" cols=50 rows=10>Some awesome things about me...</textarea><br>
-
+				<textarea placeholder="Some awesome things about me..." name="bio" maxlength="250" id="bio"></textarea><br>
 
 			</div>
-			<input type="submit" name="profileSubmit" value="Submit">
+			<break></break>
+			<div>
+				<button id="logout">Logout</button>
+				<input type="submit" name="profileSubmit" value="Submit">
+			</div>
 		</form>
 
 	<script type="text/javascript" src="js/profile.js"></script>
