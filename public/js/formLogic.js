@@ -49,38 +49,47 @@ $(document).ready(function(){
 
 	    var name=$("#name").val();
 	    var gender = $("#gender option:selected").val();
-	    var age=$("#age").val();
+
+        //date stuff
+	    var dob=$("#dob").val();
+        console.log(dob);
+        console.log(typeof dob);
+        var convertedDOB=moment(dob,'YYYY-MM-DD HH:mm:ss');
+        console.log(convertedDOB);
+        console.log(typeof convertedDOB);
+        var years=moment().diff(moment(dob),"years");
+        console.log(years);
+
 	    var primaryLocation=$("#primaryLocation").val();
         var bio=$("#bio").val();
 
-        if ((name!=="")&&(gender!=="blank")&&(typeof age !=="number")&&(primaryLocation!=="")&&(atLeastOneIsChecked>0)){
-            console.log(name + gender+ typeof age +name+atLeastOneIsChecked);
-        }
+        var atLeastOneIsChecked=$('#checkboxes input[type=checkbox]:checked').length;
+        console.log(atLeastOneIsChecked);
 
         if (name===""){
-            console.log(name);
+            $("#errorMes").html("Name is required for profile");
         }
 
-        if (gender==="blank"){
-            console.log(gender);
+        else if (gender==="blank"){
+            $("#errorMes").html("Please select your gender");
         }
 
-        if (typeof age ==="number"){
-            console.log(typeof age);
+
+        else if (primaryLocation ===""){
+            $("#errorMes").html("Please store your Primary Location");
         }
 
-        if (primaryLocation ===""){
-            console.log(primaryLocation);
+        else if (atLeastOneIsChecked === 0){
+            $("#errorMes").html("Please select at least one activity.");
         }
 
-        if (atLeastOneIsChecked === 0){
-            console.log(primaryLocation);
-        }
+        else if ((name!=="")&&(gender!=="blank")&&(primaryLocation!=="")&&(atLeastOneIsChecked>0)){
 
     	var newForm = {
     	name: name,
         gender: gender,
-        age: age,
+        age: years,
+        // dob: convertedDOB,
         img: readerResult,
         primaryLocation: primaryLocation,
         weightlift: $("#weightlift").is(":checked"),
@@ -123,6 +132,10 @@ $(document).ready(function(){
     			console.log("successful form");
     		}
     	});
+    }
+    else{
+        console.log("other error");
+    }
 	});
 
     $.ajax({

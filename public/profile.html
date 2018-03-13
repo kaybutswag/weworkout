@@ -36,7 +36,13 @@
 			</div>
 		</header>
 		
+
 		<div class="content">
+			<div class="row">
+				<div class=fullrow>
+					<h6 id="errorMes"></h6>
+				</div>
+			</div><break></break>
 			<div class="box1">
 					<!-- path changes with handlebars -->
 					<div class="imgPlace"><img src="img/placeholder.jpg"></div>
@@ -59,10 +65,10 @@
 				  	<option value="male">Male</option>
 				  	<option value="female">Female</option>
 				  	<option value="other">Other</option>
-				</select>
+				</select><br>
 				
-				<label for="age">Age: </label>
-				<input type="number" name="age" id="age"><br>
+				<label for="dob">Date of Birth: </label>
+				<input type="date" name="dob" id="dob" placeholder="mm/dd/yyyy"><br>
 				
 				<!-- search form will default to this location if we are unable to determine their current location -->
 				<!-- will need some tooling to validate and give us usable info -->
@@ -184,7 +190,7 @@
 				<input type="submit" name="profileSubmit" value="Submit" id="formSubmit">
 			</div>
 		</div>
-
+	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 	<script type="text/javascript" src="js/profile.js"></script>
 	<script type="text/javascript" src="js/formLogic.js"></script>
 	</body>
