@@ -76,6 +76,7 @@ app.post("/api/user-form", function(req, res, next) {
       primaryLocation: req.body.primaryLocation,
       weightlift: req.body.weightlift,
       run: req.body.run,
+      walk: req.body.walk,
       swim: req.body.swim,
       surf: req.body.surf,
       bike: req.body.bike,
