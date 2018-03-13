@@ -8,10 +8,32 @@ function previewFile(input) {
             previewImage.attr("src", reader.result);
             $(".imgPlace").empty();
             $(".imgPlace").append(previewImage);
-            readerResult=reader.result;
+            readerResult = reader.result;
         };
 
     reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function fillInForm(preferences) {
+    var fieldsToFill = ["name", "gender", "age", "primaryLocation", "weightlift", "run", "walk",
+    "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl", 
+    "rowing", "tennis", "baseball", "basketball", "football", "soccer", "rugby", "volleyball", 
+    "golf", "hockey", "ice", "skateboard", "bio"];
+
+    if(preferences.img !== null)
+        $(".imgPlace").append("<img width = '100%' height = 'auto' src = '" + preferences.img + "'>");
+
+    for(var i = 0; i < fieldsToFill.length; i++) {
+        var fieldId = fieldsToFill[i];
+        var field = $("#" + fieldId);
+
+        if(field.attr("type") === "checkbox") {
+            if(preferences[fieldId] === true)
+                field.attr("checked", true);
+        }
+        else
+            field.val(preferences[fieldId]);
     }
 }
 
@@ -25,13 +47,10 @@ $(document).ready(function(){
 	$("input[name=profileSubmit]").on("click", function(event){
         event.preventDefault();
 
-       var atLeastOneIsChecked = $('#checkboxes:checkbox:checked').length;
-
-	   var name=$("#name").val();
-	   var gender=$("#genderBar option:selected").val();
-	   var age=parseInt($("#ageInput").val());
-	   var primaryLocation=$("#location").val();
-        
+	    var name=$("#name").val();
+	    var gender = $("#gender option:selected").val();
+	    var age=$("#age").val();
+	    var primaryLocation=$("#primaryLocation").val();
         var bio=$("#bio").val();
 
         if ((name!=="")&&(gender!=="blank")&&(typeof age !=="number")&&(primaryLocation!=="")&&(atLeastOneIsChecked>0)){
@@ -105,4 +124,11 @@ $(document).ready(function(){
     		}
     	});
 	});
+
+    $.ajax({
+        type: "POST",
+        url: "/api/user-preferences"
+    }).then(function(preferences){
+        fillInForm(preferences);
+    });
 });

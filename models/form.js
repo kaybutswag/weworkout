@@ -2,8 +2,7 @@ module.exports = function(sequelize, DataTypes) {
   var Form = sequelize.define("Form", {
     email: {
       type: DataTypes.STRING,
-      primaryKey:true,
-      allowNull: false
+      primaryKey: true
     },
     name: {
       type: DataTypes.STRING

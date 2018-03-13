@@ -3,7 +3,6 @@ var passport = require("../config/passport.js")
 
 module.exports = function(app) {
 
-  // GET route for getting all of the posts
   app.post("/api/new-user", function(req, res, next) {
     var lastid;
     var newEmail = req.body.email;
@@ -22,8 +21,7 @@ module.exports = function(app) {
       latitude: newLatitude,
       longitude: newLongitude
     }).then(function(result) {
-      lastid=result.dataValues.id;
-      runMatch(lastid);
+      runMatch(newEmail);
       req.login({email: newEmail}, function(err){
         if(err)
           res.json(err);
@@ -34,19 +32,21 @@ module.exports = function(app) {
       res.json(error); 
     });  
   });
-function runMatch(){
-db.Match.create({
-     email: newEmail
-   }).catch(function(error){
-     res.json(error);
-   });
 
-   db.Form.create({
-     email: newEmail
-   }).catch(function(error){
-     res.json(error);
-   });
- }
+  function runMatch(newEmail) {
+
+    db.Match.create({
+      email: newEmail
+    }).catch(function(error){
+      res.json(error);
+    });
+
+    db.Form.create({
+      email: newEmail
+    }).catch(function(error){
+      res.json(error); 
+    });
+  }
 
   app.post("/api/login-user", function(req, res, next) {
     passport.authenticate("local", function(error, user, info){
@@ -66,7 +66,7 @@ db.Match.create({
     })(req, res, next);
   });
 
-app.post("/api/user-form", function(req, res, next) {
+  app.post("/api/user-form", function(req, res) {
     db.Form.upsert({
       email: req.user.email,
       name: req.body.name,
@@ -105,6 +105,15 @@ app.post("/api/user-form", function(req, res, next) {
     });  
   });
 
+  app.post("/api/user-preferences", function(req, res) {
+    db.Form.findOne({
+      where: {
+        email: req.user.email
+      }
+    }).then(function(response){
+      res.json(response);
+    });
+  });
 
   app.put("/api/update-location", function(req, res) {
     db.User.update({
@@ -117,6 +126,16 @@ app.post("/api/user-form", function(req, res, next) {
     }).then(function(response){
       console.log("updated location");
       res.end();
+    });
+  });
+
+  app.post("/api/get-prof-pic", function(req, res){
+    db.Form.findOne({
+      where: {
+        email: req.user.email
+      }
+    }).then(function(data){
+      res.json(data.img);
     });
   });
 
