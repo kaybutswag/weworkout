@@ -1,17 +1,10 @@
 module.exports = function(sequelize, DataTypes) {
   var Form = sequelize.define("Form", {
-    mainid: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
     email: {
       type: DataTypes.STRING,
+      primaryKey: true
     },
-    firstName: {
-      type: DataTypes.STRING
-    },
-    lastName: {
+    name: {
       type: DataTypes.STRING
     },
     gender: {
@@ -100,15 +93,6 @@ module.exports = function(sequelize, DataTypes) {
     },
     skateboard: {
       type: DataTypes.BOOLEAN
-    },
-    maxpress: {
-      type: DataTypes.INTEGER
-    },
-    maxsquat: {
-      type: DataTypes.INTEGER
-    },
-    miles: {
-      type: DataTypes.INTEGER
     },
     bio: {
       type: DataTypes.STRING

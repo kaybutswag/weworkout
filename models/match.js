@@ -1,13 +1,14 @@
 module.exports = function(sequelize, DataTypes) {
   var Match = sequelize.define("Match", {
-    mainid: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      unique: true,
+    email: {
+      type: DataTypes.STRING,
+      primaryKey: true,
     },
     myMatches:{
-    	type:DataTypes.STRING
+    	type: DataTypes.STRING
     }
   });
+
   return Match;
+
 };

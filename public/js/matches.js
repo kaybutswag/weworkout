@@ -32,7 +32,7 @@ function displayProfPic() {
 		type: "POST",
 		url: "/api/get-prof-pic"
 	}).then(function(dataURL){
-		$("img").attr("src", dataURL);
+		$("#profPic").attr("src", dataURL);
 	});
 }
 
