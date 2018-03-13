@@ -13,6 +13,9 @@ module.exports = function(sequelize, DataTypes) {
     age: {
       type: DataTypes.INTEGER
     },
+    dob: {
+      type: DataTypes.DATEONLY
+    },
     img: {
       type: DataTypes.TEXT("long")
     },
@@ -98,5 +101,8 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING
     }
   });
+  Form.associate=function(models){
+    Form.belongsTo(models.User);
+  };
   return Form;
 };
