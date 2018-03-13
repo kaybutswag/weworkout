@@ -45,7 +45,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		var newEmail = $("input[name=email]").val();
 		var newPassword = $("input[name=password]").val();
-		
+
 		$("input[name=email]").val("");
 		$("input[name=password]").val("");
 
