@@ -8,11 +8,13 @@
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
 		<!-- font -->
-		<!-- <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,800" rel="stylesheet"> -->
 		<link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
 
 		<!-- our css -->
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+		<!-- font awesome -->
+		<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 		<!-- jquery -->
 		<script src="https://code.jquery.com/jquery.js"></script>
@@ -21,24 +23,35 @@
 
 <!-- post request for users data -->
 		<header>
-			<div class="headerDiv">			
-				<button id="profile">Profile</button>
-				<!-- will be replaced by the logo -->
-				<img class="headLogo" src="img/logoBlack.png">
-				<button id="kinections">Kinections</button>
+			<div class="headerDiv">
+				<button class="profileLink" href="/profile">
+					<i class="fas fa-user"></i>
+				</button>
+				<button class="judgementLink" href="/judgement">
+					<img class="headLogo" src="img/logoBlack.png">
+				</button>
+				<button class="matchesLink" href="/matches">
+					<i class="fas fa-comment-alt"></i>
+				</button>
 			</div>
 		</header>
 		
-		<form class="content">
+
+		<div class="content">
 			<div class="row">
 				<div class=fullrow>
 					<h6 id="errorMes"></h6>
 				</div>
 			</div><break></break>
 			<div class="box1">
-					<div class="imgPlace"></div>
-					<input type="file" name="picture" accept="image/*">
-					
+					<!-- path changes with handlebars -->
+					<div class="imgPlace"><img src="img/placeholder.jpg"></div>
+					<form>
+						<!-- styling this is apparently really difficult -->
+						<input type="file" name="picture" accept="image/*">
+						<button id="clear">Clear</button>
+					</form>
+
 					<input type="text" name="name" placeholder="First Name" id="name"><br>
 			</div>
 
@@ -66,77 +79,117 @@
 				<h3>
 					<label for="interests">How do you like to be active?</label><br>
 				</h3>
-				<div class="multiselect">
-					<div class="selectBox" onclick="showCheckboxes()">
-						<select>
-							<option>Select an activity</option>
-						</select>
-						<div class="overSelect"></div>
-					</div>
-					<div id="checkboxes">
-						<label for="weightlift">
-						<input type="checkbox" id="weightlift"/>Weightlifting</label>
-						<label for="run">
-						<input type="checkbox" id="run" />Running</label>
-						<label for="walk">
-						<input type="checkbox" id="walk" />Walking</label>
-						<label for="swim">
-						<input type="checkbox" id="swim" />Swimming</label>
-						<label for="surf">
-						<input type="checkbox" id="surf" />Surfing</label>
-						<label for="bike">
-						<input type="checkbox" id="bike" />Biking</label>
-						<label for="yoga">
-						<input type="checkbox" id="yoga" />Yoga</label>
-						<label for="pilates">
-						<input type="checkbox" id="pilates" />Pilates</label>
-						<label for="cardio">
-						<input type="checkbox" id="cardio" />Cardio</label>
-						<label for="dance">
-						<input type="checkbox" id="dance" />Dancing</label>
-						<label for="rock">
-						<input type="checkbox" id="rock" />Rock Climbing</label>
-						<label for="gymnastics">
-						<input type="checkbox" id="gymnastics" />Gymnastics</label>
-						<label for="bowl">
-						<input type="checkbox" id="bowl" />Bowling</label>
-						<label for="rowing">
-						<input type="checkbox" id="rowing" />Rowing</label>
-						<label for="tennis">
-						<input type="checkbox" id="tennis" />Tennis</label>
-						<label for="baseball">
-						<input type="checkbox" id="baseball" />Baseball</label>
-						<label for="basketball">
-						<input type="checkbox" id="basketball" />Basketball</label>
-						<label for="football">
-						<input type="checkbox" id="football" />Football</label>
-						<label for="soccer">
-						<input type="checkbox" id="soccer" />Soccer</label>
-						<label for="rugby">
-						<input type="checkbox" id="rugby" />Rugby</label>
-						<label for="volleyball">
-						<input type="checkbox" id="volleyball" />Volleyball</label>
-						<label for="golf">
-						<input type="checkbox" id="golf" />Golf</label>
-						<label for="hockey">
-						<input type="checkbox" id="hockey" />Hockey</label>
-						<label for="ice">
-						<input type="checkbox" id="ice" />Ice Skating</label>
-						<label for="skateboard">
-						<input type="checkbox" id="skateboard" />Skateboarding</label>
-					</div>
+
+				<span id="userActivities"></span>
+				<a href="#openModal"><i class="far fa-plus-square" id="addActivities"></i></a>
+
+				<div id="openModal" class="modalDialog">
+				    <div>	<a href="#close" title="Close" class="close">X</a>
+
+				        <h2>Activities</h2>
+			        	<div class="activityFlex">
+			        		<div class="activityCol">
+			        			
+				        		<label for="weightlift">
+								<input type="checkbox" id="weightlift" class="activity" data-text="Weightlifting"/>Weightlifting</label>
+								<br>
+								<label for="run">
+								<input type="checkbox" id="run" class="activity" data-text="Running"/>Running</label>
+								<br>
+								<label for="walk">
+								<input type="checkbox" id="walk"  class="activity" data-text="Walking"/>Walking</label>
+								<br>
+								<label for="swim">
+								<input type="checkbox" id="swim"  class="activity" data-text="Swimming"/>Swimming</label>
+								<br>
+								<label for="surf">
+								<input type="checkbox" id="surf"  class="activity" data-text="Surfing"/>Surfing</label>
+			        		</div>
+			        		<div class="activityCol">
+			        			
+								<label for="bike">
+								<input type="checkbox" id="bike"  class="activity" data-text="Biking"/>Biking</label>
+								<br>
+								<label for="yoga">
+								<input type="checkbox" id="yoga"  class="activity" data-text="Yoga"/>Yoga</label>
+								<br>
+								<label for="pilates">
+								<input type="checkbox" id="pilates"  class="activity" data-text="Pilates"/>Pilates</label>
+								<br>
+								<label for="cardio">
+								<input type="checkbox" id="cardio"  class="activity" data-text="Cardio"/>Cardio</label>
+								<br>
+								<label for="dance">
+								<input type="checkbox" id="dance"  class="activity" data-text="Dancing"/>Dancing</label>
+			        		</div>
+			        		<div class="activityCol">
+			        			
+								<label for="rock">
+								<input type="checkbox" id="rock"  class="activity" data-text="Rock Climbing"/>Rock Climbing</label>
+								<br>
+								<label for="gymnastics">
+								<input type="checkbox" id="gymnastics"  class="activity" data-text="Gymnastics"/>Gymnastics</label>
+								<br>
+								<label for="bowl">
+								<input type="checkbox" id="bowl"  class="activity" data-text="Bowling"/>Bowling</label>
+								<br>
+								<label for="rowing">
+								<input type="checkbox" id="rowing"  class="activity" data-text="Rowing"/>Rowing</label>
+								<br>
+								<label for="tennis">
+								<input type="checkbox" id="tennis"  class="activity" data-text="Tennis"/>Tennis</label>
+			        		</div>
+			        		<div class="activityCol">	
+								<label for="baseball">
+								<input type="checkbox" id="baseball"  class="activity" data-text="Baseball"/>Baseball</label>
+								<br>
+								<label for="basketball">
+								<input type="checkbox" id="basketball"  class="activity" data-text="Basketball"/>Basketball</label>
+								<br>
+								<label for="football">
+								<input type="checkbox" id="football"  class="activity" data-text="Football"/>Football</label>
+								<br>
+								<label for="soccer">
+								<input type="checkbox" id="soccer"  class="activity" data-text="Soccer"/>Soccer</label>
+								<br>
+								<label for="rugby">
+								<input type="checkbox" id="rugby"  class="activity" data-text="Rugby"/>Rugby</label>
+								<br>
+				        		</div>
+			        		<div class="activityCol">	
+								<label for="volleyball">
+								<input type="checkbox" id="volleyball" class="activity" data-text="Volleyball"/>Volleyball</label>
+								<br>
+								<label for="golf">
+								<input type="checkbox" id="golf"  class="activity" data-text="Golf"/>Golf</label>
+								<br>
+								<label for="hockey">
+								<input type="checkbox" id="hockey"  class="activity" data-text="Hockey"/>Hockey</label>
+								<br>
+								<label for="ice">
+								<input type="checkbox" id="ice" data-text="Ice Skating"/>Ice Skating</label>
+								<br>
+								<label for="skateboard">
+								<input type="checkbox" id="skateboard" data-text="Skateboarding"/>Skateboarding</label>
+			        		</div>
+				        </div>
+				        <br>
+				        <div class="subDiv">
+				        	<a href="#close" id="submitActivities">Submit</a>
+				        </div>
+
+				    </div>
 				</div>
 
 				<h3>Short Bio</h3>
 				<textarea placeholder="Let everyone get to know you! Feel free to list your gym memberships and any stats such as 'I run 8 minute miles' or 'I bench press 150 lbs.'" name="bio" maxlength="250" id="bio"></textarea><br>
-
 			</div>
 			<break></break>
 			<div>
 				<button id="logout">Logout</button>
 				<input type="submit" name="profileSubmit" value="Submit" id="formSubmit">
 			</div>
-		</form>
+		</div>
 	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 	<script type="text/javascript" src="js/profile.js"></script>
 	<script type="text/javascript" src="js/formLogic.js"></script>
