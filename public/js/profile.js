@@ -15,7 +15,6 @@ function clearContents(element) {
   element.value = '';
 }
 
-
 $(document).ready(function(){
 	$("#logout").on("click", function(){
 		$.ajax({
