@@ -57,6 +57,7 @@ module.exports = function(app) {
       }
       else {
         req.login(user, function(err){
+          console.log(req.session.passport.user)
           if(err)
             return next(err);
           else
