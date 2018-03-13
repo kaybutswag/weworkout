@@ -4,7 +4,7 @@ var passport = require("../config/passport.js")
 module.exports = function(app) {
 
   // GET route for getting all of the posts
-  app.post("/api/test-new-user", function(req, res, next) {
+  app.post("/api/new-user", function(req, res, next) {
     var lastid;
     var newEmail = req.body.email;
     var newPassword = req.body.password;
@@ -38,14 +38,12 @@ module.exports = function(app) {
 function runMatch(lastid){
 db.Match.create({
       mainid: lastid
-    }).DB.Form.create({
-      mainid: lastid
     }).catch(function(error){
       res.json(error); 
     });
   }
 
-  app.post("/api/test-login-user", function(req, res, next) {
+  app.post("/api/login-user", function(req, res, next) {
     passport.authenticate("local", function(error, user, info){
       if(error)
         return res.json("error");
@@ -151,7 +149,7 @@ app.post("/api/user-form", function(req, res, next) {
 
   app.get("/logout", function(req, res){
     req.logout();
-    res.redirect("/test-login");
+    res.redirect("/index");
   });
   
 };
