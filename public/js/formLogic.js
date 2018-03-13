@@ -15,6 +15,28 @@ function previewFile(input) {
     }
 }
 
+function fillInForm(preferences) {
+    var fieldsToFill = ["name", "gender", "age", "primaryLocation", "weightlift", "run", "walk",
+    "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl", 
+    "rowing", "tennis", "baseball", "basketball", "football", "soccer", "rugby", "volleyball", 
+    "golf", "hockey", "ice", "skateboard", "bio"];
+
+    if(preferences.img !== null)
+        $(".imgPlace").append("<img width = '100%' height = 'auto' src = '" + preferences.img + "'>");
+
+    for(var i = 0; i < fieldsToFill.length; i++) {
+        var fieldId = fieldsToFill[i];
+        var field = $("#" + fieldId);
+
+        if(field.attr("type") === "checkbox") {
+            if(preferences[fieldId] === true)
+                field.attr("checked", true);
+        }
+        else
+            field.val(preferences[fieldId]);
+    }
+}
+
 $(document).ready(function(){	
 
     $("input[name=picture]").change(function(){
@@ -25,10 +47,10 @@ $(document).ready(function(){
 	$("input[name=profileSubmit]").on("click", function(event){
         event.preventDefault();
 
-	   var name=$("#name").val();
-	   var gender=$("#genderBar option:selected").val();
-	   var age=$("#ageInput").val();
-	   var primaryLocation=$("#location").val();
+	    var name=$("#name").val();
+	    var gender = $("#gender option:selected").val();
+	    var age=$("#age").val();
+	    var primaryLocation=$("#primaryLocation").val();
         var bio=$("#bio").val();
 
     	var newForm = {
@@ -59,13 +81,11 @@ $(document).ready(function(){
         rugby: $("#rugby").is(":checked"),
         volleyball: $("#volleyball").is(":checked"),
         golf: $("#golf").is(":checked"),
-        hockey: $("#hocket").is(":checked"),
+        hockey: $("#hockey").is(":checked"),
         ice: $("#ice").is(":checked"),
         skateboard: $("#skateboard").is(":checked"),
         bio: bio
     	};
-
-        console.log(newForm.run);
 
     	$.ajax({
     		type: "POST",
@@ -80,4 +100,11 @@ $(document).ready(function(){
     		}
     	});
 	});
+
+    $.ajax({
+        type: "POST",
+        url: "/api/user-preferences"
+    }).then(function(preferences){
+        fillInForm(preferences);
+    });
 });
