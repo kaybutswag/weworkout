@@ -35,13 +35,17 @@ module.exports = function(app) {
     });  
   });
 
-function runMatch(lastid){
 db.Match.create({
-      mainid: lastid
-    }).catch(function(error){
-      res.json(error); 
-    });
-  }
+     email: newEmail
+   }).catch(function(error){
+     res.json(error);
+   });
+
+   db.Form.create({
+     email: newEmail
+   }).catch(function(error){
+     res.json(error);
+   });
 
   app.post("/api/login-user", function(req, res, next) {
     passport.authenticate("local", function(error, user, info){
@@ -93,7 +97,7 @@ app.post("/api/user-form", function(req, res, next) {
     var newSkateboard = req.body.skateboard;
     var newBio = req.body.bio;
 
-    db.Form.create({
+    db.Form.upsert({
       name: newName,
       gender: newGender,
       age: newAge,
