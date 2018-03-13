@@ -94,7 +94,7 @@ break {
 .imgPlace {
 	background-color: #ddd;
 	width: 100%;
-	padding-top: 80%;
+	/*padding-top: 80%;*/
 	position: relative; 
 	display: flex;
 	justify-content: center;
