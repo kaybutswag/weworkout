@@ -25,6 +25,7 @@ input[name="email"], input[type="password"], textarea, input[type="number"], sel
 	padding: 5px;
 }
 
+
 input[name="email"], input[type="password"], {
 	margin: 10px;
 	width: 70%;
