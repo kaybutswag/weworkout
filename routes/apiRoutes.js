@@ -4,7 +4,7 @@ var passport = require("../config/passport.js")
 module.exports = function(app) {
 
   // GET route for getting all of the posts
-  app.post("/api/test-new-user", function(req, res, next) {
+  app.post("/api/new-user", function(req, res, next) {
     var lastid;
     var newEmail = req.body.email;
     var newPassword = req.body.password;
@@ -49,7 +49,7 @@ module.exports = function(app) {
     });
   }
 
-  app.post("/api/test-login-user", function(req, res, next) {
+  app.post("/api/login-user", function(req, res, next) {
     passport.authenticate("local", function(error, user, info){
       if(error)
         return res.json("error");
@@ -68,68 +68,39 @@ module.exports = function(app) {
   });
 
 app.post("/api/user-form", function(req, res, next) {
-    var newName = req.body.name;
-    var newGender = req.body.gender;
-    var newAge = req.body.age;
-    var newImg = req.body.img;
-    var newLocation = req.body.primaryLocation;
-    var newWeightlift = req.body.weightlift;
-    var newRun = req.body.run;
-    var newSwim = req.body.swim;
-    var newSurf = req.body.surf;
-    var newBike = req.body.bike;
-    var newYoga = req.body.yoga;
-    var newPilates = req.body.pilates;
-    var newCardio = req.body.cardio;
-    var newDance = req.body.dance;
-    var newRock = req.body.rock;
-    var newGym = req.body.gymnastics;
-    var newBowl = req.body.bowl;
-    var newRowing = req.body.rowing;
-    var newTennis = req.body.tennis;
-    var newBaseball = req.body.baseball;
-    var newBasketball = req.body.basketball;
-    var newFootball = req.body.football;
-    var newSoccer = req.body.soccer;
-    var newRugby = req.body.rugby
-    var newVolleyball = req.body.volleyball;
-    var newGolf = req.body.golf;
-    var newHockey = req.body.hockey;
-    var newIce= req.body.ice;
-    var newSkateboard = req.body.skateboard;
-    var newBio = req.body.bio;
-
-    db.Form.create({
-      name: newName,
-      gender: newGender,
-      age: newAge,
-      img: newImg,
-      primaryLocation:newLocation,
-      weightlift:newWeightlift,
-      run:newRun,
-      swim: newSwim,
-      surf: newSurf,
-      bike: newBike,
-      yoga: newYoga,
-      pilates:newPilates,
-      cardio:newCardio,
-      dance: newDance,
-      rock: newRock,
-      gymnastics: newGym,
-      bowl: newBowl,
-      rowing: newRowing,
-      tennis: newTennis,
-      baseball: newBaseball,
-      basketball: newBasketball,
-      football: newFootball,
-      soccer: newSoccer,
-      rugby: newRugby,
-      volleyball:newVolleyball,
-      golf:newGolf,
-      hockey: newHockey,
-      ice: newIce,
-      skateboard:newSkateboard,
-      bio:newBio
+    db.Form.upsert({
+      email: req.user.email,
+      name: req.body.name,
+      gender: req.body.gender,
+      age: req.body.age,
+      img: req.body.img,
+      primaryLocation: req.body.primaryLocation,
+      weightlift: req.body.weightlift,
+      run: req.body.run,
+      walk: req.body.walk,
+      swim: req.body.swim,
+      surf: req.body.surf,
+      bike: req.body.bike,
+      yoga: req.body.yoga,
+      pilates: req.body.pilates,
+      cardio: req.body.cardio,
+      dance: req.body.dance,
+      rock: req.body.rock,
+      gymnastics: req.body.gymnastics,
+      bowl: req.body.bowl,
+      rowing: req.body.rowing,
+      tennis: req.body.tennis,
+      baseball: req.body.baseball,
+      basketball: req.body.basketball,
+      football: req.body.football,
+      soccer: req.body.soccer,
+      rugby: req.body.rugby,
+      volleyball: req.body.volleyball,
+      golf: req.body.golf,
+      hockey: req.body.hockey,
+      ice: req.body.ice,
+      skateboard: req.body.skateboard,
+      bio: req.body.bio
     }).catch(function(error){
       res.json(error); 
     });  
@@ -155,7 +126,7 @@ app.post("/api/user-form", function(req, res, next) {
 
   app.get("/logout", function(req, res){
     req.logout();
-    res.redirect("/test-login");
+    res.redirect("/index");
   });
   
 };

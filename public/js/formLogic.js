@@ -25,11 +25,37 @@ $(document).ready(function(){
 	$("input[name=profileSubmit]").on("click", function(event){
         event.preventDefault();
 
-	   var name=$("#name").val();
-	   var gender=$("#genderBar option:selected").val();
-	   var age=$("#ageInput").val();
-	   var primaryLocation=$("#location").val();
+        var atLeastOneIsChecked = $('#checkboxes:checkbox:checked').length;
+
+	    var name=$("#name").val();
+	    var gender=$("#genderBar option:selected").val();
+	    var age=parseInt($("#ageInput").val());
+	    var primaryLocation=$("#location").val();
         var bio=$("#bio").val();
+
+        if ((name!=="")&&(gender!=="blank")&&(typeof age !=="number")&&(primaryLocation!=="")&&(atLeastOneIsChecked>0)){
+            console.log(name + gender+ typeof age +name+atLeastOneIsChecked);
+        }
+
+        if (name===""){
+            console.log(name);
+        }
+
+        if (gender==="blank"){
+            console.log(gender);
+        }
+
+        if (typeof age ==="number"){
+            console.log(typeof age);
+        }
+
+        if (primaryLocation ===""){
+            console.log(primaryLocation);
+        }
+
+        if (atLeastOneIsChecked === 0){
+            console.log(primaryLocation);
+        }
 
     	var newForm = {
     	name: name,
@@ -59,13 +85,11 @@ $(document).ready(function(){
         rugby: $("#rugby").is(":checked"),
         volleyball: $("#volleyball").is(":checked"),
         golf: $("#golf").is(":checked"),
-        hockey: $("#hocket").is(":checked"),
+        hockey: $("#hockey").is(":checked"),
         ice: $("#ice").is(":checked"),
         skateboard: $("#skateboard").is(":checked"),
         bio: bio
     	};
-
-        console.log(newForm.run);
 
     	$.ajax({
     		type: "POST",
