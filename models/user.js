@@ -35,5 +35,9 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
+  User.associate=function(models){
+    User.hasOne(models.Form);
+    User.hasOne(models.Match);
+  };
   return User;
 };
