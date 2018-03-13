@@ -1,4 +1,5 @@
 var reader = new FileReader();
+var readerResult;
 
 function previewFile(input) {
     if(input.files && input.files[0]) {
@@ -7,6 +8,7 @@ function previewFile(input) {
             previewImage.attr("src", reader.result);
             $(".imgPlace").empty();
             $(".imgPlace").append(previewImage);
+            readerResult = reader.result;
         };
 
     reader.readAsDataURL(input.files[0]);
@@ -31,6 +33,8 @@ $(document).ready(function(){
 	   var activities=[weightlift, run, walk, swim, surf, bike, yoga, pilates, cardio, dance, rock, gymnastics, bowl, rowing, tennis, baseball,
         basketball, football, soccer, rugby, volleyball, golf, hockey, ice, skateboard];
 
+        console.log(activities[0]);
+
         for (i=0;i<activities.length;i++){
 
             var actName="'#"+activities[i]+"'";
@@ -52,10 +56,10 @@ $(document).ready(function(){
     	name: name,
         gender: gender,
         age: age,
-        img: reader.result,
+        img: readerResult,
         primaryLocation: primaryLocation,
         weightlift: weightlift,
-        run: run,
+        run: $("#run").val();,
         walk: walk,
         swim: swim,
         surf: surf,

@@ -23,7 +23,7 @@ module.exports = function(app) {
       longitude: newLongitude,
     }).then(function(result) {
       lastid = result.dataValues.id;
-      runMatch(lastid);
+      runMatch(newEmail);
       req.login({email: newEmail}, function(err){
         if(err)
           res.json(err);
@@ -35,16 +35,16 @@ module.exports = function(app) {
     });
   });  
 
-function runMatch(lastid){
+function runMatch(newEmail){
 
 db.Match.create({
-      mainid: lastid
+      email: newEmail
     }).catch(function(error){
       res.json(error);
     });
 
 db.Form.create({
-      mainid: lastid
+      email: newEmail
     }).catch(function(error){
       res.json(error); 
     });
