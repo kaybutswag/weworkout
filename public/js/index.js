@@ -20,7 +20,7 @@ function createNewUser(email, password, latitude, longitude) {
 		email: email,
 		password: password,
 		latitude: latitude,
-		longitude: longitude,
+		longitude: longitude
 	};
 
 	$.ajax({
@@ -29,14 +29,17 @@ function createNewUser(email, password, latitude, longitude) {
 		data: newUser
 	}).then(function(error){
 		if(error){
+			console.log(error);
 			if("errors" in error) {
 				if(error.errors[0].path === "email")
 					$("form p").text("The email you entered is not valid.");
 				else if(error.errors[0].path === "password")
 					$("form p").text("The password you entered is not valid.");
 			}
+			else if ("original" in error && "code" in error.original && error.original.code === "ER_DUP_ENTRY")
+				$("form p").text("That email already exists");
 			else
-				$("form p").text("There was an error. Please try again.");
+				$("form p").text("Please allow us to access your location.");
 		}
 		else {
 			window.location.replace("/profile");
@@ -81,7 +84,7 @@ $(document).ready(function(){
 			else if(data === "password")
 				$("form p").text("That password is incorrect");
 			else {
-				window.location.replace("/matches");
+				window.location.replace("/judgement");
 			}
 		});
 	});
