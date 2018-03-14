@@ -69,7 +69,7 @@ $(document).ready(function(){
     event.preventDefault();
     this.form.reset();
     // path changes with handlebars
-    $(".userCardImg").attr("style", "background-image: url('img/placeholder.jpg')");
+    $(".userCardImg").attr("style", "background-image: url('img/logoBlack.png')");
     $('.userCardImg').height($('.userCardImg').width());
     // $("input[name=picture]").value('')
   })
@@ -86,11 +86,17 @@ $(document).ready(function(){
     console.log("you clicked the matches link");
   })
 
-});
-
-
   $('.userCardImg').height($('.userCardImg').width());
+
+  $('#imgUpload').hide();
+
+  $('#imgUploadBtn').click(function(event){
+    event.preventDefault();
+    $('#imgUpload').trigger('click');
+  })
 });
+
+
 
 
 $(window).resize(function() {
