@@ -5,14 +5,9 @@
     "password": "root",
     "database": "kinnections_users",
     "host": "127.0.0.1",
-<<<<<<< HEAD
-    "port": "3306",
-    "dialect": "mysql"
-=======
     "port": "8889",
     "dialect": "mysql",
     "logging": false
->>>>>>> upstream/master
   },
   "test": {
     "username": "root",
