@@ -18,8 +18,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     latitude: {
       type: DataTypes.DOUBLE,
-      allowNull: true,
-      defaultValue: null,
+      allowNull: false,
       validate: {
         min: -90,
         max: 90
@@ -27,8 +26,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     longitude: {
       type: DataTypes.DOUBLE,
-      allowNull: true,
-      defaultValue: null,
+      allowNull: false,
       validate: {
         min: -180,
         max: 180
