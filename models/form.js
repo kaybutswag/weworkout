@@ -2,19 +2,32 @@ module.exports = function(sequelize, DataTypes) {
   var Form = sequelize.define("Form", {
     email: {
       type: DataTypes.STRING,
-      primaryKey: true
+      primaryKey: true,
+      unique: true,
+      validate: {
+        len: [1]
+      }
     },
     name: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
     },
     gender: {
-      type: DataTypes.STRING
-    },
-    age: {
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
     },
     dob: {
-      type: DataTypes.DATEONLY
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
     },
     img: {
       type: DataTypes.TEXT("long")
