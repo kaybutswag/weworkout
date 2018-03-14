@@ -110,6 +110,7 @@ $(document).ready(function(){
 	$("#kinect").on("click",function(event){
 			addLike();
 	});
+
   $('.userCardImg').height($('.userCardImg').width());
 });
 

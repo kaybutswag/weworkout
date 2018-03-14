@@ -90,7 +90,7 @@ $(document).ready(function(){
 
 
   $('.userCardImg').height($('.userCardImg').width());
-});
+// });
 
 
 $(window).resize(function() {

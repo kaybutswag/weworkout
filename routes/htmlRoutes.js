@@ -24,6 +24,12 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/judgement.html"));    
   });
 
+  app.get("/matches", isAuthenticated, function(req, res){
+
+
+    res.sendFile(path.join(__dirname, "../public/matches.html"));    
+  });
+
   app.get("/profile", isAuthenticated, function(req, res) {
     res.sendFile(path.join(__dirname, "../public/profile.html"));
   });
