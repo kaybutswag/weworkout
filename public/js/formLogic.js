@@ -4,10 +4,12 @@ var readerResult;
 function previewFile(input) {
     if(input.files && input.files[0]) {
         reader.onload = function() {
-            var previewImage = $("<img width = '100%' height = 'auto'>");
-            previewImage.attr("src", reader.result);
-            $(".imgPlace").empty();
-            $(".imgPlace").append(previewImage);
+            // var previewImage = $("<img width = 'auto' height = '100%'>");
+            // previewImage.attr("src", reader.result);
+            // $(".userCardImg").empty();
+            // $(".userCardImg").append(previewImage);
+            $(".userCardImg").attr("style", "background-image: url('"+reader.result+"')");
+            $('.userCardImg').height($('.userCardImg').width());
             readerResult = reader.result;
         };
 
@@ -22,7 +24,8 @@ function fillInForm(preferences) {
     "golf", "hockey", "ice", "skateboard", "bio"];
 
     if(preferences.img !== null)
-        $(".imgPlace").append("<img width = '100%' height = 'auto' src = '" + preferences.img + "'>");
+        $(".userCardImg").attr("style", "background-image: url('"+preferences.img+"')");
+        // $(".imgPlace").append("<img width = '100%' height = 'auto' src = '" + preferences.img + "'>");
 
     for(var i = 0; i < fieldsToFill.length; i++) {
         var fieldId = fieldsToFill[i];
@@ -40,7 +43,7 @@ function fillInForm(preferences) {
 $(document).ready(function(){	
 
     $("input[name=picture]").change(function(){
-        $(".imgPlace").empty();
+        // $(".imgPlace").empty();
         previewFile(this);
     });
 

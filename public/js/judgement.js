@@ -37,7 +37,7 @@ function sendPreferences() {
 	var genderselect=[];
 	var selectval=$("#genderPref option:selected").val();
 
-	if(selectval==="all"||){
+	if(selectval==="all"){
 		genderselect=["male","female","other"];
 	}
 
@@ -110,8 +110,13 @@ $(document).ready(function(){
 	$("#kinect").on("click",function(event){
 			addLike();
 	});
+  $('.userCardImg').height($('.userCardImg').width());
 });
 
+
+$(window).resize(function() {
+  $('.userCardImg').height($('.userCardImg').width());
+});
 
 
 
