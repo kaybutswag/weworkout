@@ -3,7 +3,7 @@ var expanded = false;
 function clearContents(element) {
   element.value = '';
 }
-<<<<<<< HEAD
+
 //pic testing starts//
 var imgSrcs =[
     "/img/crunch.jpg",
@@ -37,10 +37,6 @@ function animateBackground() {
     });
 }
 
-
-// pic ends//
-=======
-
 $(document).ready(function(){
   $("#logout").on("click", function(){
     $.ajax({
@@ -72,10 +68,10 @@ $(document).ready(function(){
   $("#clear").click(function(event){
     event.preventDefault();
     this.form.reset();
-    $(".imgPlace").empty();
     // path changes with handlebars
-    $(".imgPlace").append('<img src="img/placeholder.jpg">');
-    $("input[name=picture]").value('')
+    $(".userCardImg").attr("style", "background-image: url('img/placeholder.jpg')");
+    $('.userCardImg').height($('.userCardImg').width());
+    // $("input[name=picture]").value('')
   })
 
   $(".profileLink").click(function(){
@@ -89,5 +85,15 @@ $(document).ready(function(){
   $(".matchesLink").click(function(){
     console.log("you clicked the matches link");
   })
+
 });
->>>>>>> upstream/master
+
+
+  $('.userCardImg').height($('.userCardImg').width());
+});
+
+
+$(window).resize(function() {
+  $('.userCardImg').height($('.userCardImg').width());
+});
+
