@@ -8,24 +8,28 @@ var isAuthenticated = require("../config/middleware/isAuthenticated.js");
 // =============================================================
 module.exports = function(app) {
 
-  // index route loads view.html
-  app.get("/test-login", function(req, res) {
+  // loads index.html page
+  app.get("/", function(req, res) {
     if(req.user)
-      return res.redirect("/test-success.html");
+      return res.redirect("/matches");
 
-    res.sendFile(path.join(__dirname, "../public/test-login.html"));
+    res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
-  app.get("/test-success", isAuthenticated, function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/test-success.html"));
+  app.get("/judgement", isAuthenticated, function(req, res){
+    /* Katharine: add a function to see if user has preferences stored (you can get user's
+    email with req.user.email and then use that to get the user's id); if the user does
+    not have any preferences stored, redirect to "/profile"; otherwise, send matches.html */
+
+    res.sendFile(path.join(__dirname, "../public/judgement.html"));    
   });
-  
-//   app.get("/maps", function(req, res) {
-//     res.sendFile(path.join(__dirname, "../public/maps.html"));
-//   });
+
+  app.get("/profile", isAuthenticated, function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/profile.html"));
+  });
 
   app.get("/*", function(req, res) {
-    res.redirect("/test-login.html");
+    res.redirect("/");
   });
   
 

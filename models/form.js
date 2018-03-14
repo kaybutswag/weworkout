@@ -1,14 +1,10 @@
 module.exports = function(sequelize, DataTypes) {
   var Form = sequelize.define("Form", {
-    mainid: {
+    email: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+      primaryKey: true
     },
-    firstName: {
-      type: DataTypes.STRING
-    },
-    lastName: {
+    name: {
       type: DataTypes.STRING
     },
     gender: {
@@ -17,8 +13,11 @@ module.exports = function(sequelize, DataTypes) {
     age: {
       type: DataTypes.INTEGER
     },
+    dob: {
+      type: DataTypes.DATEONLY
+    },
     img: {
-      type: DataTypes.BLOB
+      type: DataTypes.TEXT("long")
     },
     primaryLocation: {
       type: DataTypes.STRING
@@ -98,18 +97,12 @@ module.exports = function(sequelize, DataTypes) {
     skateboard: {
       type: DataTypes.BOOLEAN
     },
-    maxpress: {
-      type: DataTypes.INTEGER
-    },
-    maxsquat: {
-      type: DataTypes.INTEGER
-    },
-    miles: {
-      type: DataTypes.INTEGER
-    },
     bio: {
       type: DataTypes.STRING
     }
   });
+  Form.associate=function(models){
+    Form.belongsTo(models.User);
+  };
   return Form;
 };

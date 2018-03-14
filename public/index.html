@@ -2,7 +2,8 @@
 <html lang="en-us">
 <head>
 	<meta charset="UTF-8">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+		
 		<link rel="stylesheet" href="/css/style.css" type="text/css"/>
 		<title>Kinections | Sign In</title>
 
@@ -10,16 +11,17 @@
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
 		<!-- font -->
-		<!-- <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,800" rel="stylesheet"> -->
 		<link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
+
+		<!-- font awesome -->
+		<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 		<!-- our css -->
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 
 		<!-- jquery -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-		<script src="/js/logic.js"></script>
 	</head>
 	<body>
 		<header></header>
@@ -29,11 +31,13 @@
 				<form>
 					<img class="loginLogo" src="img/logoTransparent.png"><br>
 					<label for="email">Email</label><br>
-					<input type="text" name="email" value="someone@email.com"><br>
+					<input type="text" name="email" placeholder="someone@email.com" value="test@test.com"><br>
 					<label for="password">Password</label><br>
-					<input type="password" name="password" value="password"><br>
-					<input class="signIn" type="submit" name="signIn" value="Sign In">
-					<input class="signUp" type="submit" name="signUp" value="Sign Up">
+					<input type="password" name="password" placeholder="password" value="testtest"><br>
+					<button class="signIn" type="submit" name="signIn">Sign In</button>
+					<button class="signUp" type="submit" name="signUp">Sign Up</button>
+					<br>
+					<p></p>
 				</form>
 				<button onclick="getLocation()">Get Location Demo</button>
 				<div class="loaderContainer">
@@ -47,6 +51,10 @@
 		<div class="foot"></div>
 
 		<!-- javascript -->
+<<<<<<< HEAD
 
+=======
+		<script type = "text/javascript" src = "js/index.js"> </script>
+>>>>>>> upstream/master
 	</body>
 </html>
