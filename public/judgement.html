@@ -24,11 +24,16 @@
 	<body>
 
 		<header>
-
 			<div class="headerDiv">
-				<i class="fas fa-user"></i>
-				<img class="headLogo" src="img/logoBlack.png">
-				<i class="fas fa-comment-alt"></i>
+				<button class="profileLink" href="/profile">
+					<i class="fas fa-user"></i>
+				</button>
+				<button class="judgementLink" href="/judgement">
+					<img class="headLogo" src="img/logoBlack.png">
+				</button>
+				<button class="matchesLink" href="/matches">
+					<i class="fas fa-comment-alt"></i>
+				</button>
 			</div>
 		</header>
 		
@@ -53,6 +58,19 @@
 					  	<option value="male">Men Only</option>
 					  	<option value="female">Women Only</option>
 					</select>
+
+					<h3>Age Range</h3>
+					<label for="minAge">
+					Minimum Age: 
+					<input type="number" name="minAge" id="minAge"> years old
+					</label><br>
+
+
+					<label for="maxAge">
+					Maximum Age:
+					<input type="number" name="minAge" id="maxAge"> years old
+					</label>
+
 
 		        	<h3>Activities</h3>
 		        	<div class="activityFlex">
@@ -152,13 +170,19 @@
 
 		<form class="content">
 
+			<p id="error-message"></p>
 
-			<div class="box1">
-				<img class="centerCropped" src="https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1">
+			<break></break>
 
+			<div class="userCard">
+				<div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
 
+				<!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
+				<!-- may want to change this to class="userCardName" -->
 				<h2 id = "name" user-id = "">James</h2>
 			</div>
+
+
 
 			<div class="box2">
 
