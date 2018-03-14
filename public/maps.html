@@ -16,10 +16,98 @@
         width: 400px;
       }
     </style>
+    <!-- start slider -->
+    <style>
+    .slidecontainer {
+        width: 100%;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+
+    .slider:hover {
+        opacity: 1;
+    }
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #4CAF50;
+        cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #4CAF50;
+        cursor: pointer;
+    }
+    .search {
+      font-weight: 700;
+      font-size: 20px;
+      font-family: sans-serif;
+    }
+    </style>
+
+
+    <!--end slider  -->
   </head>
   <body>
     <div id="map"></div>
+    <h2>Matches by Distance : </h2>
+    <div id="distance" class="search">
+    </div>
+    <h3>Select Distance By Miles</h3>
+    <div class="""slidecontainer">
+      <input type="range" min="1" max="15" value="8" class="slider" id="myRange">
+      <p>Value: <span id="demo"></span></p>
+    </div>
     <script>
+    var pos;
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+         pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+
+        new google.maps.Marker({
+          position: pos,
+          map: map
+        });
+
+        infoWindow = new google.maps.InfoWindow;
+        infoWindow.setPosition(pos);
+        infoWindow.setContent('Location found.');
+        infoWindow.open(map);
+        map.setCenter(pos);
+        checkDistances(pos);
+      }, function() {
+
+        handleLocationError(true, infoWindow, map.getCenter());
+      });
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+    }
+
+    var distanceFromMe = 8.00;
+    var peopleInRange = [];
+
     var users = [
       {
       "firstName":"Jack",
@@ -61,7 +149,7 @@
       "available": "true",
       "workoutWindowStart" : "8:00 am",
       "workoutWindowEnd" : "11:00 am",
-      "bio":"Quidditch for live.",
+      "bio":"Quidditch for life.",
       "email":"sample2@gmail.com",
       "password":"password2"
    },
@@ -86,11 +174,37 @@
       "bio":"No pain no gain",
       "email":"sample2@gmail.com",
       "password":"password2"
+   },
+   {
+      "firstName":"Penny",
+      "img":"http://adventuresinbrainsurgery.com/wp-content/uploads/2013/03/Jenny-Head-HiRez.jpg",
+      "gender":"Female",
+      "age":"19",
+      "location":{"lat": 30.299153, "lng": -97.72316079999997},
+      "activities":[
+         "yoga",
+         "golf"
+      ],
+      "bench":"50",
+      "squat":"45",
+      "deadlift":"20",
+      "fastestMile":"9",
+      "activityForToday": "running",
+      "available": "true",
+      "workoutWindowStart" : "9:00 am",
+      "workoutWindowEnd" : "11:00 am",
+      "bio":"Golf for life.",
+      "email":"sample2@gmail.com",
+      "password":"password2"
    }]
       // Note: This example requires that you consent to location sharing when
       // prompted by your browser. If you see the error "The Geolocation service
       // failed.", it means you probably did not give permission for the browser to
       // locate you.
+      var markers = [];
+      for(var i=0; i<users.length; i++){
+        markers.push(users[i].location)
+      }
       var map, infoWindow;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -104,10 +218,6 @@
         //   {lat: 30.287153, lng: -97.72306079999997},
         //   {lat: 30.247153, lng: -97.76306079999997},
         // ];
-        var markers = [];
-        for(var i=0; i<users.length; i++){
-          markers.push(users[i].location)
-        }
         var content = "My Match ";
         var image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPRzjlzH4hzp6H3P2vR3j5QzZApE8gQJfmA9Rwl07Z5AzAFkx8CQ"
         for(var i=0; i<markers.length; i++){
@@ -136,28 +246,33 @@
             })(test,content,infowindow, i));
           }
         }
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
 
-            new google.maps.Marker({
-              position: pos,
-              map: map
-            });
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map);
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
+        //markers and logic
+        for(var i=0; i<markers.length; i++){
+          if(users[i].available === "true"){
+            if(users[i].gender === 'Male'){
+              var test = new google.maps.Marker({
+                position: markers[i],
+                map: map,
+                icon:  "https://a7babzorona.de/file/icon/19.gif"
+              });
+            }
+            else{
+              var test = new google.maps.Marker({
+                position: markers[i],
+                map: map,
+                icon: image
+              });
+            }
+
+            var infowindow = new google.maps.InfoWindow();
+            google.maps.event.addListener(test,'click', (function(test,content,infowindow, i){
+                return function() {
+                infowindow.setContent('<IMG style="padding-right:10px;" HEIGHT="100PX" WIDTH="100PX" BORDER="0" ALIGN="Left" SRC=' + users[i].img+ '><span> My name is ' + users[i].firstName + "<br>" + users[i].bio + " <br> <br>Workout Window: " + users[i].workoutWindowStart + "-" +  users[i].workoutWindowEnd +"</span>");
+                infowindow.open(map,test);
+              };
+            })(test,content,infowindow, i));
+          }
         }
       }
 
@@ -168,6 +283,53 @@
                               'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
       }
+
+//START Matching logic
+// users should be coming from data base - update code as needed to get proper attributes
+function checkDistances(pos){
+  peopleInRange = [];
+  for(var i=1; i< users.length; i++){
+      console.log(users[i].firstName);
+      //calculate distance of user vs each in the list of potential partners from data base
+    var dist = getDistanceFromLatLonInKm(pos.lat, pos.lng, users[i].location.lat, users[i].location.lng, 'km');
+    //match based on distance distanceFromMe is hard coded to 5
+    if(dist <= distanceFromMe){
+      console.log(users[i].firstName + " is in my range!");
+      //push people in range to our list of results by distance
+      peopleInRange.push(users[i].firstName);
+    }
+  }
+
+  document.getElementById("distance").innerHTML = "People within " + distanceFromMe + " miles: " + peopleInRange.join(", ") + "\n";
+
+
+}
+// slider!
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+  distanceFromMe = this.value;
+  checkDistances(pos);
+}
+// slider ends
+
+//Get distance between 2 points on the map
+function getDistanceFromLatLonInKm(latitude1,longitude1,latitude2,longitude2,units) {
+    var p = 0.017453292519943295;    //This is  Math.PI / 180
+    var c = Math.cos;
+    var a = 0.5 - c((latitude2 - latitude1) * p)/2 +
+            c(latitude1 * p) * c(latitude2 * p) *
+            (1 - c((longitude2 - longitude1) * p))/2;
+    var R = 6371; //  Earth distance in km so it will return the distance in km
+   var dist = 2 * R * Math.asin(Math.sqrt(a));
+   dist = dist/1.60934 ;
+  console.log(dist + " miles")
+  return dist;
+}
+//end MATCHING LOGIC
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcT7xAok0IYa1lA246JLCVihq54KuJOIA&callback=initMap">

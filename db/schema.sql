@@ -30,7 +30,7 @@ CREATE DATABASE kinnections_users;
 --     rock BOOLEAN,
 --     gymnastics BOOLEAN,
 --     bowl BOOLEAN,
---     rowing BOOLEAN, 
+--     rowing BOOLEAN,
 -- 	tennis BOOLEAN,
 --     baseball BOOLEAN,
 --     basketball BOOLEAN,

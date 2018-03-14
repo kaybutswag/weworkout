@@ -25,7 +25,7 @@
 		<header></header>
 
 		<div>
-			<div class="signInPanel">		
+			<div class="signInPanel">
 				<form>
 					<img class="loginLogo" src="img/logoTransparent.png"><br>
 					<label for="email">Email</label><br>
@@ -35,6 +35,10 @@
 					<input class="signIn" type="submit" name="signIn" value="Sign In">
 					<input class="signUp" type="submit" name="signUp" value="Sign Up">
 				</form>
+				<button onclick="getLocation()">Get Location Demo</button>
+				<div class="loaderContainer">
+					<div id="loader"></div>
+				</div>
 			</div>
 		</div>
 
@@ -43,6 +47,6 @@
 		<div class="foot"></div>
 
 		<!-- javascript -->
-		
+
 	</body>
 </html>
