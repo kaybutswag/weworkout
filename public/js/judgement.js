@@ -12,7 +12,7 @@ function updateLocation() {
 }
 
 function updateUserLocation(latitude, longitude) {
-	var updateEmail = {
+	var updatedLocation = {
 		latitude: latitude,
 		longitude: longitude
 	};
@@ -20,39 +20,53 @@ function updateUserLocation(latitude, longitude) {
 	$.ajax({
 		type: "PUT",
 		url: "/api/update-location",
-		data: updateEmail
+		data: updatedLocation
 	}).then(function(error){
 		if(error)
-			("p").text("Could not update your location");
+			("#error-message").text("Could not update your location");
 	});
 }
 
-function sendPreferences() {
+function autoPopulateModal() {
+	$.ajax({
+		type: "POST",
+		url: "/api/get-default-filter"
+	}).then(function(sportsPreferences){
+		for(var i = 0; i < sportsPreferences.length; i++)
+			$("#" + sportsPreferences[i]).attr("checked", true);
+	});
+
+	$("#search-radius").val(5); //will need to update based on how search radius bar works
+}
+
+function sendPreferences(userAge) {
 	//if (miles has been filled out then miles=that number)
 	//else miles=5
+	var miles = $("#miles").val();
+	if(miles === "")
+		miles = 5;
 
-	var miles= $("#miles").val();
+	var minAge = userAge - 5;
+
+	var maxAge = userAge + 5;
 	
-	//type will be number
 	var genderselect=[];
 	var selectval=$("#genderPref option:selected").val();
 
-	if(selectval==="all"){
+	if(selectval==="all")
 		genderselect=["male","female","other"];
-	}
-
 	else{
-		genderselect=selectval;
+		genderselect=[selectval];
 	}
 
 	var sports=[];
 
-    var fieldsToFill2 = ["weightlift", "run", "walk", "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl", 
+    var fieldsToFill = ["weightlift", "run", "walk", "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl", 
     "rowing", "tennis", "baseball", "basketball", "football", "soccer", "rugby", "volleyball", "golf", "hockey", "ice", "skateboard"];
 
 
-    for(var i = 0; i < fieldsToFill2.length; i++) {
-        var fieldId = fieldsToFill2[i];
+    for(var i = 0; i < fieldsToFill.length; i++) {
+        var fieldId = fieldsToFill[i];
         var field = $("#" + fieldId);
 
         if(field.is(":checked")){
@@ -61,9 +75,11 @@ function sendPreferences() {
     }
 
 	var preferences = {
-		genderselect:genderselect,
-		miles:miles,
-		sports:sports
+		genderselect: genderselect,
+		miles: miles,
+		minAge: minAge,
+		maxAge: maxAge,
+		sports: sports
 	};
 
 	$.ajax({
@@ -87,7 +103,7 @@ function displayOption() {
 }
 
 function addLike(){
-	var likeId=$("#idName").attr("user-id");
+	var likeId=$("#name").attr("user-id");
 
 	var currentUser={
 		likeId:likeId
@@ -104,12 +120,24 @@ function addLike(){
 
 
 $(document).ready(function(){
-	updateLocation();
-	sendPreferences();
+	var userAge;
+	autoPopulateModal();
+
+	$.ajax({
+		type: "POST",
+		url: "/api/get-age"
+	}).then(function(dob){
+		userAge = moment().diff(moment(dob), "years");
+		$("#minAge").val(userAge - 5);
+		$("#maxAge").val(userAge + 5);
+		updateLocation();
+		sendPreferences(userAge);
+	});
 
 	$("#kinect").on("click",function(event){
 			addLike();
 	});
+
   $('.userCardImg').height($('.userCardImg').width());
 });
 
