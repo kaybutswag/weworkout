@@ -1,12 +1,16 @@
 function getLocation(email, password) {
+	showIndicator();
 	if(navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position){
+			hideLoader();
 			createNewUser(email, password, position.coords.latitude, position.coords.longitude);
 		}, function(error){
+			hideLoader();
 			createNewUser(email, password, null, null);
 		});
 	}
 	else {
+		hideLoader();
 		createNewUser(email, password, null, null);
 	}
 }
@@ -40,7 +44,7 @@ function createNewUser(email, password, latitude, longitude) {
 	});
 }
 
-$(document).ready(function(){	
+$(document).ready(function(){
 	$(".signUp").on("click", function(event){
 		event.preventDefault();
 		var newEmail = $("input[name=email]").val();
@@ -55,7 +59,7 @@ $(document).ready(function(){
 	$(".signIn").on("click", function(event){
 		event.preventDefault();
 		var email = $("input[name=email]").val();
-		var password = $("input[name=password]").val(); 
+		var password = $("input[name=password]").val();
 
 		var credentials = {
 			email: email,
@@ -82,3 +86,24 @@ $(document).ready(function(){
 		});
 	});
 });
+
+
+function showIndicator(){
+    $("#loader").addClass("loader");
+}
+
+function hideLoader(){
+    $("#loader").removeClass("loader");
+}
+
+//pic looping starts//
+$(document).ready(function() {
+  var counter = 0;
+  setInterval(myFunc, 9000);
+  function myFunc() {
+    var newImage = counter;
+    $("#changingPic img").eq(newImage).addClass("opaque");
+    counter++;
+  }
+});
+// pic looping ends//

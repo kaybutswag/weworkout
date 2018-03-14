@@ -32,7 +32,7 @@ function sendPreferences() {
 	//else miles=5
 
 	var miles= $("#miles").val();
-	
+
 	//type will be number
 	var genderselect=[];
 	var selectval=$("#genderPref option:selected").val();
@@ -47,7 +47,7 @@ function sendPreferences() {
 
 	var sports=[];
 
-    var fieldsToFill2 = ["weightlift", "run", "walk", "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl", 
+    var fieldsToFill2 = ["weightlift", "run", "walk", "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl",
     "rowing", "tennis", "baseball", "basketball", "football", "soccer", "rugby", "volleyball", "golf", "hockey", "ice", "skateboard"];
 
 
@@ -112,6 +112,14 @@ $(document).ready(function(){
 	});
 });
 
-
-
-
+//pic looping starts//
+$(document).ready(function() {
+  var counter = 0;
+  setInterval(myFunc, 9000);
+  function myFunc() {
+    var newImage = counter;
+    $("#changingPic img").eq(newImage).addClass("opaque");
+    counter++;
+  }
+});
+// pic looping ends//

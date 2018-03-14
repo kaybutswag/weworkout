@@ -1,5 +1,7 @@
 body {
-	background-image: url('../img/Golf.jpeg');
+  background: black;
+	/* background-image: url('../img/crunch.jpg'); */
+  /* background-color: red; */
   /* url("../img/crunch.jpg"),
   url("../img/bikes.jpg"),
   url("../img/tennis.jpg"),
@@ -11,7 +13,6 @@ body {
   url("../img/Golf.jpeg"),
   url("../img/streching.jpeg"),
   url("../img/jumpRope.jpeg"); */
-  -webkit-transition: background-image 0.5s ease-in-out;
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -361,6 +362,36 @@ break {
   z-index: -1;
   background-size: cover;
 }
+
+#changingPic img.opaque {
+    opacity:1;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=1);
+  }
+
+  .shadow {
+    -webkit-box-shadow: 5px 5px 5px #aaa;
+    -moz-box-shadow: 5px 5px 5px #aaa;
+    box-shadow: 5px 5px 5px #aaa;
+    margin-bottom: 10px;
+  }
+
+  #changingPic img {
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    opacity:0;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background-size: cover;
+  }
 
 /* pic testing ends */
 
