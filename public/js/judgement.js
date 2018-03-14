@@ -1,3 +1,6 @@
+var myBigArray=[];
+var currentProfile=0;
+
 function updateLocation() {
 	if(navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position){
@@ -54,7 +57,7 @@ function sendPreferences(userAge) {
 	var selectval=$("#genderPref option:selected").val();
 
 	if(selectval==="all")
-		genderselect=["male","female","other"];
+		genderselect=["Male","Female","Other"];
 	else{
 		genderselect=[selectval];
 	}
@@ -88,8 +91,50 @@ function sendPreferences(userAge) {
 		data: preferences
 	}).then(function(matches){
 		// shuffle matches
-		// function to display one of the matches
+		myBigArray=matches;
+		currentProfile = 0;
+		console.log(myBigArray[currentProfile]);
+		showCard();
 	});
+}
+
+function showCard(){
+	$("#name").text(myBigArray[currentProfile].name);
+	$("#name").attr("user-id",myBigArray[currentProfile].UserId);
+	$(".userCardImg").empty();
+	$(".userCardImg").attr("style","background-image: url('"+myBigArray[currentProfile].img+"')");
+	$('.userCardImg').height($('.userCardImg').width());
+	$('#gender').text(myBigArray[currentProfile].gender);
+	$('#location').text(myBigArray[currentProfile].primaryLocation);
+	$('#age').text(moment().diff(moment(myBigArray[currentProfile].dob),"years"));
+	$('#bio').text(myBigArray[currentProfile].bio);
+
+	var sports2="";
+
+    var fieldsToFill = ["weightlift", "run", "walk", "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl", 
+    "rowing", "tennis", "baseball", "basketball", "football", "soccer", "rugby", "volleyball", "golf", "hockey", "ice", "skateboard"];
+
+    var actualActivity = ["weightlifting", "running", "walking", "swimming", "surfing", "biking", "yoga", "pilates", "cardio", "dancing",
+    "rock climbing", "gymnastics", "bowling", "rowing", "tennis", "baseball", "basketball", "football", "soccer", "rugby", "volleyball", 
+    "golfing", "hockey", "ice skating", "skateboarding"];
+
+
+    for(var i = 0; i < fieldsToFill.length; i++) {
+        var activity = fieldsToFill[i];
+        if(myBigArray[currentProfile][activity] === true) {
+            if(sports2 === "") {
+            	sports2 += actualActivity[i].charAt(0).toUpperCase() + actualActivity[i].substring(1);
+            }
+            else
+            	sports2 += ", " + actualActivity[i];
+        }
+    }
+
+    $("#activities").text(sports2);
+
+    currentProfile++;        
+
+
 }
 
 function displayOption() {
@@ -114,7 +159,7 @@ function addLike(){
 		url: "/api/change-likes",
 		data: currentUser
 	}).then(function(likeData){
-		$("#matchPic").attr("src", dataURL);
+		console.log("like was stored");
 	});
 }
 
@@ -136,6 +181,12 @@ $(document).ready(function(){
 
 	$("#kinect").on("click",function(event){
 			addLike();
+			showCard();
+	});
+
+	$("#reject").on("click",function(event){
+			// some code
+			showCard();
 	});
 
   $('.userCardImg').height($('.userCardImg').width());
