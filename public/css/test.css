@@ -1,0 +1,75 @@
+html, body {
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	font-family: 'Lato', sans-serif;
+	background-image: url('../img/signIn.jpg');
+	/*breaks at smaller widths*/
+	background-size: 120%;
+	background-repeat: no-repeat;
+	background-position: inherit;
+	color: #212121;
+	font-size: 20px;
+	box-sizing: border-box;
+	/*height: 100%;*/
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+break {
+	display: inline-block;
+	flex-basis: 100%;
+	width: 0px; 
+	height: 0px; 
+	overflow: hidden;
+}
+
+.newMatches, .matches {
+	flex: 1;
+	background-color: rgba(255,255,255,.5);
+	width: 80%;
+	height: 25%;
+	margin-left: 10%;
+	margin-right: 10%;
+	display: flex;
+	justify-content: space-around;
+}
+
+.matchCard {
+	flex: 1;
+	background-color: #fff;
+	margin-right: 10%;
+	margin-left: 10%;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+img {
+	max-width: 90%;
+	max-height: 90%;
+}
+
+.left {
+	text-align: left;
+}
+/*header, footer {
+	position: fixed;
+	width: 100%;
+	background-color: white;
+	height: 70px;
+}
+
+footer {
+	bottom: 0;
+	z-index: -1;
+}
+
+.headerDiv svg {
+	margin-top: 15px;
+	font-size: 40px;
+}*/

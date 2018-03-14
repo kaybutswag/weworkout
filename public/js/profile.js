@@ -47,10 +47,10 @@ $(document).ready(function(){
   $("#clear").click(function(event){
     event.preventDefault();
     this.form.reset();
-    $(".imgPlace").empty();
     // path changes with handlebars
-    $(".imgPlace").append('<img src="img/placeholder.jpg">');
-    $("input[name=picture]").value('')
+    $(".userCardImg").attr("style", "background-image: url('img/placeholder.jpg')");
+    $('.userCardImg').height($('.userCardImg').width());
+    // $("input[name=picture]").value('')
   })
 
   $(".profileLink").click(function(){
@@ -64,4 +64,10 @@ $(document).ready(function(){
   $(".matchesLink").click(function(){
     console.log("you clicked the matches link");
   })
+
+});
+
+
+$(window).resize(function() {
+  $('.userCardImg').height($('.userCardImg').width());
 });

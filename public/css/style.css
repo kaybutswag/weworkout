@@ -38,7 +38,7 @@ textarea {
 	font-size: 20px;
 }
 
-input[name="email"], input[type="password"], textarea, input[type="number"], select[name="gender"], input[placeholder="First Name"], input[name="location"], select {
+input[name="email"], input[type="password"], textarea, input[type="number"], select[name="gender"], input[name="location"], select {
 	border: 1px #212121 solid;
 	padding: 5px;
 }
@@ -69,7 +69,6 @@ header {
 }
 
 .headerDiv svg {
-	margin-top: 15px;
 	font-size: 40px;
 }
 
@@ -91,7 +90,8 @@ h2{
 
 input[placeholder="First Name"] {
 	font-size: 2em;
-	max-width: 328px;
+	max-width: 100%;
+	border: 1px #212121 solid;
 }
 
 break {
@@ -116,18 +116,48 @@ break {
 	justify-content: space-between;
 }
 
-.content, .headerDiv, .abilityInput {
+.history {
+	width: 100%;
+	border: 1px #212121 solid;
+    overflow:scroll;
+    overflow-x:hidden;
+}
+
+.userMsg {
+	background-color: #a9cbfd;
+	max-width: 70%;
+	clear: left;
+	float: right;
+	padding: 5px;
+	margin: 5px;
+	border-radius: 5px;
+}
+
+.friendMsg {
+	background-color: #aaef9f;
+	max-width: 70%;
+	clear: right;
+	float: left;
+	padding: 5px;
+	margin: 5px;
+	border-radius: 5px;
+}
+
+.content, .headerDiv, .abilityInput, .newKinectionsDiv, .kinectionsDiv {
 	display: flex;
 	justify-content: space-around;
 	flex-flow: row wrap;
 }
 
-.content {
+.content, .newKinectionsDiv {
 	background-color: rgba(255,255,255,.5);
 	/*not reactive*/
-	margin: 120px 250px;
-	flex-flow: row wrap;
+	margin: 100px 100px 20px 100px;
+}
 
+.kinectionsDiv {
+	background-color: rgba(255,255,255,.5);
+	margin: 20px 100px 10px 100px;
 }
 
 .imgPlace {
@@ -185,11 +215,22 @@ break {
 	background: transparent;
 }
 
-.signUp {
+.rightCaret, .leftCaret {
+	cursor: pointer;
+	border: none;
+	background: transparent;
+	color: #212121;
+	width: 50px;
+	font-size: 5em;
+	display: flex;
+	align-content: center;
+}
+
+.signUp, input[name="profileSubmit"] {
 	background-color: #6476fa;
 }
 
-.signIn, #kinect, input[name="profileSubmit"], #submitActivities {
+.signIn, #kinect, #submitActivities {
 	background-color: #66ab5f;
 }
 
@@ -234,6 +275,8 @@ break {
 	min-width: 300px;
 }
 
+
+
 .title {
 	margin-top: -133px;
 	/*have to adjust with media query*/
@@ -243,15 +286,22 @@ break {
 	font-size: 150px;
 }
 
-.box1, .box2 {
+.userCard, .box2 {
 	background-color: rgba(255, 255, 255, 1);
 	margin: 100px;
 	padding: 20px;
 	margin: 20px;
 }
 
-.box1 {
+.userCard {
 	flex: 1;
+	width: 200px;
+}
+
+.userCardImg {
+	width: 100%;
+	background-size: cover;
+	background-position: center;
 }
 
 .box2 {
@@ -260,45 +310,6 @@ break {
 
 .abilityDiv {
 	flex: 1;
-}
-
-/*for drop checkboxes*/
-.multiselect {
-  width: 200px;
-}
-
-.selectBox {
-  position: relative;
-}
-
-.selectBox select {
-  width: 100%;
-  font-weight: bold;
-}
-
-.overSelect {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
-
-#checkboxes {
-  display: none;
-  position: fixed;
-  border: 1px #212121 solid;
-  z-index: 100;
-  background-color: white;
-  padding: 5px;
-}
-
-#checkboxes label {
-  display: block;
-}
-
-#checkboxes label:hover {
-  background-color: #ddd;
 }
 
 /*for modal*/
@@ -321,7 +332,7 @@ break {
     pointer-events: auto;
 }
 .modalDialog > div {
-    width: 50%;
+    width: 70%;
     position: relative;
     margin: 10% auto;
     padding: 5px 20px 13px 20px;
