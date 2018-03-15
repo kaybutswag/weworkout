@@ -114,6 +114,9 @@ function showCard(){
 		$(".exhausted-options").removeClass("display-none");
 	}
 	else {
+		var theirDOB = moment(myBigArray[currentProfile].dob).utc().format('YYYY-MM-DD');
+		var theirAge = moment().diff(moment(theirDOB), "years")
+
 		$("#name").text(myBigArray[currentProfile].name);
 		$("#name").attr("user-id", myBigArray[currentProfile].UserId);
 		$(".userCardImg").empty();
@@ -121,7 +124,7 @@ function showCard(){
 		$('.userCardImg').height($('.userCardImg').width());
 		$('#gender').text(myBigArray[currentProfile].gender);
 		$('#location').text(myBigArray[currentProfile].primaryLocation);
-		$('#age').text(moment().diff(moment(myBigArray[currentProfile].dob),"years"));
+		$('#age').text(theirAge);
 		$('#bio').text(myBigArray[currentProfile].bio);
 
 		var sports2="";
@@ -176,7 +179,8 @@ $(document).ready(function(){
 		type: "POST",
 		url: "/api/get-age"
 	}).then(function(dob){
-		userAge = moment().diff(moment(dob), "years");
+		userDOB = moment(dob).utc().format("YYYY-MM-DD");
+		userAge = moment().diff(moment(userDOB), "years");
 		$("#minAge").val(userAge - 5);
 		$("#maxAge").val(userAge + 5);
 		updateLocation(userAge);
