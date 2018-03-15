@@ -42,9 +42,11 @@ function autoPopulateModal() {
 function sendPreferences(userAge) {
 	//if (miles has been filled out then miles=that number)
 	//else miles=5
-	var miles = $("#miles").val();
-	if(miles === "")
-		miles = 5;
+	// var miles = $("#miles").val();
+	// console.log(miles);
+	// if(miles === "")
+	var miles = 5;
+	console.log(miles);
 
 	var minAge = userAge - 5;
 

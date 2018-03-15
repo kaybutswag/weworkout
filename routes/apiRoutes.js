@@ -63,49 +63,47 @@ module.exports = function(app) {
         email: req.user.email
       }
     }).then(function(response){
-      userId = response.id;
+      db.Form.upsert({
+        email: req.user.email,
+        name: req.body.name,
+        gender: req.body.gender,
+        dob: req.body.dob,
+        img: req.body.img,
+        primaryLocation: req.body.primaryLocation,
+        weightlift: req.body.weightlift,
+        run: req.body.run,
+        walk: req.body.walk,
+        swim: req.body.swim,
+        surf: req.body.surf,
+        bike: req.body.bike,
+        yoga: req.body.yoga,
+        pilates: req.body.pilates,
+        cardio: req.body.cardio,
+        dance: req.body.dance,
+        rock: req.body.rock,
+        gymnastics: req.body.gymnastics,
+        bowl: req.body.bowl,
+        rowing: req.body.rowing,
+        tennis: req.body.tennis,
+        baseball: req.body.baseball,
+        basketball: req.body.basketball,
+        football: req.body.football,
+        soccer: req.body.soccer,
+        rugby: req.body.rugby,
+        volleyball: req.body.volleyball,
+        golf: req.body.golf,
+        hockey: req.body.hockey,
+        ice: req.body.ice,
+        skateboard: req.body.skateboard,
+        bio: req.body.bio,
+        UserId: response.dataValues.id
+      }).then(function(){
+        res.json("next");
+      }).catch(function(error){
+        console.log(error);
+        res.json("error"); 
+      });  
     });
-
-    db.Form.upsert({
-      email: req.user.email,
-      name: req.body.name,
-      gender: req.body.gender,
-      dob: req.body.dob,
-      img: req.body.img,
-      primaryLocation: req.body.primaryLocation,
-      weightlift: req.body.weightlift,
-      run: req.body.run,
-      walk: req.body.walk,
-      swim: req.body.swim,
-      surf: req.body.surf,
-      bike: req.body.bike,
-      yoga: req.body.yoga,
-      pilates: req.body.pilates,
-      cardio: req.body.cardio,
-      dance: req.body.dance,
-      rock: req.body.rock,
-      gymnastics: req.body.gymnastics,
-      bowl: req.body.bowl,
-      rowing: req.body.rowing,
-      tennis: req.body.tennis,
-      baseball: req.body.baseball,
-      basketball: req.body.basketball,
-      football: req.body.football,
-      soccer: req.body.soccer,
-      rugby: req.body.rugby,
-      volleyball: req.body.volleyball,
-      golf: req.body.golf,
-      hockey: req.body.hockey,
-      ice: req.body.ice,
-      skateboard: req.body.skateboard,
-      bio: req.body.bio,
-      UserId: userId
-    }).then(function(){
-      res.json("next");
-    }).catch(function(error){
-      console.log(error);
-      res.json("error"); 
-    });  
   });
 
 //
@@ -197,42 +195,46 @@ module.exports = function(app) {
         },
         email: {
           $not: req.user.email
+        },
+        where: db.sequelize.where(db.sequelize.fn('TIMESTAMPDIFF', db.sequelize.literal("year"), db.sequelize.col("dob"), db.sequelize.fn('NOW')), "<=", req.body.maxAge),
+        $and: {
+          where: db.sequelize.where(db.sequelize.fn('TIMESTAMPDIFF', db.sequelize.literal("year"), db.sequelize.col("dob"), db.sequelize.fn('NOW')), ">=", req.body.minAge)
         }
-        //where: db.sequelize.where(db.sequelize.fn('TIMESTAMPDIFF', db.sequelize.literal("year"), db.sequelize.col("dob"), db.sequelize.fn('NOW')), "<=", req.body.maxAge),
-        //where: db.sequelize.where(db.sequelize.fn('TIMESTAMPDIFF', db.sequelize.literal("year"), db.sequelize.col("dob"), db.sequelize.fn('NOW')), ">=", req.body.minAge)
       },
       include:[db.User]
     }).then(function(data){
-      console.log("first filter:");
-      for(var i = 0; i < data.length; i++)
-        console.log(data[i].dataValues.email);
-      /*filterResults(data, maxdistance);*/
+      filterResults(req, data, maxdistance);
     });
   });
 
-  function filterResults(data,maxdistance){
+  function filterResults(req, data, maxdistance){
+    var mylong = req.session.passport.user.longitude;
+    var mylat = req.session.passport.user.latitude;
+    console.log("mylong: " + mylong);
+    console.log("mylat: " + mylat);
+    var userlong;
+    var userlat;
+    var promises = [];
 
     var nearOptions=[];
-    for(var i=0;i<data.length;i++){
-      db.Match.findOne({
+    for(var i = 0;i<data.length;i++){
+      var promise = db.User.findOne({
         where: {
           email: data[i].email
         }
       }).then(function(userdata){
-          var userlong=userdata.longitude;
-          var userlat=userdata.latitude;
+        userlong=userdata.longitude;
+        userlat=userdata.latitude;
 
-          var mylong=req.session.passport.user.dataValues.longitude;
-          var mylat=req.session.passport.user.dataValues.latitude;
-
-          if (getDistance(userlat,userlong,mylat,mylong)<=maxdistance){
-              nearOptions.push(data[i]);
-          }
-      })
+        if(getDistance(userlat,userlong,mylat,mylong) <= maxdistance)
+          nearOptions.push(userdata);
+      });
+      promises.push(promise);
     }
 
-    var possibleMatches = removeMatches(nearOptions);
-    res.json(possibleMatches);
+    Promise.all(promises).then(function(){
+      console.log(nearOptions);
+      return nearOptions});
   }
 
   function getDistance(latitude1,longitude1,latitude2,longitude2) {
@@ -244,7 +246,6 @@ module.exports = function(app) {
     var R = 6371; //  Earth distance in km so it will return the distance in km
     var dist = 2 * R * Math.asin(Math.sqrt(a));
     dist = dist/1.60934 ;
-    console.log(dist + " miles")
     return dist;
   }
 
