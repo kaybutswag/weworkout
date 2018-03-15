@@ -1,5 +1,6 @@
 var myBigArray=[];
 var currentProfile=0;
+var counter=0;
 
 function shuffleArray(arr){
 	for(var i = 1; i < arr.length; i++) {
@@ -11,6 +12,15 @@ function shuffleArray(arr){
 		}
 	}
 	return arr;
+}
+
+function photoSlideshow() {
+  if(counter > 0)
+    $("#changingPic img").eq(counter - 1).removeClass("opaque");
+  else
+    $("#changingPic img").last().removeClass("opaque");
+  $("#changingPic img").eq(counter).addClass("opaque");
+  counter = (counter + 1) % $("#changingPic img").length;
 }
 
 function updateLocation(userAge) {
@@ -102,6 +112,7 @@ function sendPreferences(userAge) {
 		matches = shuffleArray(matches);
 		myBigArray = matches;
 		currentProfile = 0;
+		$("#loader_judgement").addClass("display-none");
 		$("form").first().removeClass("display-none");
 		$(".exhausted-options").addClass("display-none");
 		showCard();
@@ -109,7 +120,9 @@ function sendPreferences(userAge) {
 }
 
 function showCard(){
+	console.log("showed card");
 	if(currentProfile + 1 > myBigArray.length) {
+		console.log("options exhausted");
 		$("form").first().addClass("display-none");
 		$(".exhausted-options").removeClass("display-none");
 	}
@@ -194,29 +207,24 @@ $(document).ready(function(){
 	});
 
 	$("#reject").on("click",function(event){
+		event.preventDefault();
 		showCard();
 	});
 
 	$("#submitActivities").on("click", function(){
-		if(userAge > 0)
+		if(userAge > 0) {
+			$("#loader_judgement").removeClass("display-none");
+			$("form").first().addClass("display-none");
+			$(".exhausted-options").addClass("display-none");
 			sendPreferences(userAge);
+		}
 	});
 
   $('.userCardImg').height($('.userCardImg').width());
+
+  setInterval(photoSlideshow, 9000);
 });
 
 $(window).resize(function() {
   $('.userCardImg').height($('.userCardImg').width());
 });
-
-//pic looping starts//
-$(document).ready(function() {
-  var counter = 0;
-  setInterval(myFunc, 9000);
-  function myFunc() {
-    var newImage = counter;
-    $("#changingPic img").eq(newImage).addClass("opaque");
-    counter++;
-  }
-});
-// pic looping ends//
