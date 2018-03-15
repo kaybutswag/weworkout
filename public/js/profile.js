@@ -96,9 +96,6 @@ $(document).ready(function(){
   })
 });
 
-
-
-
 $(window).resize(function() {
   $('.userCardImg').height($('.userCardImg').width());
 });

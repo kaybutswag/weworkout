@@ -5,8 +5,8 @@ function cardImgSize() {
 	$('.userCardImg').each(function() {
 		$(this).height($(this).width());
 		$('.history').height($(this).width());
-		$('#viewChat').width($(this).width());
-		$('#viewBio').width($(this).width());
+		// $('#viewChat').width($(this).width());
+		// $('#viewBio').width($(this).width());
 	})
 }
 

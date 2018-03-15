@@ -27,14 +27,14 @@
 
         <header>
             <div class="headerDiv">
-                <a href="/profile"><button class="profileLink">
-                    <i class="fas fa-user"></i>
+                <a href="/profile"><button class="profileLink" >
+                    <img class="headLogo" src="img/profileLogoNew.png">
                 </button></a>
                 <a href="/judgement"><button class="judgementLink" >
                     <img class="headLogo" src="img/logoBlack.png">
                 </button></a>
                 <a href="/matches"><button class="matchesLink" >
-                    <i class="fas fa-comment-alt"></i>
+                    <img class="headLogoActive" src="img/messageLogoNew.png">
                 </button></a>
             </div>
         </header>
@@ -44,17 +44,20 @@
         </div>
 
         <div class="newKinectionsBench">
-        <h3>New</h3>
+        <div class="benchTitle">
+            <h3>New</h3>
+        </div>
             
         
         <div class="newKinectionsDiv">
-
             <div class="userCard">
                 <!-- path changes with handlebars -->
                 <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
 
                 <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
-                <h2 id = "name" user-id = "">James</h2>
+                <div class="nameDiv">
+                    <h4 id = "name" user-id = "">James</h4>
+                </div>
             </div>
 
             <div class="userCard">
@@ -62,7 +65,9 @@
                 <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
 
                 <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
-                <h2 id = "name" user-id = "">James</h2>
+                <div class="nameDiv">
+                    <h4 id = "name" user-id = "">James</h4>
+                </div>
             </div>
 
             <div class="userCard">
@@ -70,7 +75,9 @@
                 <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
 
                 <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
-                <h2 id = "name" user-id = "">James</h2>
+                <div class="nameDiv">
+                    <h4 id = "name" user-id = "">James</h4>
+                </div>
             </div>
 
             <div class="userCard">
@@ -78,7 +85,9 @@
                 <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
 
                 <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
-                <h2 id = "name" user-id = "">James</h2>
+                <div class="nameDiv">
+                    <h4 id = "name" user-id = "">James</h4>
+                </div>
             </div>
 
             <div class="userCard">
@@ -86,7 +95,19 @@
                 <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
 
                 <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
-                <h2 id = "name" user-id = "">James</h2>
+                <div class="nameDiv">
+                    <h4 id = "name" user-id = "">James</h4>
+                </div>
+            </div>
+
+            <div class="userCard">
+                <!-- path changes with handlebars -->
+                <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
+
+                <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
+                <div class="nameDiv">
+                    <h4 id = "name" user-id = "">James</h4>
+                </div>
             </div>
 
         </div>
@@ -94,7 +115,9 @@
 
         <div class="kinectionsBench">
 
-        <h3>Kinections</h3>
+        <div class="benchTitle">
+            <h3>Kinections</h3>
+        </div>
             
         <div class="kinectionsDiv">
 
@@ -105,7 +128,9 @@
                 <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
 
                 <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
-                <h2 id = "name" user-id = "">James</h2>
+                <div class="nameDiv">
+                    <h4 id = "name" user-id = "">James</h4>
+                </div>
             </div>
 
             <div class="userCard">
@@ -113,7 +138,9 @@
                 <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
 
                 <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
-                <h2 id = "name" user-id = "">James</h2>
+                <div class="nameDiv">
+                    <h4 id = "name" user-id = "">James</h4>
+                </div>
             </div>
 
             <div class="userCard">
@@ -121,7 +148,9 @@
                 <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
 
                 <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
-                <h2 id = "name" user-id = "">James</h2>
+                <div class="nameDiv">
+                    <h4 id = "name" user-id = "">James</h4>
+                </div>
             </div>
         </div>
         </div>
@@ -171,9 +200,11 @@
 
             </div>
             <break></break>
-            <div class="judgement">
+            <div class="profSubDiv">
                 <button id="viewBio">View Profile</button>
                 <button id="viewChat" style="display: none">Chat</button>
+            </div>
+            <div class="judgement">
             </div>
         </div>
 
