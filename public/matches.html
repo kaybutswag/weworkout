@@ -2,14 +2,12 @@
 <html lang="en-us">
 <head>
     <meta charset="UTF-8">
-        <title>Kinections | matches</title>
+        <title>Kinections | Matches</title>
 
         <!-- reset -->
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
         <!-- font -->
-        <!-- <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,800" rel="stylesheet"> -->
-
         <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
 
         <!-- font awesome -->
@@ -17,6 +15,10 @@
 
         <!-- our css -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <!-- slick css -->
+        <link rel="stylesheet" type="text/css" href="js/slick/slick.css"/>
+        <link rel="stylesheet" type="text/css" href="js/slick/slick-theme.css"/>
 
         <!-- jquery -->
         <script src="https://code.jquery.com/jquery.js"></script>
@@ -36,15 +38,17 @@
                 </button></a>
             </div>
         </header>
+
+        <div id="returnMatch" style="display: none">
+            <i class="fas fa-arrow-left"></i>
+        </div>
+
+        <div class="newKinectionsBench">
+        <h3>New</h3>
+            
         
         <div class="newKinectionsDiv">
 
-            <p id="error-message"></p>
-
-            <break></break>
-
-            <button class="rightCaret"><i class="fas fa-caret-left"></i></button>
-
             <div class="userCard">
                 <!-- path changes with handlebars -->
                 <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
@@ -77,15 +81,25 @@
                 <h2 id = "name" user-id = "">James</h2>
             </div>
 
-            <button class="rightCaret"><i class="fas fa-caret-right"></i></button>
+            <div class="userCard">
+                <!-- path changes with handlebars -->
+                <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
+
+                <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
+                <h2 id = "name" user-id = "">James</h2>
+            </div>
+
+        </div>
         </div>
 
+        <div class="kinectionsBench">
+
+        <h3>Kinections</h3>
+            
         <div class="kinectionsDiv">
 
             <!-- need an empty div for a bench to hold cards? problematic -->
 
-            <button class="rightCaret"><i class="fas fa-caret-left"></i></button>
-
             <div class="userCard">
                 <!-- path changes with handlebars -->
                 <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
@@ -109,16 +123,7 @@
                 <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
                 <h2 id = "name" user-id = "">James</h2>
             </div>
-
-            <div class="userCard">
-                <!-- path changes with handlebars -->
-                <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
-
-                <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
-                <h2 id = "name" user-id = "">James</h2>
-            </div>
-
-            <button class="rightCaret"><i class="fas fa-caret-right"></i></button>
+        </div>
         </div>
 
         <div class="content" style="display: none">
@@ -134,80 +139,19 @@
             <div class="box2">
                 <div class="chat">
                     <div class="history">
+
                         <div class="friendMsg">
                             <p>Sup, idiot?</p>
                         </div>
+                        
                         <div class="userMsg">
                             <p>That's not very nice.</p>
                         </div>
-                        <div class="friendMsg">
-                            <p>Sup, idiot?</p>
-                        </div>
-                        <div class="userMsg">
-                            <p>That's not very nice.</p>
-                        </div>
-                        <div class="friendMsg">
-                            <p>Sup, idiot?</p>
-                        </div>
-                        <div class="userMsg">
-                            <p>That's not very nice.</p>
-                        </div>
-                        <div class="friendMsg">
-                            <p>Sup, idiot?</p>
-                        </div>
-                        <div class="userMsg">
-                            <p>That's not very nice.</p>
-                        </div>
-                        <div class="friendMsg">
-                            <p>Sup, idiot?</p>
-                        </div>
-                        <div class="userMsg">
-                            <p>That's not very nice.</p>
-                        </div>
-                        <div class="friendMsg">
-                            <p>Sup, idiot?</p>
-                        </div>
-                        <div class="userMsg">
-                            <p>That's not very nice.</p>
-                        </div>
-                        <div class="friendMsg">
-                            <p>Sup, idiot?</p>
-                        </div>
-                        <div class="userMsg">
-                            <p>That's not very nice.</p>
-                        </div>
-                        <div class="friendMsg">
-                            <p>Sup, idiot?</p>
-                        </div>
-                        <div class="userMsg">
-                            <p>That's not very nice.</p>
-                        </div>
-                        <div class="friendMsg">
-                            <p>Sup, idiot?</p>
-                        </div>
-                        <div class="userMsg">
-                            <p>That's not very nice.</p>
-                        </div>
-                        <div class="friendMsg">
-                            <p>Sup, idiot?</p>
-                        </div>
-                        <div class="userMsg">
-                            <p>That's not very nice.</p>
-                        </div>
-                        <div class="friendMsg">
-                            <p>Sup, idiot?</p>
-                        </div>
-                        <div class="userMsg">
-                            <p>That's not very nice.</p>
-                        </div>
-                        <div class="friendMsg">
-                            <p>Sup, idiot?</p>
-                        </div>
-                        <div class="userMsg">
-                            <p>That's not very nice.</p>
-                        </div>
+
                     </div>
-                    <input type="text" id="message"><button>Send</button>
+                    <div class="messageDiv"> 
+                        <input type="text" id="message"><button id="messageSend">Send</button>
+                    </div>
                     
                 </div>
 
@@ -229,14 +173,14 @@
             <break></break>
             <div class="judgement">
                 <button id="viewBio">View Profile</button>
-                <button id="viewChat">Chat</button>
-                <!-- could be remade to just use the matches href -->
-                <button id="matches">Back to matches</button>
+                <button id="viewChat" style="display: none">Chat</button>
             </div>
         </div>
 
 
-    <!-- <script type="text/javascript" src="js/judgement.js"></script> -->
+    <!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
+    <!-- <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
+    <script type="text/javascript" src="js/slick/slick.js"></script>
     <script type="text/javascript" src="js/matches.js"></script>
 
     </body>

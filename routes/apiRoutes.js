@@ -63,6 +63,8 @@ module.exports = function(app) {
         email: req.user.email
       }
     }).then(function(response){
+      userId = response.dataValues.id;
+
       db.Form.upsert({
         email: req.user.email,
         name: req.body.name,
@@ -96,14 +98,15 @@ module.exports = function(app) {
         ice: req.body.ice,
         skateboard: req.body.skateboard,
         bio: req.body.bio,
-        UserId: response.dataValues.id
+        UserId: userId
       }).then(function(){
         res.json("next");
       }).catch(function(error){
         console.log(error);
         res.json("error"); 
-      });  
-    });
+      });
+
+    });  
   });
 
 //
@@ -174,9 +177,11 @@ module.exports = function(app) {
     });
   })
 
+
   //our match function
   app.post("/api/filter-judgees", function(req, res){
     var sportsArray = [];
+    var list1=[];
 
     for(var i = 0; i < req.body.sports.length; i++) {
       var sport = req.body.sports[i];
@@ -197,44 +202,46 @@ module.exports = function(app) {
           $not: req.user.email
         },
         where: db.sequelize.where(db.sequelize.fn('TIMESTAMPDIFF', db.sequelize.literal("year"), db.sequelize.col("dob"), db.sequelize.fn('NOW')), "<=", req.body.maxAge),
-        $and: {
+        $and:{
           where: db.sequelize.where(db.sequelize.fn('TIMESTAMPDIFF', db.sequelize.literal("year"), db.sequelize.col("dob"), db.sequelize.fn('NOW')), ">=", req.body.minAge)
-        }
-      },
+      }
+    },
       include:[db.User]
     }).then(function(data){
-      filterResults(req, data, maxdistance);
-    });
+      filterResults(res,req,data,maxdistance)
+      });    
   });
 
-  function filterResults(req, data, maxdistance){
-    var mylong = req.session.passport.user.longitude;
-    var mylat = req.session.passport.user.latitude;
-    console.log("mylong: " + mylong);
-    console.log("mylat: " + mylat);
+  function filterResults(res,req,data,maxdistance){
+    var mylong=req.session.passport.user.longitude;
+    var mylat=req.session.passport.user.latitude;
     var userlong;
     var userlat;
-    var promises = [];
+
+    var promises=[];
 
     var nearOptions=[];
-    for(var i = 0;i<data.length;i++){
-      var promise = db.User.findOne({
+    for(var i=0;i<data.length;i++){
+      var promise=db.User.findOne({
         where: {
           email: data[i].email
         }
       }).then(function(userdata){
-        userlong=userdata.longitude;
-        userlat=userdata.latitude;
+          userlong=userdata.longitude;
+          userlat=userdata.latitude;
 
-        if(getDistance(userlat,userlong,mylat,mylong) <= maxdistance)
-          nearOptions.push(userdata);
+          if (getDistance(userlat,userlong,mylat,mylong)<=maxdistance){
+              nearOptions.push(userdata);
+          }
+          else{
+            console.log("test fail");
+          }
       });
       promises.push(promise);
     }
-
     Promise.all(promises).then(function(){
-      console.log(nearOptions);
-      return nearOptions});
+    getFormData(res,nearOptions);
+    });
   }
 
   function getDistance(latitude1,longitude1,latitude2,longitude2) {
@@ -249,15 +256,47 @@ module.exports = function(app) {
     return dist;
   }
 
-  function removeMatches(lessUsers){
+   function getFormData(res,userdata2) {
+    console.log("test3");
+    var thisid;
+    var cardOptions=[];
+    var promises=[];
+
+    for(var i=0;i<userdata2.length;i++){
+      thisEmail=userdata2[i].email;
+
+      var promise=db.Form.findOne({
+          where: {
+          email: thisEmail
+        }
+      }).then(function(userdata3){
+          cardOptions.push(userdata3);
+    });
+
+    
+    promises.push(promise);
+    }
+    Promise.all(promises).then(function(){
+    console.log("42");
+    res.json(cardOptions);
+    });
+
+    // return cardOptions
+    
+    // console.log(cardOptions);
+    
+  }
+
+  function removeMatches(req, lessUsers){
     var myLikes=[];
     var showOptions=[];
+
     db.Match.findOne({
       where: {
         email: req.user.email
       }
     }).then(function(mydata){
-        myLikes=mydata.split(",");
+        myLikes=mydata.myLikes.split(",");
 
         for(var i=0;i<lessUsers.length;i++){
           if(lessUsers.UserId.indexOf(myLikes)===-1){
@@ -265,6 +304,8 @@ module.exports = function(app) {
           }
         }
         return showOptions;
+        console.log(showOptions);
+
     });
 
   }
@@ -272,7 +313,8 @@ module.exports = function(app) {
   app.put("/api/change-likes", function(req, res) {
     var myLikes;
     var theirLikes;
-    var myId=req.session.passport.user.dataValues.id;
+    var myId=req.session.passport.user.id;
+    console.log(myId);
     var theirId = req.body.likeId;
     var myEmail = req.user.email;
 
@@ -281,7 +323,7 @@ module.exports = function(app) {
         email: myEmail
       }
     }).then(function(results){
-      myLikes = results.myLikes;
+      myLikes = results.dataValues.myLikes;
       if(myLikes === null)
         myLikes = theirId;
       else
@@ -301,14 +343,21 @@ module.exports = function(app) {
         UserId: theirId
       }
     }).then(function(results2){
-      theirLikes=results2.myLikes.split(",");
-      if(myId.indexOf(theirLikes)!==-1){             
+      console.log("results2:"+results2);
+      
+      if(results2.dataValues.myLikes!==null){
+        theirLikes=results2.dataValues.myLikes.split(",");
+      }
+      else{
+        theirLikes=[];
+      }
+      if(theirLikes.indexOf(myId)!==-1){             
         db.Match.findOne({
           where: {
             email: myEmail
           }
         }).then(function(myProfile){
-          var existingMatches = myProfile.myMatches;
+          var existingMatches = myProfile.dataValues.myMatches;
           if(existingMatches === null)
             existingMatches = req.body.likeId;
           else
@@ -327,7 +376,7 @@ module.exports = function(app) {
             UserId: theirId
           }
         }).then(function(theirProfile){
-          var existingMatches = theirProfile.myMatches;
+          var existingMatches = theirProfile.dataValues.myMatches;
           if(existingMatches === null)
             existingMatches = myId;
           else

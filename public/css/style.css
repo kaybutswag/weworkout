@@ -16,7 +16,7 @@ body {
   background-repeat: no-repeat;
 }
 
-/* body {
+ body {
 	font-family: 'Lato', sans-serif;
 	background-image: url('../img/signIn.jpg');
 
@@ -27,21 +27,27 @@ body {
 	font-size: 20px;
 	box-sizing: border-box;
 	height: 100%;
-} */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+} 
 
+/*need to look at this.*/
 textarea {
 	width: 100%;
-	height: 130px;
+	height: 23%;
 	resize: none;
 	font-family: 'Lato', sans-serif;
 	font-size: 20px;
 }
 
-input[name="email"], input[type="password"], textarea, input[type="number"], select[name="gender"], input[name="location"], select {
-	border: 1px #212121 solid;
+input[name="email"], input[type="password"], textarea, input[type="number"], select[name="gender"], input[name="location"], select, #dob {
+	border: 1px #ddd solid;
 	padding: 5px;
+	margin: 3px;
+	font-family: 'Lato', sans-serif;
 }
-
 
 input[name="email"], input[type="password"], {
 	margin: 10px;
@@ -83,14 +89,14 @@ h3 {
 }
 
 h2{
-	font-size: 2em;
+	font-size: 1.9em;
 	font-weight: 600;
 }
 
 input[placeholder="First Name"] {
 	font-size: 2em;
 	max-width: 100%;
-	border: 1px #212121 solid;
+	border: 1px #ddd solid;
 }
 
 break {
@@ -113,11 +119,15 @@ break {
 .activityFlex {
 	display: flex;
 	justify-content: space-between;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
+
+/**************************chat styles*********************/
 
 .history {
 	width: 100%;
-	border: 1px #212121 solid;
+	border: 1px #ddd solid;
     overflow:scroll;
     overflow-x:hidden;
 }
@@ -142,21 +152,37 @@ break {
 	border-radius: 5px;
 }
 
+.messageDiv {
+	display: flex;
+}
+
+#message {
+	margin-top: 3px;
+	width: 100%;
+	border: 1px #ddd solid;
+	padding: 5px;
+	font-family: 'Lato', sans-serif;
+}
+
 .content, .headerDiv, .abilityInput, .newKinectionsDiv, .kinectionsDiv {
 	display: flex;
 	justify-content: space-around;
 	flex-flow: row wrap;
 }
 
-.content, .newKinectionsDiv {
+.content, .newKinectionsBench {
 	background-color: rgba(255,255,255,.5);
 	/*not reactive*/
 	margin: 100px 100px 20px 100px;
+	max-width: 1100px;
+	width: 70%
 }
 
-.kinectionsDiv {
+.kinectionsBench {
 	background-color: rgba(255,255,255,.5);
 	margin: 20px 100px 10px 100px;
+	max-width: 1100px;
+	width: 70%
 }
 
 .imgPlace {
@@ -177,13 +203,6 @@ break {
 	right: 0;
 }
 
-.centerCropped {
-  object-fit: cover; /* Do not scale the image */
-  object-position: center; /* Center the image within the element */
-  height: 100%;
-  width: 100%;
-}
-
 .userImg {
 	width: 100%;
 	height: 350px;
@@ -199,7 +218,9 @@ break {
 	max-height: 70px;
 }
 
-.signUp, .signIn, #kinect, #reject, input[name="profileSubmit"], #logout, #submitActivities {
+/*****************************button styles****************************/
+
+.signUp, .signIn, #kinect, #reject, input[name="profileSubmit"], #submitActivities, #viewChat, #viewBio {
 	cursor: pointer;
 	border: none;
 	color: white;
@@ -225,12 +246,33 @@ break {
 	align-content: center;
 }
 
-.signUp, input[name="profileSubmit"] {
+.signUp, input[name="profileSubmit"], #viewChat, #viewBio {
 	background-color: #6476fa;
 }
 
-.signIn, #kinect, #submitActivities {
+.signIn, #kinect, #submitActivities, #messageSend, #imgUploadBtn {
 	background-color: #66ab5f;
+}
+
+#messageSend, #imgUploadBtn, #clear {
+	cursor: pointer;
+	border: none;
+	color: white;
+	padding: 10px;
+	font-size: .9em;
+}
+
+#messageSend {
+	margin-top: 3px;
+}
+
+#clear, #imgUploadBtn {
+	width: 50%;
+}
+
+#imgUploadForm {
+	width: 100%;
+	display: flex;
 }
 
 #submitActivities {
@@ -244,18 +286,27 @@ break {
 	padding: 20px;
 }
 
-#logout, #reject {
+#reject, #clear {
 	background-color: #fa7070;
 }
 
-#search {
+#search, #returnMatch, #logout {
+	cursor: pointer;
 	position: fixed;
-	right: 20px;
 	z-index: 20;
 	background-color: white;
 	padding: 7px;
 	border-radius: 50%;
 	color: #212121;
+	top: 100px;
+}
+
+#search, #logout {
+	right: 20px;
+}
+
+#returnMatch {
+	left: 20px;
 }
 
 #addActivities {
@@ -301,6 +352,9 @@ break {
 	width: 100%;
 	background-size: cover;
 	background-position: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
 }
 
 .box2 {

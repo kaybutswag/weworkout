@@ -3,11 +3,8 @@ var db = require("../models");
 
 var isAuthenticated = require("../config/middleware/isAuthenticated.js");
 
-// Routes from blog exercise
-// =============================================================
 module.exports = function(app) {
 
-  // loads index.html page
   app.get("/", function(req, res) {
     if(req.user)
       res.redirect("/judgement");
