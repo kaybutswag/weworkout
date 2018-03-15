@@ -23,9 +23,10 @@ function createNewUser(email, password, latitude, longitude) {
 		type: "POST",
 		url: "/api/new-user",
 		data: newUser
-	}).then(function(error){
-		if(error){
-			console.log(error);
+	}).then(function(result){
+		if(result === "success")
+			logInUser(email, password, "newUser");
+		else {
 			if("errors" in error) {
 				if(error.errors[0].path === "email")
 					$("form p").text("The email you entered is not valid.");
@@ -37,8 +38,31 @@ function createNewUser(email, password, latitude, longitude) {
 			else
 				$("form p").text("Please allow us to access your location.");
 		}
+	});
+}
+
+function logInUser(email, password, type) {
+	var credentials = {
+		email: email,
+		password: password
+	};
+
+	$.ajax({
+		type: "POST",
+		url: "/api/login-user",
+		data: credentials
+	}).then(function(data){
+		if(data === "error")
+			$("form p").text("Sorry. There was a login error");
+		else if(data === "user")
+			$("form p").text("We could not find that username");
+		else if(data === "password")
+			$("form p").text("That password is incorrect");
 		else {
-			window.location.replace("/profile");
+			if(type === "oldUser")
+				window.location.replace("/judgement");
+			else
+				window.location.replace("/profile");
 		}
 	});
 }
@@ -60,28 +84,10 @@ $(document).ready(function(){
 		var email = $("input[name=email]").val();
 		var password = $("input[name=password]").val(); 
 
-		var credentials = {
-			email: email,
-			password: password
-		};
-
 		$("input[name=email]").val("");
 		$("input[name=password]").val("");
 
-		$.ajax({
-			type: "POST",
-			url: "/api/login-user",
-			data: credentials
-		}).then(function(data){
-			if(data === "error")
-				$("form p").text("Sorry. There was a login error");
-			else if(data === "user")
-				$("form p").text("We could not find that username");
-			else if(data === "password")
-				$("form p").text("That password is incorrect");
-			else {
-				window.location.replace("/judgement");
-			}
-		});
+		logInUser(email, password, "oldUser");
+
 	});
 });
