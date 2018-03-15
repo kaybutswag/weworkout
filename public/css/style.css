@@ -310,6 +310,18 @@ break {
 	color: #212121;
 }
 
+#exhausted-options {
+	font-weight: 600;
+	font-size: 32px;
+	line-height: 1.5;
+}
+
+.exhausted-options {
+	position: absolute;
+	top: 160px;
+	margin-left: auto;
+}
+
 .signInPanel {
 	margin: 12% auto;
 	text-align: center;
@@ -322,7 +334,9 @@ break {
 	min-width: 300px;
 }
 
-
+.display-none {
+	display: none;
+}
 
 .title {
 	margin-top: -133px;
@@ -457,31 +471,21 @@ break {
 /* pic testing ends */
 
 
-/* loading indicator start*/
-.loader {
-    border: 16px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 16px solid #3498db;
-    width: 70px;
-    height: 70px;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
-    animation: spin 1s linear infinite;
-}
 
-.loaderContainer{
-      padding-left: 95px;
+#loader{
+	display: none;
 }
 
     /* Safari */
-@-webkit-keyframes spin {
+/*@-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
     100% { -webkit-transform: rotate(360deg); }
-}
+}*/
 
-@keyframes spin {
+/*@keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
+}*/
 /* loading indicator end */
 .rejectKinnectButton {
    cursor: pointer;

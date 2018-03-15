@@ -30,20 +30,34 @@ var myBigArray=[
 ];
 var currentProfile=0;
 
-function updateLocation() {
+function shuffleArray(arr){
+	for(var i = 1; i < arr.length; i++) {
+		var random = Math.floor(Math.random() * (i + 1));
+		if(random !== i) {
+			var dummy = arr[random];
+			arr[random] = arr[i];
+			arr[i] = dummy;
+		}
+	}
+	return arr;
+}
+
+function updateLocation(userAge) {
 	if(navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position){
-			updateUserLocation(position.coords.latitude, position.coords.longitude);
+			updateUserLocation(position.coords.latitude, position.coords.longitude, userAge);
 		}, function(error){
 			$("#location-unavailable").text("Could not update your location");
+			sendPreferences(userAge);
 		});
 	}
 	else {
-		$("#location-unavailable").text("Your browser did not let us store your location. You may update your location manually in the Settings tab.");
+		$("#location-unavailable").text("Your browser did not let us store your location.");
+		sendPreferences(userAge);
 	}
 }
 
-function updateUserLocation(latitude, longitude) {
+function updateUserLocation(latitude, longitude, userAge) {
 	var updatedLocation = {
 		latitude: latitude,
 		longitude: longitude
@@ -56,6 +70,7 @@ function updateUserLocation(latitude, longitude) {
 	}).then(function(error){
 		if(error)
 			("#error-message").text("Could not update your location");
+		sendPreferences(userAge);
 	});
 }
 
@@ -67,29 +82,23 @@ function autoPopulateModal() {
 		for(var i = 0; i < sportsPreferences.length; i++)
 			$("#" + sportsPreferences[i]).attr("checked", true);
 	});
-
 	$("#search-radius").val(5); //will need to update based on how search radius bar works
 }
 
 function sendPreferences(userAge) {
-	//if (miles has been filled out then miles=that number)
-	//else miles=5
-	var miles = $("#miles").val();
-	if(miles === "")
-		miles = 5;
+	var miles = $("#miles").text();
 
-	var minAge = userAge - 5;
+	var minAge = $("#minAge").val();
 
-	var maxAge = userAge + 5;
+	var maxAge = $("#maxAge").val();
 
 	var genderselect=[];
 	var selectval=$("#genderPref option:selected").val();
 
 	if(selectval==="all")
 		genderselect=["Male","Female","Other"];
-	else{
+	else
 		genderselect=[selectval];
-	}
 
 	var sports=[];
 
@@ -119,25 +128,26 @@ function sendPreferences(userAge) {
 		url: "/api/filter-judgees",
 		data: preferences
 	}).then(function(matches){
-		// shuffle matches
-		myBigArray=matches;
+		matches = shuffleArray(matches);
+		myBigArray = matches;
 		currentProfile = 0;
-		console.log(myBigArray[currentProfile]);
+		$("form").first().removeClass("display-none");
+		$(".exhausted-options").addClass("display-none");
 		showCard();
 	});
 }
 
 function showCard(){
+	if(myBigArray[currentProfile]) {
 
-	 if(myBigArray[currentProfile]){
 		$("#name").text(myBigArray[currentProfile].name);
-		$("#name").attr("user-id",myBigArray[currentProfile].UserId);
+		$("#name").attr("user-id", myBigArray[currentProfile].UserId);
 		$(".userCardImg").empty();
 		$(".userCardImg").attr("style","background-image: url('"+myBigArray[currentProfile].img+"')");
 		$('.userCardImg').height($('.userCardImg').width());
 		$('#gender').text(myBigArray[currentProfile].gender);
 		$('#location').text(myBigArray[currentProfile].primaryLocation);
-		$('#age').text(moment().diff(moment(myBigArray[currentProfile].dob).format('L'),"years"));
+		$('#age').text(moment().diff(moment(myBigArray[currentProfile].dob),"years"));
 		$('#bio').text(myBigArray[currentProfile].bio);
 
 		var sports2="";
@@ -145,16 +155,16 @@ function showCard(){
 	    var fieldsToFill = ["weightlift", "run", "walk", "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl",
 	    "rowing", "tennis", "baseball", "basketball", "football", "soccer", "rugby", "volleyball", "golf", "hockey", "ice", "skateboard"];
 
-	    var actualActivity = ["weightlifting", "running", "walking", "swimming", "surfing", "biking", "yoga", "pilates", "cardio", "dancing",
-	    "rock climbing", "gymnastics", "bowling", "rowing", "tennis", "baseball", "basketball", "football", "soccer", "rugby", "volleyball",
-	    "golfing", "hockey", "ice skating", "skateboarding"];
+	    var actualActivity = ["Weightlifting", "Running", "Walking", "Swimming", "Surfing", "Biking", "Yoga", "Pilates", "Cardio", "Dancing",
+	    "Rock Climbing", "Gymnastics", "Bowling", "Rowing", "Tennis", "Baseball", "Basketball", "Football", "Soccer", "Rugby", "Volleyball",
+	    "Golfing", "Hockey", "Ice Skating", "Skateboarding"];
 
 
 	    for(var i = 0; i < fieldsToFill.length; i++) {
 	        var activity = fieldsToFill[i];
 	        if(myBigArray[currentProfile][activity] === true) {
 	            if(sports2 === "") {
-	            	sports2 += actualActivity[i].charAt(0).toUpperCase() + actualActivity[i].substring(1);
+	            	sports2 += actualActivity[i];
 	            }
 	            else
 	            	sports2 += ", " + actualActivity[i];
@@ -187,16 +197,6 @@ function showCard(){
 
 }
 
-function displayOption() {
-	$.ajax({
-		type: "POST",
-		url: "/api/get-prof-pic"
-	}).then(function(dataURL){
-		$("#matchPic").attr("src", dataURL);
-		//make sure we populate user-id!
-	});
-}
-
 function addLike(){
 	var likeId=$("#name").attr("user-id");
 
@@ -215,8 +215,7 @@ function addLike(){
 
 
 $(document).ready(function(){
-	var userAge;
-	autoPopulateModal();
+	var userAge = -2;
 
 	$.ajax({
 		type: "POST",
@@ -225,8 +224,8 @@ $(document).ready(function(){
 		userAge = moment().diff(moment(dob), "years");
 		$("#minAge").val(userAge - 5);
 		$("#maxAge").val(userAge + 5);
-		updateLocation();
-		sendPreferences(userAge);
+		updateLocation(userAge);
+		autoPopulateModal(userAge);
 	});
 
 	$("#kinect").on("click",function(event){
