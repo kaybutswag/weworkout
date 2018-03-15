@@ -77,7 +77,7 @@
 
 					<h3>Age Range</h3>
 					<label for="minAge">
-					Minimum Age: 
+					Minimum Age:
 					<input type="number" name="minAge" id="minAge"> years old
 					</label><br>
 
@@ -184,14 +184,15 @@
 
 		</div>
 
-		<form class="content">
-			
+		<form id="matchBox" class="content">
+
 			<p id="error-message"></p>
 
 			<break></break>
 
 			<div class="userCard">
-				<div class="userCardImg" style="background-image: url('img/logoBlack.png')"></div>
+				<div id="noMatches"></div>
+				<div id="userCardImg" class="userCardImg" style="background-image: url('img/logoBlack.png')"></div>
 
 				<!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
 				<!-- may want to change this to class="userCardName" -->
@@ -200,7 +201,7 @@
 
 
 
-			<div class="box2">
+			<div id="box2" class="box2">
 
 				<h3>Basics</h3>
 
@@ -216,13 +217,17 @@
 			</div>
 			<break></break>
 			<div class="judgement">
-				<button id="reject">Reject</button>
-				<button id="kinect">Kinect</button>
+				<button  id="reject">
+					<a class="rejectKinnectButton" href="#close">Reject </a>
+				 </button> &emsp; &emsp;
+				<button  id="kinect">
+					<a class="rejectKinnectButton" href="#close">Kinect </a>
+				</button>
 			</div>
 		</form>
-		
+
 		<form class="content exhausted-options display-none">
-			<p id = "exhausted-options">Unfortunately we do not have any more recommendations. Please adjust your preferences if you have not found a Kinection. 
+			<p id = "exhausted-options">Unfortunately we do not have any more recommendations. Please adjust your preferences if you have not found a Kinection.
 		</form>
 
 	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>

@@ -1,4 +1,33 @@
-var myBigArray=[];
+var myBigArray=[
+	{
+ "name" : "Peter Jackson",
+ "UserId" : "3",
+ "img" : "https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_80%2Cw_300/MTE4MDAzNDEwMTU3Mjc0NjM4/peter-jackson-37009-1-402.jpg",
+ "gender" : "Male",
+"primaryLocation" : "Austin, Tx",
+"dob" : "10/24/1974",
+"bio" : "I love not working and making movies instead."
+},
+{
+ "name" : "Bubbles",
+ "UserId" : "4",
+ "img" : "https://i.ytimg.com/vi/CMv0V9LqLRo/hqdefault.jpg",
+ "gender" : "Other",
+"primaryLocation" : "Southern Trailer",
+"dob" : "09/14/1998",
+"bio" : "I love cats"
+},
+{
+ "name" : "Bruce Banner",
+ "UserId" : "5",
+ "img" : "https://images-na.ssl-images-amazon.com/images/G/01/digital/video/hero/Movies/2003/B00285K1KE_Hulk_UXNB1._V142676592_RI_SX940_.jpg",
+ "gender" : "Male",
+"primaryLocation" : "Gold's Gym",
+"dob" : "07/04/1983",
+"bio" : "Lifting is my game",
+"activity" : []
+}
+];
 var currentProfile=0;
 
 function shuffleArray(arr){
@@ -109,11 +138,8 @@ function sendPreferences(userAge) {
 }
 
 function showCard(){
-	if(currentProfile + 1 > myBigArray.length) {
-		$("form").first().addClass("display-none");
-		$(".exhausted-options").removeClass("display-none");
-	}
-	else {
+	if(myBigArray[currentProfile]) {
+
 		$("#name").text(myBigArray[currentProfile].name);
 		$("#name").attr("user-id", myBigArray[currentProfile].UserId);
 		$(".userCardImg").empty();
@@ -126,11 +152,11 @@ function showCard(){
 
 		var sports2="";
 
-	    var fieldsToFill = ["weightlift", "run", "walk", "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl", 
+	    var fieldsToFill = ["weightlift", "run", "walk", "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl",
 	    "rowing", "tennis", "baseball", "basketball", "football", "soccer", "rugby", "volleyball", "golf", "hockey", "ice", "skateboard"];
 
 	    var actualActivity = ["Weightlifting", "Running", "Walking", "Swimming", "Surfing", "Biking", "Yoga", "Pilates", "Cardio", "Dancing",
-	    "Rock Climbing", "Gymnastics", "Bowling", "Rowing", "Tennis", "Baseball", "Basketball", "Football", "Soccer", "Rugby", "Volleyball", 
+	    "Rock Climbing", "Gymnastics", "Bowling", "Rowing", "Tennis", "Baseball", "Basketball", "Football", "Soccer", "Rugby", "Volleyball",
 	    "Golfing", "Hockey", "Ice Skating", "Skateboarding"];
 
 
@@ -148,7 +174,26 @@ function showCard(){
 	    $("#activities").text(sports2);
 
 	    currentProfile++;
-	}        
+
+		//No more matches, myBigArray[currentProfile] is empty
+	} else{
+		$("#noMatches").show();
+		$("#name").hide();
+		$(".userCardImg").hide();
+		$('#gender').hide();
+		$('#location').hide();
+		$('#age').hide();
+		$('#bio').hide();
+		$('#noMatches').html("No more matches. <br> <a href='#openModal'>Try a new search</a>");
+		$("#noMatches").css("font-weight", "900");
+		$("#noMatches").css("font-size", "35px");
+		$("#noMatches").css("text-align", "center");
+		$('#box2').hide();
+		$('#userCardImg').hide();
+		$('#reject').hide();
+		$('#kinect').hide();
+	}
+
 
 }
 
@@ -184,26 +229,73 @@ $(document).ready(function(){
 	});
 
 	$("#kinect").on("click",function(event){
-		event.preventDefault();
-		addLike();
-		showCard();
+			kinnected();
 	});
 
 	$("#reject").on("click",function(event){
-		showCard();
-	});
-
-	$("#submitActivities").on("click", function(){
-		if(userAge > 0)
-			sendPreferences(userAge);
+			// some code
+			rejected();
 	});
 
   $('.userCardImg').height($('.userCardImg').width());
+
+	$("#submitActivities").on("click",function(event){
+		//add logic to perforn new search
+		//for now set currenProfile back to 0 to repeat hard coded profiles
+		currentProfile = 0;
+		hideNoMatches();
+		showCard();
+	});
 });
 
 $(window).resize(function() {
   $('.userCardImg').height($('.userCardImg').width());
 });
+//matchBox animation
+function rejected() {
+  var elem = document.getElementById("matchBox");
+	elem.classList.add("rejected");
+  var pos = 0;
+  var id = setInterval(frame, 1);
+  function frame() {
+    if (pos >= 1000) {
+      pos=0;
+      elem.style.top.left = pos + 'px';
+      elem.style.right = pos + 'px';
+      clearInterval(id);
+			elem.classList.remove("rejected");
+			showCard();
+    } else {
+      pos += 20;
+      elem.style.top.left = pos + 'px';
+      elem.style.right = pos + 'px';
+    }
+  }
+}
+
+
+function kinnected() {
+  var elem = document.getElementById("matchBox");
+	elem.classList.add("kinnected");
+  var pos = 0;
+  var id = setInterval(frame, 1);
+  function frame() {
+    if (pos <= -1000) {
+      pos=0;
+      elem.style.top.left = pos + 'px';
+      elem.style.right = pos + 'px';
+      clearInterval(id);
+			elem.classList.remove("kinnected");
+			addLike();
+			showCard();
+    } else {
+      pos -= 20;
+      elem.style.top.left = pos + 'px';
+      elem.style.right = pos + 'px';
+    }
+  }
+}
+// matchBox ends//
 
 //pic looping starts//
 $(document).ready(function() {
@@ -213,6 +305,26 @@ $(document).ready(function() {
     var newImage = counter;
     $("#changingPic img").eq(newImage).addClass("opaque");
     counter++;
-  }
+		if(counter === 13){
+			counter = 0;
+			for(var i=0; i<13; i++){
+				$("#changingPic img").eq(i).removeClass("opaque");
+			}
+		}
+	}
 });
 // pic looping ends//
+
+function hideNoMatches(){
+	$("#name").show();
+	$(".userCardImg").show();
+	$('#gender').show();
+	$('#location').show();
+	$('#age').show();
+	$('#bio').show();
+	$('#noMatches').hide();
+	$('#box2').show();
+	$('#userCardImg').show();
+	$('#reject').show();
+	$('#kinect').show();
+}
