@@ -140,8 +140,7 @@ module.exports = function(app) {
         email: req.user.email
       }
     }).then(function(data){
-      var userDOB = new Date(data.dataValues.dob);
-      userDOB = userDOB.getFullYear() + "-" + (userDOB.getMonth() + 1) + "-" + (userDOB.getDate() + 1);
+      var userDOB = data.dataValues.dob;
       res.json(userDOB);
     });
   });
