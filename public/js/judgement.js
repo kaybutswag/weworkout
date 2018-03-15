@@ -52,7 +52,7 @@ function sendPreferences(userAge) {
 	var minAge = userAge - 5;
 
 	var maxAge = userAge + 5;
-	
+
 	var genderselect=[];
 	var selectval=$("#genderPref option:selected").val();
 
@@ -64,7 +64,7 @@ function sendPreferences(userAge) {
 
 	var sports=[];
 
-    var fieldsToFill = ["weightlift", "run", "walk", "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl", 
+    var fieldsToFill = ["weightlift", "run", "walk", "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl",
     "rowing", "tennis", "baseball", "basketball", "football", "soccer", "rugby", "volleyball", "golf", "hockey", "ice", "skateboard"];
 
 
@@ -111,11 +111,11 @@ function showCard(){
 
 	var sports2="";
 
-    var fieldsToFill = ["weightlift", "run", "walk", "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl", 
+    var fieldsToFill = ["weightlift", "run", "walk", "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl",
     "rowing", "tennis", "baseball", "basketball", "football", "soccer", "rugby", "volleyball", "golf", "hockey", "ice", "skateboard"];
 
     var actualActivity = ["weightlifting", "running", "walking", "swimming", "surfing", "biking", "yoga", "pilates", "cardio", "dancing",
-    "rock climbing", "gymnastics", "bowling", "rowing", "tennis", "baseball", "basketball", "football", "soccer", "rugby", "volleyball", 
+    "rock climbing", "gymnastics", "bowling", "rowing", "tennis", "baseball", "basketball", "football", "soccer", "rugby", "volleyball",
     "golfing", "hockey", "ice skating", "skateboarding"];
 
 
@@ -132,7 +132,7 @@ function showCard(){
 
     $("#activities").text(sports2);
 
-    currentProfile++;        
+    currentProfile++;
 
 
 }
@@ -192,10 +192,18 @@ $(document).ready(function(){
   $('.userCardImg').height($('.userCardImg').width());
 });
 
-
 $(window).resize(function() {
   $('.userCardImg').height($('.userCardImg').width());
 });
 
-
-
+//pic looping starts//
+$(document).ready(function() {
+  var counter = 0;
+  setInterval(myFunc, 9000);
+  function myFunc() {
+    var newImage = counter;
+    $("#changingPic img").eq(newImage).addClass("opaque");
+    counter++;
+  }
+});
+// pic looping ends//
