@@ -12,23 +12,23 @@ module.exports = function(app) {
       res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
-  app.get("/judgement", isAuthenticated, function(req, res){   
+  app.get("/judgement", isAuthenticated, function(req, res){
     db.Form.findOne({
       where: {
         email: req.user.email
       }
     }).then(function(response) {
       if(response !== null)
-        res.sendFile(path.join(__dirname, "../public/judgement.html"));
+        res.sendFile(path.join(__dirname, "../public/judgement.html?param=close"));
       else
-        res.redirect("/profile");   
+        res.redirect("/profile");
     });
-  }); 
+  });
 
   app.get("/matches", isAuthenticated, function(req, res){
 
 
-    res.sendFile(path.join(__dirname, "../public/matches.html"));    
+    res.sendFile(path.join(__dirname, "../public/matches.html"));
   });
 
   app.get("/profile", isAuthenticated, function(req, res) {
@@ -41,6 +41,6 @@ module.exports = function(app) {
     else
       res.redirect("/");
   });
-  
+
 
 };

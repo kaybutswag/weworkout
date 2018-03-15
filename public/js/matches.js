@@ -126,3 +126,20 @@ $(window).resize(function() {
 	cardImgSize();
 });
 
+//pic looping starts//
+$(document).ready(function() {
+  var counter = 0;
+  setInterval(myFunc, 9000);
+  function myFunc() {
+    var newImage = counter;
+    $("#changingPic img").eq(newImage).addClass("opaque");
+    counter++;
+    if(counter === 13){
+			counter = 0;
+			for(var i=0; i<13; i++){
+				$("#changingPic img").eq(i).removeClass("opaque");
+			}
+		}
+  }
+});
+// pic looping ends//
