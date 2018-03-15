@@ -474,7 +474,13 @@ break {
 
 /* pic testing ends */
 
-
+#loader_judgement{
+	font-size: 80px;
+	position: absolute;
+	top: 50%;
+	color: #212121;
+	text-align: center;
+}
 
 #loader{
 	display: none;

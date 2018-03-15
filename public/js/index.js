@@ -1,3 +1,14 @@
+var counter = 0;
+
+function photoSlideshow() {
+  if(counter > 0)
+    $("#changingPic img").eq(counter - 1).removeClass("opaque");
+  else
+    $("#changingPic img").last().removeClass("opaque");
+  $("#changingPic img").eq(counter).addClass("opaque");
+  counter = (counter + 1) % $("#changingPic img").length;
+}
+
 function getLocation(email, password) {
 	showIndicator();
 	if(navigator.geolocation) {
@@ -71,14 +82,19 @@ function logInUser(email, password, type) {
 	});
 }
 
+function showIndicator(){
+    $("#loader").css("display","block");
+}
+
+function hideLoader(){
+    $("#loader").css("display","none");
+}
+
 $(document).ready(function(){
 	$(".signUp").on("click", function(event){
 		event.preventDefault();
 		var newEmail = $("input[name=email]").val();
 		var newPassword = $("input[name=password]").val();
-
-		$("input[name=email]").val("");
-		$("input[name=password]").val("");
 
 		getLocation(newEmail, newPassword);
 	});
@@ -94,25 +110,6 @@ $(document).ready(function(){
 		logInUser(email, password, "oldUser");
 
 	});
+
+	setInterval(photoSlideshow, 9000);
 });
-
-
-function showIndicator(){
-    $("#loader").css("display","block");
-}
-
-function hideLoader(){
-    $("#loader").css("display","none");
-}
-
-//pic looping starts//
-$(document).ready(function() {
-  var counter = 0;
-  setInterval(myFunc, 9000);
-  function myFunc() {
-    var newImage = counter;
-    $("#changingPic img").eq(newImage).addClass("opaque");
-    counter++;
-  }
-});
-// pic looping ends//
