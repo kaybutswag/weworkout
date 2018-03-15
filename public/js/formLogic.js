@@ -36,10 +36,18 @@ function fillInForm(preferences) {
             var field = $("#" + fieldId);
 
             if(field.attr("type") === "checkbox") {
-                if(preferences[fieldId] === true)
+                if(preferences[fieldId] === true) {
                     field.attr("checked", true);
+
+                    if($("#userActivities").text() === "Click to add activities") {
+                        $("#userActivities").empty();
+                        $("#userActivities").text($("#" + fieldsToFill[i]).attr("data-text"));
+                    }
+                    else
+                        $("#userActivities").append(", " + $("#" + fieldsToFill[i]).attr("data-text"));
+                }
             }
-            else if (fieldId === "dob") {
+            else if(fieldId === "dob") {
                 var date = preferences[fieldId].substring(0, 10);
                 console.log(date);
                 field.val(date);
@@ -53,7 +61,6 @@ function fillInForm(preferences) {
 $(document).ready(function(){	
 
     $("input[name=picture]").change(function(){
-        // $(".imgPlace").empty();
         previewFile(this);
     });
 

@@ -29,7 +29,3 @@ function showIndicator(){
 function hideLoader(){
     $("#loader").removeClass("loader");
 }
-
-// this can be used to match people
-
-//should we be ranking people? Randomizing those that fit

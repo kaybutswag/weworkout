@@ -5,31 +5,27 @@ var passport = require("../config/passport.js")
 module.exports = function(app) {
 
   var maxdistance;
+  var myLatitude;
+  var myLongitude;
 
   app.post("/api/new-user", function(req, res, next) {
     var lastid;
     var newEmail = req.body.email;
     var newPassword = req.body.password;
-    var newLatitude = req.body.latitude;
-    var newLongitude = req.body.longitude;
+    myLatitude = req.body.latitude;
+    myLongitude = req.body.longitude;
 
     db.User.create({
       email: newEmail,
       password: newPassword,
-      latitude: newLatitude,
-      longitude: newLongitude
+      latitude: myLatitude,
+      longitude: myLongitude
     }).then(function(result) {
       db.Match.create({
         email: newEmail,
         UserId: result.id
       });
-
-      req.login({email: newEmail}, function(err){
-        if(err)
-          res.json(err);
-        else
-          res.end();
-      });
+      res.json("success");
     }).catch(function(error){
       res.json(error); 
     });  
@@ -123,26 +119,17 @@ module.exports = function(app) {
 
 //updates login location
   app.put("/api/update-location", function(req, res) {
+    myLatitude = req.body.latitude;
+    myLongitude = req.body.longitude;
     db.User.update({
-      latitude: req.body.latitude,
-      longitude: req.body.longitude
+      latitude: myLatitude,
+      longitude: myLongitude
     }, {
       where: {
         email: req.user.email
       }
     }).then(function(response){
       res.end();
-    });
-  });
-
-//this will grab pictures. probably changing
-  app.post("/api/get-prof-pic", function(req, res){
-    db.Form.findOne({
-      where: {
-        email: req.user.email
-      }
-    }).then(function(data){
-      res.json(data.img);
     });
   });
 
@@ -175,8 +162,7 @@ module.exports = function(app) {
       }
       res.json(sportsPreferences);
     });
-  })
-
+  });
 
   //our match function
   app.post("/api/filter-judgees", function(req, res){
@@ -213,8 +199,6 @@ module.exports = function(app) {
   });
 
   function filterResults(res,req,data,maxdistance){
-    var mylong=req.session.passport.user.longitude;
-    var mylat=req.session.passport.user.latitude;
     var userlong;
     var userlat;
 
@@ -230,17 +214,14 @@ module.exports = function(app) {
           userlong=userdata.longitude;
           userlat=userdata.latitude;
 
-          if (getDistance(userlat,userlong,mylat,mylong)<=maxdistance){
+          if (getDistance(userlat,userlong,myLatitude,myLongitude)<=maxdistance)
               nearOptions.push(userdata);
-          }
-          else{
-            console.log("test fail");
-          }
       });
       promises.push(promise);
     }
+    
     Promise.all(promises).then(function(){
-    getFormData(res,nearOptions);
+      removeMatches(res, req, nearOptions)
     });
   }
 
@@ -256,8 +237,28 @@ module.exports = function(app) {
     return dist;
   }
 
-   function getFormData(res,userdata2) {
-    console.log("test3");
+  function removeMatches(res, req, lessUsers){
+    var myLikes=[];
+    var showOptions=[];
+
+    db.Match.findOne({
+      where: {
+        email: req.user.email
+      }
+    }).then(function(mydata){
+        if(mydata.myLikes !== null)
+          myLikes=mydata.myLikes.split(",");
+
+        for(var i=0;i<lessUsers.length;i++){
+          if(myLikes.indexOf(lessUsers[i].id.toString())===-1){
+            showOptions.push(lessUsers[i]);
+          }
+        }
+        getFormData(res, showOptions);
+    });
+  }
+
+  function getFormData(res,userdata2) {
     var thisid;
     var cardOptions=[];
     var promises=[];
@@ -273,48 +274,19 @@ module.exports = function(app) {
           cardOptions.push(userdata3);
     });
 
-    
-    promises.push(promise);
+      promises.push(promise);
     }
+    
     Promise.all(promises).then(function(){
-    console.log("42");
-    res.json(cardOptions);
+      res.json(cardOptions);
     });
-
-    // return cardOptions
-    
-    // console.log(cardOptions);
-    
   }
 
-  function removeMatches(req, lessUsers){
-    var myLikes=[];
-    var showOptions=[];
-
-    db.Match.findOne({
-      where: {
-        email: req.user.email
-      }
-    }).then(function(mydata){
-        myLikes=mydata.myLikes.split(",");
-
-        for(var i=0;i<lessUsers.length;i++){
-          if(lessUsers.UserId.indexOf(myLikes)===-1){
-            showOptions.push(lessUsers[i]);
-          }
-        }
-        return showOptions;
-        console.log(showOptions);
-
-    });
-
-  }
-//this will push id into likes
+  //this will push id into likes
   app.put("/api/change-likes", function(req, res) {
     var myLikes;
     var theirLikes;
-    var myId=req.session.passport.user.id;
-    console.log(myId);
+    var myId = req.session.passport.user.id;
     var theirId = req.body.likeId;
     var myEmail = req.user.email;
 
@@ -343,15 +315,14 @@ module.exports = function(app) {
         UserId: theirId
       }
     }).then(function(results2){
-      console.log("results2:"+results2);
-      
       if(results2.dataValues.myLikes!==null){
         theirLikes=results2.dataValues.myLikes.split(",");
       }
-      else{
+      else {
         theirLikes=[];
       }
-      if(theirLikes.indexOf(myId)!==-1){             
+
+      if(theirLikes.indexOf(myId.toString())!==-1){           
         db.Match.findOne({
           where: {
             email: myEmail
