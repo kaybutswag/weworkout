@@ -3,7 +3,9 @@ html {
 }
 
 body {
-	background-image: url('../img/Golf.jpeg');
+  background: black;
+	/* background-image: url('../img/crunch.jpg'); */
+  /* background-color: red; */
   /* url("../img/crunch.jpg"),
   url("../img/bikes.jpg"),
   url("../img/tennis.jpg"),
@@ -15,7 +17,6 @@ body {
   url("../img/Golf.jpeg"),
   url("../img/streching.jpeg"),
   url("../img/jumpRope.jpeg"); */
-  -webkit-transition: background-image 0.5s ease-in-out;
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -498,32 +499,52 @@ input[name="profileSubmit"], #viewChat, #viewBio {
   background-size: cover;
 }
 
+#changingPic img.opaque {
+    opacity:1;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=1);
+  }
+
+  .shadow {
+    -webkit-box-shadow: 5px 5px 5px #aaa;
+    -moz-box-shadow: 5px 5px 5px #aaa;
+    box-shadow: 5px 5px 5px #aaa;
+    margin-bottom: 10px;
+  }
+
+  #changingPic img {
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    opacity:0;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background-size: cover;
+  }
+
 /* pic testing ends */
 
 
-/* loading indicator start*/
-.loader {
-    border: 16px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 16px solid #3498db;
-    width: 70px;
-    height: 70px;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
-    animation: spin 1s linear infinite;
-}
 
-.loaderContainer{
-      padding-left: 95px;
+#loader{
+	display: none;
 }
 
     /* Safari */
-@-webkit-keyframes spin {
+/*@-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
     100% { -webkit-transform: rotate(360deg); }
-}
+}*/
 
-@keyframes spin {
+/*@keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
+}*/
 /* loading indicator end */

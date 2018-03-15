@@ -367,6 +367,54 @@ module.exports = function(app) {
     });
   });
 
+  //get matches for page
+
+  app.get("/api/myMatches",function(req,res){
+    db.Match.findOne({
+      where:{
+        UserID:req.session.passport.user.id
+      }
+    }).then(function(matchdata){
+      var matches=matchdata.dataValues.myMatches;
+      console.log(matches);
+      if(matches===null){
+        res.send("nada");
+        console.log("nada");
+      }
+      else{
+        matches.split(",");
+        pullForms(res,matches);
+        console.log("some data");
+      }
+  });
+
+});
+
+function pullForms(res,matches){
+    var MatchCards=[];
+    var promises=[];
+
+    for(var i=0;i<matches.length;i++){
+      thisMatch=matches[i];
+
+      var promise=db.Form.findOne({
+          where: {
+          UserId: thisMatch
+        }
+      }).then(function(matchforms){
+          MatchCards.push(matchforms);
+    });
+
+      promises.push(promise);
+    }
+    
+    Promise.all(promises).then(function(){
+      res.json(MatchCards);
+    });
+  }
+
+
+
 //logout but saves function
 
   app.get("/logout", function(req, res){

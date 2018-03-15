@@ -62,7 +62,7 @@ function sendPreferences(userAge) {
 	var minAge = $("#minAge").val();
 
 	var maxAge = $("#maxAge").val();
-	
+
 	var genderselect=[];
 	var selectval=$("#genderPref option:selected").val();
 
@@ -73,7 +73,7 @@ function sendPreferences(userAge) {
 
 	var sports=[];
 
-    var fieldsToFill = ["weightlift", "run", "walk", "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl", 
+    var fieldsToFill = ["weightlift", "run", "walk", "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl",
     "rowing", "tennis", "baseball", "basketball", "football", "soccer", "rugby", "volleyball", "golf", "hockey", "ice", "skateboard"];
 
 
@@ -149,6 +149,7 @@ function showCard(){
 
 	    currentProfile++;
 	}        
+
 }
 
 function addLike(){
@@ -200,10 +201,18 @@ $(document).ready(function(){
   $('.userCardImg').height($('.userCardImg').width());
 });
 
-
 $(window).resize(function() {
   $('.userCardImg').height($('.userCardImg').width());
 });
 
-
-
+//pic looping starts//
+$(document).ready(function() {
+  var counter = 0;
+  setInterval(myFunc, 9000);
+  function myFunc() {
+    var newImage = counter;
+    $("#changingPic img").eq(newImage).addClass("opaque");
+    counter++;
+  }
+});
+// pic looping ends//
