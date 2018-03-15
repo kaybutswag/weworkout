@@ -84,7 +84,19 @@ function slickInit() {
 	});
 }
 
+
 $(document).ready(function(){
+  $.get("/api/myMatches", function(data) {
+      if(data="nada"){
+        console.log("test front");
+        $(".newKinectionsDiv").empty();
+        $(".newKinectionsDiv").html("<p>Sorry, no matches at the moment. We suggest broadening your preferences.</p><a href='/judgement'><button>Adjust Preferences</button></a>");
+      }
+      else{
+        console.log(data);
+      }
+    });
+
 	$('.userCard').click(function () {
 		$(".newKinectionsBench").hide();
 		$(".kinectionsBench").hide();

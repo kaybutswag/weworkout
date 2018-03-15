@@ -369,19 +369,22 @@ module.exports = function(app) {
 
   //get matches for page
 
-  app.get("api/myMatches",function(req,res){
+  app.get("/api/myMatches",function(req,res){
     db.Match.findOne({
       where:{
         UserID:req.session.passport.user.id
       }
     }).then(function(matchdata){
       var matches=matchdata.dataValues.myMatches;
+      console.log(matches);
       if(matches===null){
         res.send("nada");
+        console.log("nada");
       }
       else{
         matches.split(",");
         pullForms(res,matches);
+        console.log("some data");
       }
   });
 

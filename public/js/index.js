@@ -98,11 +98,11 @@ $(document).ready(function(){
 
 
 function showIndicator(){
-    $("#loader").addClass("loader");
+    $("#loader").css("display","block");
 }
 
 function hideLoader(){
-    $("#loader").removeClass("loader");
+    $("#loader").css("display","none");
 }
 
 //pic looping starts//
