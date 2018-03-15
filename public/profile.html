@@ -20,7 +20,21 @@
 		<script src="https://code.jquery.com/jquery.js"></script>
 	</head>
 	<body>
-
+	<div id="changingPic" class="shadow">
+		<img class='opaque'src="/img/crunch.jpg" />
+			<img  src="/img/bikes.jpg"/>
+			<img  src="/img/deadlift.jpg"/>
+			<img  src="/img/tennis.jpg"/>
+			<img  src="/img/hiking.jpeg"/>
+			<img  src="/img/highFive.jpg"/>
+			<img  src="/img/waterBottles.jpg"/>
+			<img  src="/img/weights.jpeg"/>
+			<img  src="/img/yoga.jpeg"/>
+			<img  src="/img/weightBar.jpeg"/>
+			<img  src="/img/Golf.jpeg"/>
+			<img  src="/img/streching.jpeg"/>
+			<img  src="/img/jumpRope.jpeg"/>
+	</div>
 <!-- post request for users data -->
 		<header>
 			<div class="headerDiv">
@@ -39,7 +53,7 @@
         <div id="logout">
 			<i class="fas fa-sign-out-alt"></i>
         </div>
-		
+
 
 		<div class="content">
 			<div class="row">
@@ -50,7 +64,7 @@
 			<div class="userCard">
 					<!-- path changes with handlebars -->
 					<div class="userCardImg" style="background-image: url('img/logoBlack.png')">
-						
+
 					</div>
 					<form id="imgUploadForm">
 						<!-- styling this is apparently really difficult -->
@@ -73,10 +87,10 @@
 				  	<option value="Female">Female</option>
 				  	<option value="Other">Other</option>
 				</select><br>
-				
+
 				<label for="dob">Date of Birth: </label>
 				<input type="date" name="dob" id="dob" placeholder="mm/dd/yyyy"><br>
-				
+
 				<!-- search form will default to this location if we are unable to determine their current location -->
 				<!-- will need some tooling to validate and give us usable info -->
 				<label for="location">Primary Location: </label>
@@ -97,7 +111,7 @@
 				        <hr>
 			        	<div class="activityFlex">
 			        		<div class="activityCol">
-			        			
+
 				        		<label for="weightlift">
 								<input type="checkbox" id="weightlift" class="activity" data-text="Weightlifting"/>Weightlifting</label>
 								<br>
@@ -114,7 +128,7 @@
 								<input type="checkbox" id="surf"  class="activity" data-text="Surfing"/>Surfing</label>
 			        		</div>
 			        		<div class="activityCol">
-			        			
+
 								<label for="bike">
 								<input type="checkbox" id="bike"  class="activity" data-text="Biking"/>Biking</label>
 								<br>
@@ -131,7 +145,7 @@
 								<input type="checkbox" id="dance"  class="activity" data-text="Dancing"/>Dancing</label>
 			        		</div>
 			        		<div class="activityCol">
-			        			
+
 								<label for="rock">
 								<input type="checkbox" id="rock"  class="activity" data-text="Rock Climbing"/>Rock Climbing</label>
 								<br>
@@ -147,7 +161,7 @@
 								<label for="tennis">
 								<input type="checkbox" id="tennis"  class="activity" data-text="Tennis"/>Tennis</label>
 			        		</div>
-			        		<div class="activityCol">	
+			        		<div class="activityCol">
 								<label for="baseball">
 								<input type="checkbox" id="baseball"  class="activity" data-text="Baseball"/>Baseball</label>
 								<br>
@@ -164,7 +178,7 @@
 								<input type="checkbox" id="rugby"  class="activity" data-text="Rugby"/>Rugby</label>
 								<br>
 				        		</div>
-			        		<div class="activityCol">	
+			        		<div class="activityCol">
 								<label for="volleyball">
 								<input type="checkbox" id="volleyball" class="activity" data-text="Volleyball"/>Volleyball</label>
 								<br>
