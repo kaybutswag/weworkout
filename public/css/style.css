@@ -351,14 +351,14 @@ break {
 	font-size: 150px;
 }
 
-.userCard, .box2 {
+.userCard, .box2, .userCard2 {
 	background-color: rgba(255, 255, 255, 1);
 	margin: 100px;
 	padding: 20px;
 	margin: 20px;
 }
 
-.userCard {
+.userCard, .userCard2  {
 	flex: 1;
 	width: 200px;
 }
