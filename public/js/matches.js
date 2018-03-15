@@ -84,9 +84,6 @@ function slickInit() {
 	});
 }
 
-
-    
-
 $(document).ready(function(){
   $.get("api/myMatches", function(data) {
       if(data="nada")

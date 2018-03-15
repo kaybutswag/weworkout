@@ -5,31 +5,27 @@ var passport = require("../config/passport.js")
 module.exports = function(app) {
 
   var maxdistance;
+  var myLatitude;
+  var myLongitude;
 
   app.post("/api/new-user", function(req, res, next) {
     var lastid;
     var newEmail = req.body.email;
     var newPassword = req.body.password;
-    var newLatitude = req.body.latitude;
-    var newLongitude = req.body.longitude;
+    myLatitude = req.body.latitude;
+    myLongitude = req.body.longitude;
 
     db.User.create({
       email: newEmail,
       password: newPassword,
-      latitude: newLatitude,
-      longitude: newLongitude
+      latitude: myLatitude,
+      longitude: myLongitude
     }).then(function(result) {
       db.Match.create({
         email: newEmail,
         UserId: result.id
       });
-
-      req.login({email: newEmail}, function(err){
-        if(err)
-          res.json(err);
-        else
-          res.end();
-      });
+      res.json("success");
     }).catch(function(error){
       res.json(error); 
     });  
@@ -64,48 +60,47 @@ module.exports = function(app) {
       }
     }).then(function(response){
       userId = response.dataValues.id;
-    
 
-    db.Form.upsert({
-      email: req.user.email,
-      name: req.body.name,
-      gender: req.body.gender,
-      dob: req.body.dob,
-      img: req.body.img,
-      primaryLocation: req.body.primaryLocation,
-      weightlift: req.body.weightlift,
-      run: req.body.run,
-      walk: req.body.walk,
-      swim: req.body.swim,
-      surf: req.body.surf,
-      bike: req.body.bike,
-      yoga: req.body.yoga,
-      pilates: req.body.pilates,
-      cardio: req.body.cardio,
-      dance: req.body.dance,
-      rock: req.body.rock,
-      gymnastics: req.body.gymnastics,
-      bowl: req.body.bowl,
-      rowing: req.body.rowing,
-      tennis: req.body.tennis,
-      baseball: req.body.baseball,
-      basketball: req.body.basketball,
-      football: req.body.football,
-      soccer: req.body.soccer,
-      rugby: req.body.rugby,
-      volleyball: req.body.volleyball,
-      golf: req.body.golf,
-      hockey: req.body.hockey,
-      ice: req.body.ice,
-      skateboard: req.body.skateboard,
-      bio: req.body.bio,
-      UserId: userId
-    }).then(function(){
-      res.json("next");
-    }).catch(function(error){
-      console.log(error);
-      res.json("error"); 
-    });
+      db.Form.upsert({
+        email: req.user.email,
+        name: req.body.name,
+        gender: req.body.gender,
+        dob: req.body.dob,
+        img: req.body.img,
+        primaryLocation: req.body.primaryLocation,
+        weightlift: req.body.weightlift,
+        run: req.body.run,
+        walk: req.body.walk,
+        swim: req.body.swim,
+        surf: req.body.surf,
+        bike: req.body.bike,
+        yoga: req.body.yoga,
+        pilates: req.body.pilates,
+        cardio: req.body.cardio,
+        dance: req.body.dance,
+        rock: req.body.rock,
+        gymnastics: req.body.gymnastics,
+        bowl: req.body.bowl,
+        rowing: req.body.rowing,
+        tennis: req.body.tennis,
+        baseball: req.body.baseball,
+        basketball: req.body.basketball,
+        football: req.body.football,
+        soccer: req.body.soccer,
+        rugby: req.body.rugby,
+        volleyball: req.body.volleyball,
+        golf: req.body.golf,
+        hockey: req.body.hockey,
+        ice: req.body.ice,
+        skateboard: req.body.skateboard,
+        bio: req.body.bio,
+        UserId: userId
+      }).then(function(){
+        res.json("next");
+      }).catch(function(error){
+        console.log(error);
+        res.json("error"); 
+      });
 
     });  
   });
@@ -124,26 +119,17 @@ module.exports = function(app) {
 
 //updates login location
   app.put("/api/update-location", function(req, res) {
+    myLatitude = req.body.latitude;
+    myLongitude = req.body.longitude;
     db.User.update({
-      latitude: req.body.latitude,
-      longitude: req.body.longitude
+      latitude: myLatitude,
+      longitude: myLongitude
     }, {
       where: {
         email: req.user.email
       }
     }).then(function(response){
       res.end();
-    });
-  });
-
-//this will grab pictures. probably changing
-  app.post("/api/get-prof-pic", function(req, res){
-    db.Form.findOne({
-      where: {
-        email: req.user.email
-      }
-    }).then(function(data){
-      res.json(data.img);
     });
   });
 
@@ -176,8 +162,7 @@ module.exports = function(app) {
       }
       res.json(sportsPreferences);
     });
-  })
-
+  });
 
   //our match function
   app.post("/api/filter-judgees", function(req, res){
@@ -209,17 +194,11 @@ module.exports = function(app) {
     },
       include:[db.User]
     }).then(function(data){
-
-      // sendThis(res,getFormData(filterResults(req,data,maxdistance)));
       filterResults(res,req,data,maxdistance)
-      });
-    
+      });    
   });
 
-
   function filterResults(res,req,data,maxdistance){
-    var mylong=req.session.passport.user.longitude;
-    var mylat=req.session.passport.user.latitude;
     var userlong;
     var userlat;
 
@@ -232,28 +211,18 @@ module.exports = function(app) {
           email: data[i].email
         }
       }).then(function(userdata){
-
           userlong=userdata.longitude;
           userlat=userdata.latitude;
 
-          if (getDistance(userlat,userlong,mylat,mylong)<=maxdistance){
+          if (getDistance(userlat,userlong,myLatitude,myLongitude)<=maxdistance)
               nearOptions.push(userdata);
-          }
-          else{
-            console.log("test fail");
-          }
       });
       promises.push(promise);
     }
+    
     Promise.all(promises).then(function(){
-    getFormData(res,nearOptions);
+      removeMatches(res, req, nearOptions)
     });
-
-    // removeMatches(req,nearOptions);
-
-
-    // var possibleMatches = removeMatches(req,nearOptions);
-    // res.json(possibleMatches);
   }
 
   function getDistance(latitude1,longitude1,latitude2,longitude2) {
@@ -265,12 +234,31 @@ module.exports = function(app) {
     var R = 6371; //  Earth distance in km so it will return the distance in km
     var dist = 2 * R * Math.asin(Math.sqrt(a));
     dist = dist/1.60934 ;
-    console.log(dist + " miles")
     return dist;
   }
 
-   function getFormData(res,userdata2) {
-    console.log("test3");
+  function removeMatches(res, req, lessUsers){
+    var myLikes=[];
+    var showOptions=[];
+
+    db.Match.findOne({
+      where: {
+        email: req.user.email
+      }
+    }).then(function(mydata){
+        if(mydata.myLikes !== null)
+          myLikes=mydata.myLikes.split(",");
+
+        for(var i=0;i<lessUsers.length;i++){
+          if(myLikes.indexOf(lessUsers[i].id.toString())===-1){
+            showOptions.push(lessUsers[i]);
+          }
+        }
+        getFormData(res, showOptions);
+    });
+  }
+
+  function getFormData(res,userdata2) {
     var thisid;
     var cardOptions=[];
     var promises=[];
@@ -286,48 +274,19 @@ module.exports = function(app) {
           cardOptions.push(userdata3);
     });
 
-    
-    promises.push(promise);
+      promises.push(promise);
     }
+    
     Promise.all(promises).then(function(){
-    console.log("42");
-    res.json(cardOptions);
+      res.json(cardOptions);
     });
-
-    // return cardOptions
-    
-    // console.log(cardOptions);
-    
   }
 
-  function removeMatches(req, lessUsers){
-    var myLikes=[];
-    var showOptions=[];
-
-    db.Match.findOne({
-      where: {
-        email: req.user.email
-      }
-    }).then(function(mydata){
-        myLikes=mydata.myLikes.split(",");
-
-        for(var i=0;i<lessUsers.length;i++){
-          if(lessUsers.UserId.indexOf(myLikes)===-1){
-            showOptions.push(lessUsers[i]);
-          }
-        }
-        return showOptions;
-        console.log(showOptions);
-
-    });
-
-  }
-//this will push id into likes
+  //this will push id into likes
   app.put("/api/change-likes", function(req, res) {
     var myLikes;
     var theirLikes;
-    var myId=req.session.passport.user.id;
-    console.log(myId);
+    var myId = req.session.passport.user.id;
     var theirId = req.body.likeId;
     var myEmail = req.user.email;
 
@@ -356,15 +315,14 @@ module.exports = function(app) {
         UserId: theirId
       }
     }).then(function(results2){
-      console.log("results2:"+results2);
-      
       if(results2.dataValues.myLikes!==null){
         theirLikes=results2.dataValues.myLikes.split(",");
       }
-      else{
+      else {
         theirLikes=[];
       }
-      if(theirLikes.indexOf(myId)!==-1){             
+
+      if(theirLikes.indexOf(myId.toString())!==-1){           
         db.Match.findOne({
           where: {
             email: myEmail
@@ -408,6 +366,51 @@ module.exports = function(app) {
 
     });
   });
+
+  //get matches for page
+
+  app.get("api/myMatches",function(req,res){
+    db.Match.findOne({
+      where:{
+        UserID:req.session.passport.user.id
+      }
+    }).then(function(matchdata){
+      var matches=matchdata.dataValues.myMatches;
+      if(matches===null){
+        res.send("nada");
+      }
+      else{
+        matches.split(",");
+        pullForms(res,matches);
+      }
+  });
+
+});
+
+function pullForms(res,matches){
+    var MatchCards=[];
+    var promises=[];
+
+    for(var i=0;i<matches.length;i++){
+      thisMatch=matches[i];
+
+      var promise=db.Form.findOne({
+          where: {
+          UserId: thisMatch
+        }
+      }).then(function(matchforms){
+          MatchCards.push(matchforms);
+    });
+
+      promises.push(promise);
+    }
+    
+    Promise.all(promises).then(function(){
+      res.json(MatchCards);
+    });
+  }
+
+
 
 //logout but saves function
 
