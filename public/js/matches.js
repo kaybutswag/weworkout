@@ -84,15 +84,17 @@ function slickInit() {
 	});
 }
 
+
 $(document).ready(function(){
-  $.get("api/myMatches", function(data) {
-      if(data="nada")
-      var rowsToAdd = [];
-      for (var i = 0; i < data.length; i++) {
-        rowsToAdd.push(createAuthorRow(data[i]));
+  $.get("/api/myMatches", function(data) {
+      if(data="nada"){
+        console.log("test front");
+        $(".newKinectionsDiv").empty();
+        $(".newKinectionsDiv").html("<p>Sorry, no matches at the moment. We suggest broadening your preferences.</p><a href='/judgement'><button>Adjust Preferences</button></a>");
       }
-      renderAuthorList(rowsToAdd);
-      nameInput.val("");
+      else{
+        console.log(data);
+      }
     });
 
 	$('.userCard').click(function () {
