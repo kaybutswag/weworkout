@@ -314,6 +314,18 @@ break {
 	color: #212121;
 }
 
+#exhausted-options {
+	font-weight: 600;
+	font-size: 32px;
+	line-height: 1.5;
+}
+
+.exhausted-options {
+	position: absolute;
+	top: 160px;
+	margin-left: auto;
+}
+
 .signInPanel {
 	margin: 12% auto;
 	text-align: center;
@@ -326,7 +338,9 @@ break {
 	min-width: 300px;
 }
 
-
+.display-none {
+	display: none;
+}
 
 .title {
 	margin-top: -133px;
