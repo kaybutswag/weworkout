@@ -1,4 +1,4 @@
-@media screen and (min-width: 1003px) {
+@media screen and (max-width: 1003px) {
 
 	html {
 		height: 100%;
@@ -6,7 +6,7 @@
 
 	body {
 	  background: black;
-	  background-size: cover;
+	  /*background-size: fill;*/
 	  background-repeat: no-repeat;
 	}
 
@@ -16,14 +16,14 @@
 
 		background-size: cover;
 		background-repeat: no-repeat;
-		background-position: inherit;
+		background-position: center;
 		color: #212121;
-		font-size: 20px;
+		font-size: 25px;
 		box-sizing: border-box;
 		min-height: 100%;
 		display: flex;
 		justify-content: center;
-		/*align-items: space-around;*/
+		align-items: space-around;
 		align-items: center;
 		flex-wrap: wrap;
 		background-attachment: fixed;
@@ -31,11 +31,12 @@
 
 	/*need to look at this.*/
 	textarea {
-		width: 97%;
+		width: 100%;
 		height: 23%;
 		resize: none;
 		font-family: 'Lato', sans-serif;
 		font-size: 20px;
+		min-height: 100px;
 	}
 
 	input[name="email"], input[type="password"], textarea, input[type="number"], select[name="gender"], input[name="location"], select, #dob {
@@ -63,6 +64,7 @@
 		width: 100%;
 		background-color: white;
 		height: 70px;
+		z-index: 500;
 	}
 
 	header {
@@ -92,13 +94,17 @@
 		width: 100%;
 	}
 
+	.profileSecTitle {
+		margin-top: 10px;
+	}
+
 	h2{
 		font-size: 1.9em;
 		font-weight: 600;
 	}
 
 	input[placeholder="First Name"] {
-		font-size: 2em;
+		font-size: 1.5em;
 		max-width: 100%;
 		border: 1px #ddd solid;
 	}
@@ -178,26 +184,18 @@
 		font-family: 'Lato', sans-serif;
 	}
 
-	.content, .headerDiv, .abilityInput, .newKinectionsDiv, .kinectionsDiv {
+	.headerDiv, .abilityInput, .newKinectionsDiv, .kinectionsDiv {
 		display: flex;
 		justify-content: space-around;
 		flex-flow: row wrap;
 	}
 
-
-	.profileSecTitle {
-		margin-top: 10px;
-		margin-bottom: 5px;
-	}
-
 	.content, .newKinectionsBench {
-		background-color: rgba(255,255,255,.5);
-		/*not reactive*/
-		/*margin: 150px 150px 20px 150px;*/
-		margin-bottom: 20px;
+		/*background-color: rgba(255,255,255,.5);*/
+		margin: 100px 50px 20px 50px;
 		max-width: 1100px;
-		width: 70%;
-	  position:relative;
+		width: 85%;
+		position:relative;
 	}
 
 	.rejected{
@@ -420,9 +418,16 @@
 		margin: 20px;
 	}
 
+	.box2 {
+		margin-bottom: 0px;
+	}
+
 	.userCard, .userCard2  {
-		flex: 1;
-		width: 200px;
+		max-width: 500px;
+		margin-left: auto;
+		margin-right: auto;
+		/*flex: 1;*/
+		/*width: 200px;*/
 	}
 
 	.userCardImg {
@@ -435,7 +440,7 @@
 	}
 
 	.box2 {
-		flex: 2;
+		/*flex: 2;*/
 	}
 
 	.abilityDiv {
@@ -452,8 +457,8 @@
 	    background: rgba(0, 0, 0, 0.8);
 	    z-index: 99999;
 	    opacity:0;
-	    /*-webkit-transition: opacity 400ms ease-in;*/
-	    /*-moz-transition: opacity 400ms ease-in;*/
+	    -webkit-transition: opacity 400ms ease-in;
+	    -moz-transition: opacity 400ms ease-in;
 	    transition: opacity 400ms ease-in;
 	    pointer-events: none;
 	}
@@ -462,7 +467,7 @@
 	    pointer-events: auto;
 	}
 	.modalDialog > div {
-	    width: 70%;
+	    width: 85%;
 	    position: relative;
 	    margin: 10% auto;
 	    padding: 5px 20px 13px 20px;
@@ -483,8 +488,8 @@
 	    -webkit-border-radius: 12px;
 	    -moz-border-radius: 12px;
 	    border-radius: 12px;
-	    /*-moz-box-shadow: 1px 1px 3px #000;*/
-	    /*-webkit-box-shadow: 1px 1px 3px #000;*/
+	    -moz-box-shadow: 1px 1px 3px #000;
+	    -webkit-box-shadow: 1px 1px 3px #000;
 	    box-shadow: 1px 1px 3px #000;
 	}
 	.close:hover {
@@ -511,16 +516,16 @@
 	  }
 
 	  .shadow {
-/*	    -webkit-box-shadow: 5px 5px 5px #aaa;
+	    -webkit-box-shadow: 5px 5px 5px #aaa;
 	    -moz-box-shadow: 5px 5px 5px #aaa;
-	    box-shadow: 5px 5px 5px #aaa;*/
+	    box-shadow: 5px 5px 5px #aaa;
 	    margin-bottom: 10px;
 	  }
 
 	  #changingPic img {
-/*	    -webkit-transition: opacity 1s ease-in-out;
+	    -webkit-transition: opacity 1s ease-in-out;
 	    -moz-transition: opacity 1s ease-in-out;
-	    -o-transition: opacity 1s ease-in-out;*/
+	    -o-transition: opacity 1s ease-in-out;
 	    transition: opacity 1s ease-in-out;
 	    opacity:0;
 	    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
@@ -562,4 +567,5 @@
 	   font-size: .9em;
 	  text-decoration: none;
 	}
+
 }
