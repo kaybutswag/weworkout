@@ -175,7 +175,7 @@
 			        <div class="actSubDiv">
 			        	<a href="#close" id="submitActivities">Submit</a>
 			        </div>
-			        
+
 		    </div>
 
 		</div>
@@ -186,6 +186,41 @@
 
 			<p id="error-message"></p>
 
+	<!-- match box start -->
+			<div id="newMatch" class="disableBackground">
+				<!--close button -->
+				<div><a onclick='removeDialog()' title='Close' class='close'><i class='fas fa-times'></i></a></div>
+				<!--congratulations message -->
+				<div id="matchedMessage"></div>
+				<div id="greetingText" class="row">
+					<!--user picture -->
+						<div id="matchedPic1">
+							<div class="matchedCard">
+								<div id="pic1"></div>
+							</div>
+						</div>
+					<!--match's picture -->
+						<div id="matchedPic2">
+							<div class="matchedCard">
+								<div id="pic2"></div>
+							</div>
+						</div>
+				</div>
+				<!--match's name -->
+				<div id="matchedName"></div>
+
+				<!--chat or continue-->
+				<div id="matchOptions" class="row">
+					<div id="chat">
+						<span id="chatText" onclick='removeDialog()'></span>
+					</div>
+					<div id='continue'>
+						<span id="continueText" onclick='removeDialog()'></span>
+					</div>
+				</div>
+
+			</div>
+	<!-- match box end -->
 			<break></break>
 
 			<div class="userCard">
@@ -227,5 +262,6 @@
 
 	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 	<script type="text/javascript" src="js/judgement.js"></script>
+	<div id="overlay"></div>
 	</body>
 </html>

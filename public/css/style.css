@@ -12,8 +12,7 @@
 
 	body {
 		font-family: 'Lato', sans-serif;
-		/*background-image: url('../img/signIn.jpg');*/
-
+		background-image: url('../img/signIn.jpg');
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: inherit;
@@ -542,16 +541,6 @@
 		display: none;
 	}
 
-	    /* Safari */
-	/*@-webkit-keyframes spin {
-	    0% { -webkit-transform: rotate(0deg); }
-	    100% { -webkit-transform: rotate(360deg); }
-	}*/
-
-	/*@keyframes spin {
-	    0% { transform: rotate(0deg); }
-	    100% { transform: rotate(360deg); }
-	}*/
 	/* loading indicator end */
 	.rejectKinnectButton {
 	   cursor: pointer;
@@ -571,8 +560,6 @@ body {
 
  body {
 	font-family: 'Lato', sans-serif;
-	background-image: url('../img/signIn.jpg');
-
 	background-size: 120%;
 	background-repeat: no-repeat;
 	background-position: inherit;
@@ -991,7 +978,6 @@ break {
 }
 
 
-
 /* pic testin */
 #changingPic {
   height: 100vh;
@@ -1042,6 +1028,114 @@ break {
 	color: #212121;
 	text-align: center;
 }
+/* start new animation */
+.greetingText{
+  vertical-align: middle;
+}
 
-#loader{
-	display: none;
+.matchedCard {
+	flex: 1;
+	width: 100px;
+}
+
+.op-match--overlay {
+			width: 100% !important;
+			position: absolute !important;
+			top: 0px !important;
+}
+
+.disableBackground {
+  opacity: 0;
+}
+
+.newMatch {
+  opacity: 1;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.dialog {
+  z-index: 1000;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  min-height: 500px;
+  width: 60%;
+  max-width: 600px;
+  min-width: 400px;
+  background-color: #fff;
+  box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
+}
+
+.matchedImageSize{
+  height: 100px;
+  width: 100px;
+}
+
+.row:after{
+  /* display: table; */
+  clear:both
+}
+
+.column{
+  float:left;
+  width: 30%;
+  padding: 40px 40px 40px 70px;
+}
+
+.matchedCardImg{
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-radius: 50%;
+}
+
+.matchedCardImgUser{
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-radius: 50%;
+}
+
+.matchedMessage{
+  text-align: center;
+  padding: 20px;
+  font-size: 35px;
+  font-weight: 700;
+}
+
+.matchedName{
+  text-align: center;
+  padding: 20px;
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.options{
+  text-align: center;
+  cursor:pointer;
+}
+
+.columnForOptions{
+  float:left;
+  width: 50%;
+  padding-top:38px;
+}
+/* new animation end */

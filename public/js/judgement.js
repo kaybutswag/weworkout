@@ -222,8 +222,13 @@ $(document).ready(function(){
 			$("form").first().animate({
 				left: "0px"
 			}, function() {
-				addLike();
-				showCard();
+				//var result will determine if we have a match or not
+				//if result is true, we have a match so we do not move on the next userCard until user closes dialog
+				var result = checkIfMatches();
+				//if result is false, we do not have a match and we move to the next userCard
+				if(result !== true){
+						kinnected();
+				}
 			});
 		});
 	});
@@ -259,3 +264,181 @@ $(document).ready(function(){
 $(window).resize(function() {
   $('.userCardImg').height($('.userCardImg').width());
 });
+//matchBox animation
+function rejected() {
+  var elem = document.getElementById("matchBox");
+	elem.classList.add("rejected");
+  var pos = 0;
+  var id = setInterval(frame, 1);
+  function frame() {
+    if (pos >= 1000) {
+      pos=0;
+      elem.style.top.left = pos + 'px';
+      elem.style.right = pos + 'px';
+      clearInterval(id);
+			elem.classList.remove("rejected");
+			showCard();
+    } else {
+      pos += 20;
+      elem.style.top.left = pos + 'px';
+      elem.style.right = pos + 'px';
+    }
+  }
+}
+
+
+function kinnected() {
+  var elem = document.getElementById("matchBox");
+	elem.classList.add("kinnected");
+  var pos = 0;
+  var id = setInterval(frame, 1);
+  function frame() {
+    if (pos <= -1000) {
+      pos=0;
+      elem.style.top.left = pos + 'px';
+      elem.style.right = pos + 'px';
+      clearInterval(id);
+			elem.classList.remove("kinnected");
+			addLike();
+			showCard();
+    } else {
+      pos -= 20;
+      elem.style.top.left = pos + 'px';
+      elem.style.right = pos + 'px';
+    }
+  }
+}
+// matchBox ends//
+
+//pic looping starts//
+$(document).ready(function() {
+  var counter = 0;
+  setInterval(myFunc, 9000);
+  function myFunc() {
+    var newImage = counter;
+    $("#changingPic img").eq(newImage).addClass("opaque");
+    counter++;
+		if(counter === 13){
+			counter = 0;
+			for(var i=0; i<13; i++){
+				$("#changingPic img").eq(i).removeClass("opaque");
+			}
+		}
+	}
+});
+// pic looping ends//
+
+function hideNoMatches(){
+	$("#name").show();
+	$(".userCardImg").show();
+	$('#gender').show();
+	$('#location').show();
+	$('#age').show();
+	$('#bio').show();
+	$('#noMatches').hide();
+	$('#box2').show();
+	$('#userCardImg').show();
+	$('#reject').show();
+	$('#kinect').show();
+}
+
+//checkIfMatches is where the logic to check if we have a match is,
+//currently I hard coded Bubbles to be a match based on name.
+//The function returns true if we have a match, the dialog will open, and upon close of dialog we show next userCard
+//If the function returns false we do not have a match and we move on to the next userCard
+function checkIfMatches(){
+	if( currentProfile - 1 >= 0 ){
+		if (myBigArray[currentProfile - 1].name === "Bubbles") {
+			displayMatchDialog();
+		  displayMatchImages();
+			displayMatchOptions();
+			displayMatchName();
+			displayMatchMessage();
+			return true;
+		}
+	}
+	return false;
+}
+
+//function to hide dialog and move on the next userCard after we found a match
+function removeDialog(){
+	hideMatchDialog();
+	hideMatchImages();
+	hideMatchOptions();
+	hideMatchNameAndMessage();
+	kinnected();
+}
+//jquery methods to show and hide dialog
+function displayMatchDialog(){
+	$('#newMatch').removeClass("disableBackground");
+	$('#newMatch').addClass("newMatch");
+	$('#newMatch').addClass("dialog")
+	$('#newMatch').addClass("op-match--overlay")
+	$('#newMatch').show();
+	$('#overlay').addClass("overlay")
+	$('#overlay').show();
+}
+
+function displayMatchImages(){
+	$('#pic1').addClass("matchedCardImgUser");
+	$('#pic2').addClass("matchedCardImg");
+	$(".matchedCardImg").empty();
+	$(".matchedCardImg").attr("style","background-image: url('"+myBigArray[currentProfile-1].img+"')");
+	$('.matchedCardImg').height('150px');
+	$('.matchedCardImg').width('150px');
+	$(".matchedCardImgUser").empty();
+	$(".matchedCardImgUser").attr("style","background-image: url('"+myBigArray[0].img+"')");
+	$('.matchedCardImgUser').height('150px');
+	$('.matchedCardImgUser').width('150px');
+	$('#matchedPic1').addClass('column');
+	$('#matchedPic2').addClass('column');
+}
+
+function displayMatchOptions(){
+	$('#chat').addClass('columnForOptions');
+	$('#chat').addClass('options');
+	$('#continue').addClass('columnForOptions');
+	$('#continue').addClass('options');
+	$("#chatText").text("Start a Chat");
+	$("#continueText").text("Continue");
+}
+
+function displayMatchName(){
+	$('#matchedName').addClass('matchedName');
+	$('#matchedName').text(myBigArray[currentProfile-1].name + " is now a match!");
+}
+
+function displayMatchMessage(){
+	$('#matchedMessage').addClass("matchedMessage");
+	$('#matchedMessage').html("<a> Congratulations! <br> You guys kinnected! </a>");
+}
+
+function hideMatchDialog(){
+	$('#newMatch').removeClass("newMatch");
+	$('#newMatch').removeClass("dialog")
+	$('#newMatch').removeClass("op-match--overlay")
+	$('#newMatch').hide();
+	$('#overlay').removeClass("overlay")
+	$('#overlay').hide();
+}
+
+function hideMatchImages(){
+	$('#pic1').removeClass("userCardImg");
+	$('#pic2').removeClass("userCardImg");
+	$(".userCardImg").empty();
+	$('#matchedPic1').removeClass('column');
+	$('#matchedPic2').removeClass('column');
+}
+
+function hideMatchOptions(){
+	$('#chat').removeClass('columnForOptions');
+	$('#continue').removeClass('columnForOptions');
+	$('#chat').removeClass('options');
+	$('#continue').removeClass('options');
+}
+
+function hideMatchNameAndMessage(){
+	$('#matchedName').removeClass('matchedName');
+	$('#matchedMessage').removeClass("matchedMessage");
+}
+//jquery methods to show and hide dialog ends
