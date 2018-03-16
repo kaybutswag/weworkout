@@ -1,5 +1,3 @@
-// you need slick
-// http://kenwheeler.github.io/slick/
 var idforcontent;
 var counter = 0;
 
@@ -15,7 +13,7 @@ function photoSlideshow() {
 function cardImgSize() {
 	$('.userCardImg').each(function() {
 		$(this).height($(this).width());
-		$('.history').height($(this).width());
+		$('.history').height($(this).width()-20);
 		// $('#viewChat').width($(this).width());
 		// $('#viewBio').width($(this).width());
 	})
@@ -60,11 +58,11 @@ function slickInit() {
 	});
 
 	$('.kinectionsDiv').slick({
-  dots: true,
+  // dots: true,
   infinite: false,
   speed: 300,
   slidesToShow: 4,
-  slidesToScroll: 4,
+  slidesToScroll: 1,
   responsive: [
     {
       breakpoint: 1024,
@@ -76,17 +74,10 @@ function slickInit() {
       }
     },
     {
-      breakpoint: 600,
+      breakpoint: 1003,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
       }
     }
     // You can unslick at a given breakpoint now by adding:
@@ -108,7 +99,11 @@ function showThings(number){
           $(".userCard2").empty();
           var thisCardImg2=$("<div>");
           thisCardImg2.addClass("userCardImg");
-          thisCardImg2.attr("style","background-image: url('"+data2[0].img+"')");
+          if (data2[0].img == null) {
+            thisCardImg2.attr("style","background-image: url('img/logoBlack.png')");
+          } else {
+            thisCardImg2.attr("style","background-image: url('"+data2[0].img+"')");
+          }
           $(".userCard2").append(thisCardImg2);
           $(".userCard2").attr("data-value",number);
           $(".userCard2").append("<h4 id='name2'>"+data2[0].name+"</h4>");
@@ -159,13 +154,19 @@ $(document).ready(function(){
           thisCard.attr("data-value",data[i].UserId);
           var thisCardImg=$("<div>");
           thisCardImg.addClass("userCardImg");
-          thisCardImg.attr("style","background-image: url('"+data[i].img+"')");
+          if (data[i].img == null) {
+            thisCardImg.attr("style","background-image: url('img/logoBlack.png')");
+          } else {
+            thisCardImg.attr("style","background-image: url('"+data[i].img+"')");
+          };
+          // thisCardImg.attr("style","background-image: url('"+data[i].img+"')");
           thisCard.append(thisCardImg);
           thisCard.append("<h4 id='name'>"+data[i].name+"</h4>");
           $(".newKinectionsDiv").append(thisCard);
-          cardImgSize();
         }
       }
+      slickInit();
+      cardImgSize();
     });
 
 	$('.newKinectionsBench').on("click",".userCard",function () {
@@ -208,13 +209,11 @@ $(document).ready(function(){
 		$("#viewChat").hide();
 	})
 
-	slickInit();
-	cardImgSize();
-  setInterval(photoSlideshow, 9000);
+	// cardImgSize();
+  setInterval(photoSlideshow, 12000);
 });
 
 $(window).resize(function() {
-	// little buggy
 	slickInit();
 	cardImgSize();
 });
