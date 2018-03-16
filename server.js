@@ -8,7 +8,6 @@ var session = require("express-session");
 var io = require("socket.io")(server);
 var passport = require("./config/passport");
 var db = require("./models");
-var db = require("./models");
 
 var PORT = process.env.PORT || 8000;
 
@@ -25,8 +24,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require("./routes/apiRoutes.js")(app);
-require("./routes/htmlRoutes.js")(app);
 require("./routes/chatApiRoutes.js")(app);
+require("./routes/htmlRoutes.js")(app);
+
 
 //changed force to false for testing filter
 
@@ -37,27 +37,6 @@ db.sequelize.sync({ force: false }).then(function() {
   });
 });
 
-// io.on('connection', function(socket){
-//   socket.on('chat message', function(msg){
-//     io.emit('chat message', msg);
-//     console.log("test connection2");
-//   });
-// });
-// Listen for new client connections.
-// io.on('connection', function(socket) {
-
-//   // Listen for the client to send a _"chat message"_ message.
-//   socket.on('chat message', function(data) {
-
-//     // Store the data in the database.
-//     models.Messages.create({
-//       message  : data.message,
-//       username : data.username,
-//       recipient: data.recipient
-//     });
-
-//   });
-// });
 
 io.on('connection', function (socket) {
   console.log('connection established');
