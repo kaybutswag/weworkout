@@ -147,7 +147,7 @@ $(document).ready(function(){
       if(data==="nada"){
         console.log("test front");
         $(".newKinectionsDiv").empty();
-        $(".newKinectionsDiv").html("<p>Sorry, no matches at the moment. We suggest broadening your preferences.</p><a href='/judgement'><button>Adjust Preferences</button></a>");
+        $(".newKinectionsDiv").html("<p>Keep Kinnecting!</p><a href='/judgement'><button>Adjust Preferences</button></a>");
       }
       else{
         $(".newKinectionsDiv").empty();
@@ -164,6 +164,7 @@ $(document).ready(function(){
           cardImgSize();
         }
       }
+      slickInit();
     });
 
 	$('.newKinectionsBench').on("click",".userCard",function () {
@@ -206,7 +207,6 @@ $(document).ready(function(){
 		$("#viewChat").hide();
 	})
 
-	slickInit();
 	cardImgSize();
   setInterval(photoSlideshow, 9000);
 });

@@ -27,8 +27,7 @@ function fillInForm(preferences) {
 
     if(preferences.img !== null) {
         $(".userCardImg").attr("style", "background-image: url('"+preferences.img+"')");
-        $(".userCardImg").empty();
-        $(".userCardImg").append("<img width = '100%' height = 'auto' src = '" + preferences.img + "'>");
+        $('.userCardImg').height($('.userCardImg').width());
     }
 
         for(var i = 0; i < fieldsToFill.length; i++) {
