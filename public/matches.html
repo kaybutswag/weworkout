@@ -15,6 +15,7 @@
 
         <!-- our css -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
+       <!--  <link rel="stylesheet" type="text/css" href="css/chat.css"> -->
         <link rel="stylesheet" type="text/css" href="css/mobile.css">
 
 
@@ -185,21 +186,16 @@
             <div class="box2">
                 <div class="chat">
                     <div class="history">
-
-                        <div class="friendMsg">
-                            <p>Sup, idiot?</p>
-                        </div>
-
-                        <div class="userMsg">
-                            <p>That's not very nice.</p>
-                        </div>
-
+                        <ul id="message_block"></ul>
                     </div>
-                    <div class="messageDiv">
-                        <input type="text" id="message"><button id="messageSend">Send</button>
-                    </div>
+                    <form action="">
+                        <input type="text" id="m" autocomplete="off"><button id="messageSend">Send</button>
+                    </form>
 
                 </div>
+
+
+
 
                 <div class="bio" style="display: none">
                     <h3>Basics</h3>
@@ -229,8 +225,10 @@
     <!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
     <!-- <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script type="text/javascript" src="js/slick/slick.js"></script>
     <script type="text/javascript" src="js/matches.js"></script>
+    <script type="text/javascript" src="js/chat.js"></script>
 
     </body>
 </html>

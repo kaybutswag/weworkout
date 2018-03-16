@@ -155,8 +155,8 @@
 	.userMsg {
 		background-color: #a9cbfd;
 		max-width: 70%;
-		clear: left;
 		float: right;
+		clear: both;
 		padding: 5px;
 		margin: 5px;
 		border-radius: 5px;
@@ -165,8 +165,8 @@
 	.friendMsg {
 		background-color: #aaef9f;
 		max-width: 70%;
-		clear: right;
 		float: left;
+		clear: both;
 		padding: 5px;
 		margin: 5px;
 		border-radius: 5px;

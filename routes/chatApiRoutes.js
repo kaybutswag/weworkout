@@ -1,15 +1,25 @@
 var db = require("../models");
+var passport = require("../config/passport.js");
 
 module.exports = function (app) {
 
-  app.post("/api/chat", function (req, res) {
+  app.post("/api/newChat", function (req, res) {
+  	console.log("hit here");
+  	console.log(req.body);
+  	var intid=parseInt(req.body.FriendId);
+  	console.log(req.session.passport.user.id);
+  	console.log(intid);
+  	
     db.Message.create({
-      // user1: req.body.id
-      // user2: req.body.id2,
-      chat_messages: req.body.msg
-      // chat_time: req.body.time
+      UserId: req.session.passport.user.id,
+      FriendId: intid,
+      chat_messages: req.body.chat_messages
+    }).then(function(error){
+    	console.log("one more time");
+      res.end(); 
+    }).catch(function(error){
+    	res.json(error);
     });
-
+    console.log("hit here too");
   });
-
 };
