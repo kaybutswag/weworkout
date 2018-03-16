@@ -184,7 +184,7 @@
 		display: flex;
 	}
 
-	#message {
+	#m {
 		margin-top: 3px;
 		width: 100%;
 		border: 1px #ddd solid;
@@ -198,7 +198,7 @@
 		flex-flow: row wrap;
 	}
 
-	.profileSecTitle {
+	.secTitle {
 		margin-top: 10px;
 		margin-bottom: 5px;
 	}
@@ -336,7 +336,7 @@
 	}
 
 	.signUp, input[name="profileSubmit"], #viewChat, #viewBio {
-		background-color: #8492ff;
+		background-color: #6a7afb;
 	}
 
 	.signIn, #kinect, #submitActivities, #messageSend, #imgUploadBtn {
