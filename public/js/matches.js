@@ -1,5 +1,3 @@
-// you need slick
-// http://kenwheeler.github.io/slick/
 var idforcontent;
 var counter = 0;
 
@@ -107,6 +105,7 @@ function showThings(number){
             thisCardImg2.attr("style","background-image: url('"+data2[0].img+"')");
           }
           $(".userCard2").append(thisCardImg2);
+          $(".userCard2").attr("data-value",number);
           $(".userCard2").append("<h4 id='name2'>"+data2[0].name+"</h4>");
           cardImgSize();
 
@@ -211,11 +210,10 @@ $(document).ready(function(){
 	})
 
 	// cardImgSize();
-  setInterval(photoSlideshow, 9000);
+  setInterval(photoSlideshow, 12000);
 });
 
 $(window).resize(function() {
-	// little buggy
 	slickInit();
 	cardImgSize();
 });

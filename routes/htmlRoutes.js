@@ -12,10 +12,6 @@ module.exports = function(app) {
       res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
-    app.get("/chat", function(req, res) {
-      res.sendFile(path.join(__dirname, "../public/testChat.html"));
-  });
-
 app.get("/judgement", isAuthenticated, function(req, res){
   db.Form.findOne({
       where: {
