@@ -132,6 +132,7 @@ function showCard(){
 		var theirAge = moment().diff(moment(theirDOB), "years")
 		$("#name").text(myBigArray[currentProfile].name);
 		$("#name").attr("user-id", myBigArray[currentProfile].UserId);
+		console.log(myBigArray[currentProfile].UserId);
 		$(".userCardImg").empty();
 		$(".userCardImg").attr("style","background-image: url('"+myBigArray[currentProfile].img+"')");
 		$('.userCardImg').height($('.userCardImg').width());
@@ -169,6 +170,7 @@ function showCard(){
 
 function addLike(){
 	var likeId=$("#name").attr("user-id");
+	console.log(likeId);
 
 	var currentUser={
 		likeId:likeId
