@@ -288,6 +288,13 @@ module.exports = function(app) {
     var myId = req.session.passport.user.id;
     var theirId = req.body.likeId;
     var myEmail = req.user.email;
+    var isMatch = false;
+
+    var myName;
+    var theirName;
+    var myPhoto;
+    var theirPhoto;
+    var response = {};
 
     db.Match.findOne({
       where: {
@@ -321,7 +328,8 @@ module.exports = function(app) {
         theirLikes=[];
       }
 
-      if(theirLikes.indexOf(myId.toString())!==-1){           
+      if(theirLikes.indexOf(myId.toString())!==-1){
+        isMatch = true;           
         db.Match.findOne({
           where: {
             email: myEmail
@@ -332,6 +340,7 @@ module.exports = function(app) {
             existingMatches = req.body.likeId;
           else
             existingMatches += "," + theirId;
+          
           db.Match.update({
             myMatches: existingMatches
           }, {
@@ -351,18 +360,50 @@ module.exports = function(app) {
             existingMatches = myId;
           else
             existingMatches += "," + myId;
+          
           db.Match.update({
             myMatches: existingMatches
           }, {
             where: {
               UserId: theirId
             }
-          });
+          });          
         });
       }
-    
-    res.end();
 
+      if(isMatch === true) {
+        response.result = "match";
+        var promise1 = db.Form.findOne({
+          where: {
+            email: myEmail
+          }
+        }).then(function(myInfo){
+          myName = myInfo.dataValues.name;
+          myPhoto = myInfo.dataValues.img;
+          console.log(myPhoto);
+          response.myName = myName; 
+          response.myPhoto = myPhoto;
+        });
+
+        var promise2 = db.Form.findOne({
+          where: {
+            UserId: theirId
+          }
+        }).then(function(theirInfo){
+          theirName = theirInfo.dataValues.name;
+          theirPhoto = theirInfo.dataValues.img;
+          response.theirName = theirName;
+          response.theirPhoto = theirPhoto;
+        });
+
+        Promise.all([promise1, promise2]).then(function() {
+          res.json(response);
+        });
+      }
+      else {
+        response.result = "no match";
+        res.json(response);
+      }
     });
   });
 
@@ -379,8 +420,8 @@ module.exports = function(app) {
         res.send("nada");
       }
       else{
-        matches.split(",");
-        pullForms(res,matches);
+        var arrayOfIds = matches.split(",");
+        pullForms(res,arrayOfIds);
       }
   });
 

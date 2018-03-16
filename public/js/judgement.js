@@ -1,6 +1,6 @@
-var myBigArray=[];
 var currentProfile=0;
 var counter=0;
+var myBigArray = [];
 
 function shuffleArray(arr){
 	for(var i = 1; i < arr.length; i++) {
@@ -127,9 +127,9 @@ function showCard(){
 		$(".exhausted-options").removeClass("display-none");
 	}
 	else {
+		$("form").first().removeClass("display-none");
 		var theirDOB = moment(myBigArray[currentProfile].dob).utc().format('YYYY-MM-DD');
 		var theirAge = moment().diff(moment(theirDOB), "years")
-
 		$("#name").text(myBigArray[currentProfile].name);
 		$("#name").attr("user-id", myBigArray[currentProfile].UserId);
 		$(".userCardImg").empty();
@@ -142,11 +142,11 @@ function showCard(){
 
 		var sports2="";
 
-	    var fieldsToFill = ["weightlift", "run", "walk", "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl", 
+	    var fieldsToFill = ["weightlift", "run", "walk", "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl",
 	    "rowing", "tennis", "baseball", "basketball", "football", "soccer", "rugby", "volleyball", "golf", "hockey", "ice", "skateboard"];
 
 	    var actualActivity = ["Weightlifting", "Running", "Walking", "Swimming", "Surfing", "Biking", "Yoga", "Pilates", "Cardio", "Dancing",
-	    "Rock Climbing", "Gymnastics", "Bowling", "Rowing", "Tennis", "Baseball", "Basketball", "Football", "Soccer", "Rugby", "Volleyball", 
+	    "Rock Climbing", "Gymnastics", "Bowling", "Rowing", "Tennis", "Baseball", "Basketball", "Football", "Soccer", "Rugby", "Volleyball",
 	    "Golfing", "Hockey", "Ice Skating", "Skateboarding"];
 
 
@@ -164,8 +164,7 @@ function showCard(){
 	    $("#activities").text(sports2);
 
 	    currentProfile++;
-	}        
-
+	}
 }
 
 function addLike(){
@@ -179,11 +178,25 @@ function addLike(){
 		type: "PUT",
 		url: "/api/change-likes",
 		data: currentUser
-	}).then(function(likeData){
-		console.log("like was stored");
+	}).then(function(matchNotification){
+		if(matchNotification.result === "match")
+			notifyAboutMatch(matchNotification.myName, matchNotification.theirName, matchNotification.myPhoto, matchNotification.theirPhoto);
 	});
 }
 
+//will write to front-end once match modal is designed
+function notifyAboutMatch(myName, theirName, myPhoto, theirPhoto) {
+	console.log(myName);
+	console.log(theirName);
+	if(myPhoto !== null)
+		console.log(myPhoto.charAt(1));
+	else
+		console.log("null");
+	if(theirPhoto !== null)
+		console.log(theirPhoto.charAt(1));
+	else
+		console.log("null");
+}
 
 $(document).ready(function(){
 	var userAge = -2;
@@ -202,13 +215,31 @@ $(document).ready(function(){
 
 	$("#kinect").on("click",function(event){
 		event.preventDefault();
-		addLike();
-		showCard();
+		$("form").first().animate({
+			left: "1200px"
+		}, function(){
+			$("form").first().addClass("display-none");
+			$("form").first().animate({
+				left: "0px"
+			}, function() {
+				addLike();
+				showCard();
+			});
+		});
 	});
 
 	$("#reject").on("click",function(event){
 		event.preventDefault();
-		showCard();
+		$("form").first().animate({
+			left: "-1200px"
+		}, function(){
+			$("form").first().addClass("display-none");
+			$("form").first().animate({
+				left: "0px"
+			}, function() {
+				showCard();
+			});
+		});
 	});
 
 	$("#submitActivities").on("click", function(){
@@ -220,9 +251,9 @@ $(document).ready(function(){
 		}
 	});
 
-  $('.userCardImg').height($('.userCardImg').width());
+	$('.userCardImg').height($('.userCardImg').width());
 
-  setInterval(photoSlideshow, 9000);
+	setInterval(photoSlideshow, 9000);
 });
 
 $(window).resize(function() {

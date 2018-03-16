@@ -5,10 +5,10 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
     },
     myMatches:{
-    	type: DataTypes.STRING
+    	type: DataTypes.TEXT("long")
     },
     myLikes:{
-      type: DataTypes.STRING
+      type: DataTypes.TEXT("long")
     }
   });
   Match.associate=function(models){

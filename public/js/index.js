@@ -42,13 +42,13 @@ function createNewUser(email, password, latitude, longitude) {
 		if(result === "success")
 			logInUser(email, password, "newUser");
 		else {
-			if("errors" in error) {
-				if(error.errors[0].path === "email")
+			if("errors" in result) {
+				if(result.errors[0].path === "email")
 					$("form p").text("The email you entered is not valid.");
-				else if(error.errors[0].path === "password")
+				else if(result.errors[0].path === "password")
 					$("form p").text("The password you entered is not valid.");
 			}
-			else if ("original" in error && "code" in error.original && error.original.code === "ER_DUP_ENTRY")
+			else if ("original" in result && "code" in result.original && result.original.code === "ER_DUP_ENTRY")
 				$("form p").text("That email already exists");
 			else
 				$("form p").text("Please allow us to access your location.");
@@ -110,6 +110,6 @@ $(document).ready(function(){
 		logInUser(email, password, "oldUser");
 
 	});
-
+	
 	setInterval(photoSlideshow, 9000);
 });
