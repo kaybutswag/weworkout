@@ -376,15 +376,12 @@ module.exports = function(app) {
       }
     }).then(function(matchdata){
       var matches=matchdata.dataValues.myMatches;
-      console.log(matches);
       if(matches===null){
         res.send("nada");
-        console.log("nada");
       }
       else{
         matches.split(",");
         pullForms(res,matches);
-        console.log("some data");
       }
   });
 

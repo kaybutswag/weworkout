@@ -4,19 +4,6 @@ html {
 
 body {
   background: black;
-	/* background-image: url('../img/crunch.jpg'); */
-  /* background-color: red; */
-  /* url("../img/crunch.jpg"),
-  url("../img/bikes.jpg"),
-  url("../img/tennis.jpg"),
-  url("../img/hiking.jpeg"),
-  url("../img/highFive.jpg"),
-  url("../img/weights.jpeg"),
-  url("../img/yoga.jpeg"),
-  url("../img/weightBar.jpeg"),
-  url("../img/Golf.jpeg"),
-  url("../img/streching.jpeg"),
-  url("../img/jumpRope.jpeg"); */
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -37,7 +24,7 @@ body {
 	/*align-items: space-around;*/
 	align-items: center;
 	flex-wrap: wrap;
-} 
+}
 
 /*need to look at this.*/
 textarea {
@@ -197,9 +184,22 @@ break {
 .content, .newKinectionsBench {
 	background-color: rgba(255,255,255,.5);
 	/*not reactive*/
+<<<<<<< HEAD
 	/*margin: 100px 100px 20px 100px;*/
+=======
+	margin: 150px 150px 20px 150px;
+>>>>>>> f4fc647a6e8ed12a562685647bb053e8142ccd90
 	max-width: 1100px;
-	width: 70%
+	width: 70%;
+  position:relative;
+}
+
+.rejected{
+  background-color: red;
+}
+
+.kinnected{
+  background-color: green;
 }
 
 .newKinectionsBench {
@@ -209,8 +209,12 @@ break {
 
 .kinectionsBench {
 	background-color: rgba(255,255,255,.5);
+<<<<<<< HEAD
 	/*margin: 20px 100px 10px 100px;*/
 	margin: 20px;
+=======
+	margin: 20px 100px 10px 100px; */
+>>>>>>> f4fc647a6e8ed12a562685647bb053e8142ccd90
 	max-width: 1100px;
 	width: 70%;
 	/*max-height: 300px;*/
@@ -408,14 +412,14 @@ input[name="profileSubmit"], #viewChat, #viewBio {
 	font-size: 150px;
 }
 
-.userCard, .box2 {
+.userCard, .box2, .userCard2 {
 	background-color: rgba(255, 255, 255, 1);
 	margin: 100px;
 	padding: 20px;
 	margin: 20px;
 }
 
-.userCard {
+.userCard, .userCard2  {
 	flex: 1;
 	width: 200px;
 }
@@ -548,3 +552,12 @@ input[name="profileSubmit"], #viewChat, #viewBio {
     100% { transform: rotate(360deg); }
 }*/
 /* loading indicator end */
+.rejectKinnectButton {
+   cursor: pointer;
+   border: none;
+   color: white;
+   padding: 10px;
+   margin: 10px;
+   font-size: .9em;
+  text-decoration: none;
+}

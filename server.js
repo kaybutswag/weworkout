@@ -1,10 +1,16 @@
 var express = require("express");
+var app = express();
+var path = require("path");
 var bodyParser = require("body-parser");
+var methodOverride = require("method-override");
+var server = require("http").Server(app);
+
 var session = require("express-session");
+var io = require("socket.io")(server);
 
 var passport = require("./config/passport");
 
-var app = express();
+
 var PORT = process.env.PORT || 8000;
 
 var db = require("./models");
@@ -22,8 +28,17 @@ require("./routes/apiRoutes.js")(app);
 require("./routes/htmlRoutes.js")(app);
 
 //changed force to false for testing filter
+
 db.sequelize.sync({ force: false }).then(function() {
-  app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
+  server.listen(PORT, function() {
+    console.info(
+      "==> Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
   });
 });
+
+// io.on('connection', function(socket){
+//   socket.on('chat message', function(msg){
+//     io.emit('chat message', msg);
+//     console.log("test connection2");
+//   });
+// });
