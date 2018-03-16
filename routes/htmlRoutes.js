@@ -12,13 +12,12 @@ module.exports = function(app) {
       res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
-  app.get("/socket", function(req, res) {
-      res.sendFile(path.join(__dirname, "../public/socket.html"));
+    app.get("/chat", function(req, res) {
+      res.sendFile(path.join(__dirname, "../public/testChat.html"));
   });
 
-
 app.get("/judgement", isAuthenticated, function(req, res){
-    db.Form.findOne({
+  db.Form.findOne({
       where: {
         email: req.user.email
       }
@@ -29,6 +28,8 @@ app.get("/judgement", isAuthenticated, function(req, res){
         res.redirect("/profile");
     });
   });
+
+
 
   app.get("/matches", isAuthenticated, function(req, res){
     db.Form.findOne({
