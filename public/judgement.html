@@ -7,9 +7,6 @@
 		<!-- reset -->
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
-		<!-- font -->
-		<!-- <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,800" rel="stylesheet"> -->
-
 		<link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
 
 		<!-- font awesome -->
@@ -17,38 +14,39 @@
 
 		<!-- our css -->
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/mobile.css">
 
 		<!-- jquery -->
 		<script src="https://code.jquery.com/jquery.js"></script>
 	</head>
 	<body>
 		<div id="changingPic" class="shadow">
-			<img class='opaque'src="/img/crunch.jpg" />
-				<img  src="/img/bikes.jpg"/>
-				<img  src="/img/deadlift.jpg"/>
-				<img  src="/img/tennis.jpg"/>
-				<img  src="/img/hiking.jpeg"/>
-				<img  src="/img/highFive.jpg"/>
-				<img  src="/img/waterBottles.jpg"/>
-				<img  src="/img/weights.jpeg"/>
-				<img  src="/img/yoga.jpeg"/>
-				<img  src="/img/weightBar.jpeg"/>
-				<img  src="/img/Golf.jpeg"/>
-				<img  src="/img/streching.jpeg"/>
-				<img  src="/img/jumpRope.jpeg"/>
+			<img src="/img/crunch.jpg" />
+			<img src="/img/bikes.jpg"/>
+			<img src="/img/deadlift.jpg"/>
+			<img src="/img/tennis.jpg"/>
+			<img src="/img/hiking.jpeg"/>
+			<img src="/img/highFive.jpg"/>
+			<img src="/img/waterBottles.jpg"/>
+			<img src="/img/weights.jpeg"/>
+			<img src="/img/yoga.jpeg"/>
+			<img src="/img/weightBar.jpeg"/>
+			<img src="/img/Golf.jpeg"/>
+			<img src="/img/streching.jpeg"/>
+			<img src="/img/jumpRope.jpeg"/>
 		</div>
 
 		<header>
 			<div class="headerDiv">
-				<a href="/profile"><button class="profileLink">
-					<i class="fas fa-user"></i>
-				</button></a>
-				<a href="/judgement"><button class="judgementLink" >
-					<img class="headLogo" src="img/logoBlack.png">
-				</button></a>
-				<a href="/matches"><button class="matchesLink" >
-					<i class="fas fa-comment-alt"></i>
-				</button></a>
+                <a href="/profile"><button class="profileLink" >
+                    <img class="headLogo" src="img/profileLogoNew.png">
+                </button></a>
+                <a href="/judgement"><button class="judgementLink" >
+                    <img class="headLogoActive" src="img/logoBlack.png">
+                </button></a>
+                <a href="/matches"><button class="matchesLink" >
+                    <img class="headLogo" src="img/messageLogoNew.png">
+                </button></a>
 			</div>
 		</header>
 
@@ -60,7 +58,6 @@
 
 		<div id="openModal" class="modalDialog">
 		    <div>	<a href="#close" title="Close" class="close"><i class="fas fa-times"></i></a>
-
 
 		        <h2>Search</h2>
 
@@ -175,16 +172,17 @@
 							<input type="checkbox" id="skateboard" data-text="Skateboarding"/>Skateboarding</label>
 		        		</div>
 				    </div>
-			        <div class="subDiv">
+			        <div class="actSubDiv">
 			        	<a href="#close" id="submitActivities">Submit</a>
 			        </div>
-
 
 		    </div>
 
 		</div>
 
-		<form id="matchBox" class="content">
+		<div id="loader_judgement"><i class="fas fa-spinner fa-spin"></i></div>
+
+		<form class="content display-none">
 
 			<p id="error-message"></p>
 
@@ -231,12 +229,12 @@
 
 				<!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
 				<!-- may want to change this to class="userCardName" -->
-				<h2 id="name" user-id = ""></h2>
+				<div class="nameDiv">
+					<h2 id = "name" user-id = ""></h2>
+				</div>
 			</div>
 
-
-
-			<div id="box2" class="box2">
+			<div class="box2">
 
 				<h3>Basics</h3>
 
@@ -250,14 +248,11 @@
 				<p id="bio"></p>
 
 			</div>
+
 			<break></break>
 			<div class="judgement">
-				<button  id="reject">
-					<a class="rejectKinnectButton" href="#close">Reject </a>
-				 </button> &emsp; &emsp;
-				<button  id="kinect">
-					<a class="rejectKinnectButton" href="#close">Kinect </a>
-				</button>
+				<button  id="reject">Reject</button>
+				<button  id="kinect">Kinect</button>
 			</div>
 		</form>
 

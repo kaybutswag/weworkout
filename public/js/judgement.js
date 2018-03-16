@@ -1,34 +1,6 @@
-var myBigArray=[
-	{
- "name" : "Peter Jackson",
- "UserId" : "3",
- "img" : "https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_80%2Cw_300/MTE4MDAzNDEwMTU3Mjc0NjM4/peter-jackson-37009-1-402.jpg",
- "gender" : "Male",
-"primaryLocation" : "Austin, Tx",
-"dob" : "10/24/1974",
-"bio" : "I love not working and making movies instead."
-},
-{
- "name" : "Bubbles",
- "UserId" : "4",
- "img" : "https://i.ytimg.com/vi/CMv0V9LqLRo/hqdefault.jpg",
- "gender" : "Other",
-"primaryLocation" : "Southern Trailer",
-"dob" : "09/14/1998",
-"bio" : "I love cats"
-},
-{
- "name" : "Bruce Banner",
- "UserId" : "5",
- "img" : "https://images-na.ssl-images-amazon.com/images/G/01/digital/video/hero/Movies/2003/B00285K1KE_Hulk_UXNB1._V142676592_RI_SX940_.jpg",
- "gender" : "Male",
-"primaryLocation" : "Gold's Gym",
-"dob" : "07/04/1983",
-"bio" : "Lifting is my game",
-"activity" : []
-}
-];
 var currentProfile=0;
+var counter=0;
+var myBigArray = [];
 
 function shuffleArray(arr){
 	for(var i = 1; i < arr.length; i++) {
@@ -40,6 +12,15 @@ function shuffleArray(arr){
 		}
 	}
 	return arr;
+}
+
+function photoSlideshow() {
+  if(counter > 0)
+    $("#changingPic img").eq(counter - 1).removeClass("opaque");
+  else
+    $("#changingPic img").last().removeClass("opaque");
+  $("#changingPic img").eq(counter).addClass("opaque");
+  counter = (counter + 1) % $("#changingPic img").length;
 }
 
 function updateLocation(userAge) {
@@ -131,6 +112,7 @@ function sendPreferences(userAge) {
 		matches = shuffleArray(matches);
 		myBigArray = matches;
 		currentProfile = 0;
+		$("#loader_judgement").addClass("display-none");
 		$("form").first().removeClass("display-none");
 		$(".exhausted-options").addClass("display-none");
 		showCard();
@@ -138,8 +120,16 @@ function sendPreferences(userAge) {
 }
 
 function showCard(){
-	if(myBigArray[currentProfile]) {
-
+	console.log("showed card");
+	if(currentProfile + 1 > myBigArray.length) {
+		console.log("options exhausted");
+		$("form").first().addClass("display-none");
+		$(".exhausted-options").removeClass("display-none");
+	}
+	else {
+		$("form").first().removeClass("display-none");
+		var theirDOB = moment(myBigArray[currentProfile].dob).utc().format('YYYY-MM-DD');
+		var theirAge = moment().diff(moment(theirDOB), "years")
 		$("#name").text(myBigArray[currentProfile].name);
 		$("#name").attr("user-id", myBigArray[currentProfile].UserId);
 		$(".userCardImg").empty();
@@ -147,7 +137,7 @@ function showCard(){
 		$('.userCardImg').height($('.userCardImg').width());
 		$('#gender').text(myBigArray[currentProfile].gender);
 		$('#location').text(myBigArray[currentProfile].primaryLocation);
-		$('#age').text(moment().diff(moment(myBigArray[currentProfile].dob),"years"));
+		$('#age').text(theirAge);
 		$('#bio').text(myBigArray[currentProfile].bio);
 
 		var sports2="";
@@ -174,27 +164,7 @@ function showCard(){
 	    $("#activities").text(sports2);
 
 	    currentProfile++;
-
-		//No more matches, myBigArray[currentProfile] is empty
-	} else{
-		$("#noMatches").show();
-		$("#name").hide();
-		$(".userCardImg").hide();
-		$('#gender').hide();
-		$('#location').hide();
-		$('#age').hide();
-		$('#bio').hide();
-		$('#noMatches').html("No more matches. <br> <a href='#openModal'>Try a new search</a>");
-		$("#noMatches").css("font-weight", "900");
-		$("#noMatches").css("font-size", "35px");
-		$("#noMatches").css("text-align", "center");
-		$('#box2').hide();
-		$('#userCardImg').hide();
-		$('#reject').hide();
-		$('#kinect').hide();
 	}
-
-
 }
 
 function addLike(){
@@ -208,11 +178,25 @@ function addLike(){
 		type: "PUT",
 		url: "/api/change-likes",
 		data: currentUser
-	}).then(function(likeData){
-		console.log("like was stored");
+	}).then(function(matchNotification){
+		if(matchNotification.result === "match")
+			notifyAboutMatch(matchNotification.myName, matchNotification.theirName, matchNotification.myPhoto, matchNotification.theirPhoto);
 	});
 }
 
+//will write to front-end once match modal is designed
+function notifyAboutMatch(myName, theirName, myPhoto, theirPhoto) {
+	console.log(myName);
+	console.log(theirName);
+	if(myPhoto !== null)
+		console.log(myPhoto.charAt(1));
+	else
+		console.log("null");
+	if(theirPhoto !== null)
+		console.log(theirPhoto.charAt(1));
+	else
+		console.log("null");
+}
 
 $(document).ready(function(){
 	var userAge = -2;
@@ -221,7 +205,8 @@ $(document).ready(function(){
 		type: "POST",
 		url: "/api/get-age"
 	}).then(function(dob){
-		userAge = moment().diff(moment(dob), "years");
+		userDOB = moment(dob).utc().format("YYYY-MM-DD");
+		userAge = moment().diff(moment(userDOB), "years");
 		$("#minAge").val(userAge - 5);
 		$("#maxAge").val(userAge + 5);
 		updateLocation(userAge);
@@ -229,30 +214,51 @@ $(document).ready(function(){
 	});
 
 	$("#kinect").on("click",function(event){
-		//var result will determine if we have a match or not
-		//if result is true, we have a match so we do not move on the next userCard until user closes dialog
-		var result = checkIfMatches();
-		//if result is false, we do not have a match and we move to the next userCard
-		if(result !== true){
-				kinnected();
-		}
-
+		event.preventDefault();
+		$("form").first().animate({
+			left: "1200px"
+		}, function(){
+			$("form").first().addClass("display-none");
+			$("form").first().animate({
+				left: "0px"
+			}, function() {
+				//var result will determine if we have a match or not
+				//if result is true, we have a match so we do not move on the next userCard until user closes dialog
+				var result = checkIfMatches();
+				//if result is false, we do not have a match and we move to the next userCard
+				if(result !== true){
+						kinnected();
+				}
+			});
+		});
 	});
 
 	$("#reject").on("click",function(event){
-			// some code
-			rejected();
+		event.preventDefault();
+		$("form").first().animate({
+			left: "-1200px"
+		}, function(){
+			$("form").first().addClass("display-none");
+			$("form").first().animate({
+				left: "0px"
+			}, function() {
+				showCard();
+			});
+		});
 	});
 
-  $('.userCardImg').height($('.userCardImg').width());
-
-	$("#submitActivities").on("click",function(event){
-		//add logic to perforn new search
-		//for now set currenProfile back to 0 to repeat hard coded profiles
-		currentProfile = 0;
-		hideNoMatches();
-		showCard();
+	$("#submitActivities").on("click", function(){
+		if(userAge > 0) {
+			$("#loader_judgement").removeClass("display-none");
+			$("form").first().addClass("display-none");
+			$(".exhausted-options").addClass("display-none");
+			sendPreferences(userAge);
+		}
 	});
+
+	$('.userCardImg').height($('.userCardImg').width());
+
+	setInterval(photoSlideshow, 9000);
 });
 
 $(window).resize(function() {
