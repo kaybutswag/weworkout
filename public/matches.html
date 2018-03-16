@@ -15,6 +15,9 @@
 
         <!-- our css -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
+       <!--  <link rel="stylesheet" type="text/css" href="css/chat.css"> -->
+        <link rel="stylesheet" type="text/css" href="css/mobile.css">
+
 
         <!-- slick css -->
         <link rel="stylesheet" type="text/css" href="js/slick/slick.css"/>
@@ -42,14 +45,14 @@
 
         <header>
             <div class="headerDiv">
-                <a href="/profile"><button class="profileLink">
-                    <i class="fas fa-user"></i>
+                <a href="/profile"><button class="profileLink" >
+                    <img class="headLogo" src="img/profileLogoNew.png">
                 </button></a>
                 <a href="/judgement"><button class="judgementLink" >
                     <img class="headLogo" src="img/logoBlack.png">
                 </button></a>
                 <a href="/matches"><button class="matchesLink" >
-                    <i class="fas fa-comment-alt"></i>
+                    <img class="headLogoActive" src="img/messageLogoNew.png">
                 </button></a>
             </div>
         </header>
@@ -59,17 +62,19 @@
         </div>
 
         <div class="newKinectionsBench">
-        <h3>New</h3>
-
-
+        <div class="benchTitle">
+            <h3>New</h3>
+        </div>
+            
         <div class="newKinectionsDiv">
-
             <div class="userCard">
                 <!-- path changes with handlebars -->
                 <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
 
                 <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
-                <h2 id = "name" user-id = "">James</h2>
+                <div class="nameDiv">
+                    <h4 id = "name" user-id = "">James</h4>
+                </div>
             </div>
 
             <div class="userCard">
@@ -77,7 +82,9 @@
                 <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
 
                 <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
-                <h2 id = "name" user-id = "">James</h2>
+                <div class="nameDiv">
+                    <h4 id = "name" user-id = "">James</h4>
+                </div>
             </div>
 
             <div class="userCard">
@@ -85,7 +92,9 @@
                 <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
 
                 <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
-                <h2 id = "name" user-id = "">James</h2>
+                <div class="nameDiv">
+                    <h4 id = "name" user-id = "">James</h4>
+                </div>
             </div>
 
             <div class="userCard">
@@ -93,7 +102,9 @@
                 <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
 
                 <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
-                <h2 id = "name" user-id = "">James</h2>
+                <div class="nameDiv">
+                    <h4 id = "name" user-id = "">James</h4>
+                </div>
             </div>
 
             <div class="userCard">
@@ -101,7 +112,19 @@
                 <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
 
                 <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
-                <h2 id = "name" user-id = "">James</h2>
+                <div class="nameDiv">
+                    <h4 id = "name" user-id = "">James</h4>
+                </div>
+            </div>
+
+            <div class="userCard">
+                <!-- path changes with handlebars -->
+                <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
+
+                <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
+                <div class="nameDiv">
+                    <h4 id = "name" user-id = "">James</h4>
+                </div>
             </div>
 
         </div>
@@ -109,7 +132,9 @@
 
         <div class="kinectionsBench">
 
-        <h3>Kinections</h3>
+        <div class="benchTitle">
+            <h3>Kinections</h3>
+        </div>
 
         <div class="kinectionsDiv">
 
@@ -120,14 +145,9 @@
                 <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
 
                 <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
-                <h2 id = "name" user-id = "">James</h2>
-            </div>
-
-            <div class="userCard">
-                <!-- path changes with handlebars -->
-                <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
-
-                <h2 id = "name" user-id = "">James</h2>
+                <div class="nameDiv">
+                    <h4 id = "name" user-id = "">James</h4>
+                </div>
             </div>
 
             <div class="userCard">
@@ -135,7 +155,20 @@
                 <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
 
                 <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
-                <h2 id = "name" user-id = "">James</h2>
+                <div class="nameDiv">
+                    <h4 id = "name" user-id = "">James</h4>
+                </div>
+
+            </div>
+
+            <div class="userCard">
+                <!-- path changes with handlebars -->
+                <div class="userCardImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
+
+                <!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
+                <div class="nameDiv">
+                    <h4 id = "name" user-id = "">James</h4>
+                </div>
             </div>
         </div>
         </div>
@@ -153,21 +186,16 @@
             <div class="box2">
                 <div class="chat">
                     <div class="history">
-
-                        <div class="friendMsg">
-                            <p>Sup, idiot?</p>
-                        </div>
-
-                        <div class="userMsg">
-                            <p>That's not very nice.</p>
-                        </div>
-
+                        <ul id="message_block"></ul>
                     </div>
-                    <div class="messageDiv">
-                        <input type="text" id="message"><button id="messageSend">Send</button>
-                    </div>
+                    <form action="">
+                        <input type="text" id="m" autocomplete="off"><button id="messageSend">Send</button>
+                    </form>
 
                 </div>
+
+
+
 
                 <div class="bio" style="display: none">
                     <h3>Basics</h3>
@@ -185,9 +213,11 @@
 
             </div>
             <break></break>
-            <div class="judgement">
+            <div class="profSubDiv">
                 <button id="viewBio">View Profile</button>
                 <button id="viewChat" style="display: none">Chat</button>
+            </div>
+            <div class="judgement">
             </div>
         </div>
 
@@ -195,7 +225,9 @@
     <!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
     <!-- <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-    <script type="text/javascript" src="js/matches.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
     <script type="text/javascript" src="js/slick/slick.js"></script>
+    <script type="text/javascript" src="js/matches.js"></script>
+    <script type="text/javascript" src="js/chat.js"></script>
     </body>
 </html>

@@ -1,5 +1,5 @@
 var db = require("../models");
-var passport = require("../config/passport.js")
+var passport = require("../config/passport.js");
 
 //new user api
 module.exports = function(app) {

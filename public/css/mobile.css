@@ -1,0 +1,571 @@
+@media screen and (max-width: 1003px) {
+
+	html {
+		height: 100%;
+	}
+
+	body {
+	  background: black;
+	  /*background-size: fill;*/
+	  background-repeat: no-repeat;
+	}
+
+	 body {
+		font-family: 'Lato', sans-serif;
+		/*background-image: url('../img/signIn.jpg');*/
+
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+		color: #212121;
+		font-size: 25px;
+		box-sizing: border-box;
+		min-height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: space-around;
+		align-items: center;
+		flex-wrap: wrap;
+		background-attachment: fixed;
+	}
+
+	/*need to look at this.*/
+	textarea {
+		width: 100%;
+		height: 23%;
+		resize: none;
+		font-family: 'Lato', sans-serif;
+		font-size: 20px;
+		min-height: 100px;
+	}
+
+	input[name="email"], input[type="password"], textarea, input[type="number"], select[name="gender"], input[name="location"], select, #dob {
+		border: 1px #ddd solid;
+		padding: 5px;
+		margin: 3px;
+		font-family: 'Lato', sans-serif;
+	}
+
+	input[name="email"], input[type="password"], {
+		margin: 10px;
+		width: 70%;
+	}
+
+	#age {
+		width: 30px;
+	}
+
+	input[type="number"] {
+		width: 50px;
+	}
+
+	header, footer {
+		position: fixed;
+		width: 100%;
+		background-color: white;
+		height: 70px;
+		z-index: 500;
+	}
+
+	header {
+		top: 0;
+	}
+
+	.headerDiv svg {
+		font-size: 40px;
+	}
+
+	footer {
+		bottom: 0;
+		z-index: -1;
+	}
+
+	h3 {
+		font-weight: 900;
+	}
+
+	h4 {
+		font-size: 1.3em;
+		font-weight: 600;
+	}
+
+	.nameDiv {
+		word-wrap: break-word;
+		width: 100%;
+	}
+
+	.profileSecTitle {
+		margin-top: 10px;
+	}
+
+	h2{
+		font-size: 1.9em;
+		font-weight: 600;
+	}
+
+	input[placeholder="First Name"] {
+		font-size: 1.5em;
+		max-width: 100%;
+		border: 1px #ddd solid;
+	}
+
+	break {
+		display: inline-block;
+		flex-basis: 100%;
+		width: 0px;
+		height: 0px;
+		overflow: hidden;
+	}
+
+	.activityCol {
+		flex: 1;
+	}
+
+	.actSubDiv {
+		display: flex;
+		justify-content: flex-end;
+		width: 100%;
+		text-align: right
+		padding: 15px;
+	}
+
+	.profSubDiv {
+		width: 100%;
+		display: flex;
+		justify-content: flex-end;
+		margin: 0;
+	}
+
+	.activityFlex {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	/**************************chat styles*********************/
+
+	.history {
+		width: 100%;
+		border: 1px #ddd solid;
+	    overflow:scroll;
+	    overflow-x:hidden;
+	}
+
+	.userMsg {
+		background-color: #a9cbfd;
+		max-width: 70%;
+		float: right;
+		clear: both;
+		padding: 5px;
+		margin: 5px;
+		border-radius: 5px;
+	}
+
+	.friendMsg {
+		background-color: #aaef9f;
+		max-width: 70%;
+		float: left;
+		clear: both;
+		padding: 5px;
+		margin: 5px;
+		border-radius: 5px;
+	}
+
+	.messageDiv {
+		display: flex;
+	}
+
+	#message {
+		margin-top: 3px;
+		width: 100%;
+		border: 1px #ddd solid;
+		padding: 5px;
+		font-family: 'Lato', sans-serif;
+	}
+
+	.headerDiv, .abilityInput, .newKinectionsDiv, .kinectionsDiv {
+		display: flex;
+		justify-content: space-around;
+		flex-flow: row wrap;
+	}
+
+	.content, .newKinectionsBench {
+		/*background-color: rgba(255,255,255,.5);*/
+		margin: 100px 50px 20px 50px;
+		max-width: 1100px;
+		width: 85%;
+		position:relative;
+	}
+
+	.rejected{
+	  background-color: red;
+	}
+
+	.kinnected{
+	  background-color: green;
+	}
+
+	.newKinectionsBench {
+		/*max-height: 300px;*/
+		margin-top: 100px;
+	}
+
+	.kinectionsBench {
+		background-color: rgba(255,255,255,.5);
+		margin: 20px 100px 10px 100px; */
+		max-width: 1100px;
+		width: 70%;
+		/*max-height: 300px;*/
+	}
+
+	.imgPlace {
+		background-color: #ddd;
+		width: 100%;
+		/*padding-top: 80%;*/
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.imageForm {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+	}
+
+	.userImg {
+		width: 100%;
+		height: 350px;
+	}
+
+	.loginLogo {
+		width: 90px;
+		margin-bottom: 10px;
+	}
+
+	.headLogo, .headLogoActive {
+		max-width: 70px;
+		max-height: 70px;
+	}
+
+	/*hacky, but I don't care.*/
+	.headLogoActive {
+		border-bottom: 3px solid #ddd;
+	}
+
+	.benchTitle {
+		display: inline-block;
+		padding: 5px;
+		margin-top: 10px;
+		margin-left: 10px;
+		background-color: white;
+		min-width: 120px;
+	}
+
+	/*****************************button styles****************************/
+
+	.signUp, .signIn, #kinect, #reject, #submitActivities {
+		cursor: pointer;
+		border: none;
+		color: white;
+		padding: 10px;
+		margin: 10px;
+		font-size: .9em;
+	}
+
+	input[name="profileSubmit"], #viewChat, #viewBio {
+		width: 100%;
+		cursor: pointer;
+		border: none;
+		color: white;
+		padding: 10px;
+		margin-right: 20px;
+		margin-bottom: 20px;
+		margin-left: 20px;
+		font-size: .9em;
+	}
+
+	.profileLink, .judgementLink, .matchesLink {
+		cursor: pointer;
+		border: none;
+		background: transparent;
+	}
+
+	.rightCaret, .leftCaret {
+		cursor: pointer;
+		border: none;
+		background: transparent;
+		color: #212121;
+		width: 50px;
+		font-size: 5em;
+		display: flex;
+		align-content: center;
+	}
+
+	.signUp, input[name="profileSubmit"], #viewChat, #viewBio {
+		background-color: #8492ff;
+	}
+
+	.signIn, #kinect, #submitActivities, #messageSend, #imgUploadBtn {
+		background-color: #66ab5f;
+	}
+
+	#messageSend, #imgUploadBtn, #clear {
+		cursor: pointer;
+		border: none;
+		color: white;
+		padding: 10px;
+		font-size: .9em;
+	}
+
+	#messageSend {
+		margin-top: 3px;
+	}
+
+	#clear, #imgUploadBtn {
+		width: 50%;
+	}
+
+	#imgUploadForm {
+		width: 100%;
+		display: flex;
+	}
+
+	#submitActivities {
+		text-decoration: none;
+		margin-top: 10px;
+	}
+
+	#kinect, #reject {
+		font-size: 2em;
+		font-weight: 700;
+		padding: 20px;
+	}
+
+	#reject, #clear {
+		background-color: #fa7070;
+	}
+
+	#search, #returnMatch, #logout {
+		cursor: pointer;
+		position: fixed;
+		z-index: 20;
+		background-color: white;
+		padding: 7px;
+		border-radius: 50%;
+		color: #212121;
+		top: 100px;
+	}
+
+	#search, #logout {
+		right: 20px;
+	}
+
+	#returnMatch {
+		left: 20px;
+	}
+
+	#addActivities {
+		color: #212121;
+	}
+
+	#exhausted-options {
+		font-weight: 600;
+		font-size: 32px;
+		line-height: 1.5;
+	}
+
+	.exhausted-options {
+		position: absolute;
+		top: 160px;
+		margin-left: auto;
+	}
+
+	.signInPanel {
+		/*margin: 150px auto;*/
+		margin-bottom: 50px;
+		text-align: center;
+		width: 14%;
+		height: 34%;
+		font-weight: 800;
+		background-color: rgba(255,255,255,.5);
+		padding: 20px;
+		/*this isn't responsive*/
+		min-width: 300px;
+	}
+
+	.display-none {
+		display: none;
+	}
+
+	.title {
+		margin-top: -133px;
+		/*have to adjust with media query*/
+		margin-left: 100px;
+		color: white;
+		font-weight: 800;
+		font-size: 150px;
+	}
+
+	.userCard, .box2, .userCard2 {
+		background-color: rgba(255, 255, 255, 1);
+		margin: 100px;
+		padding: 20px;
+		margin: 20px;
+	}
+
+	.box2 {
+		margin-bottom: 0px;
+	}
+
+	.userCard, .userCard2  {
+		max-width: 500px;
+		margin-left: auto;
+		margin-right: auto;
+		/*flex: 1;*/
+		/*width: 200px;*/
+	}
+
+	.userCardImg {
+		width: 100%;
+		background-size: cover;
+		background-position: center;
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+	}
+
+	.box2 {
+		/*flex: 2;*/
+	}
+
+	.abilityDiv {
+		flex: 1;
+	}
+
+	/*for modal*/
+	.modalDialog {
+	    position: fixed;
+	    top: 0;
+	    right: 0;
+	    bottom: 0;
+	    left: 0;
+	    background: rgba(0, 0, 0, 0.8);
+	    z-index: 99999;
+	    opacity:0;
+	    -webkit-transition: opacity 400ms ease-in;
+	    -moz-transition: opacity 400ms ease-in;
+	    transition: opacity 400ms ease-in;
+	    pointer-events: none;
+	}
+	.modalDialog:target {
+	    opacity:1;
+	    pointer-events: auto;
+	}
+	.modalDialog > div {
+	    width: 85%;
+	    position: relative;
+	    margin: 10% auto;
+	    padding: 5px 20px 13px 20px;
+	    /*border-radius: 10px;*/
+	    background: #fff;
+	}
+	.close {
+	    background: #fff;
+	    color: #212121;
+	    line-height: 25px;
+	    position: absolute;
+	    right: -12px;
+	    text-align: center;
+	    top: -10px;
+	    width: 24px;
+	    text-decoration: none;
+	    font-weight: bold;
+	    -webkit-border-radius: 12px;
+	    -moz-border-radius: 12px;
+	    border-radius: 12px;
+	    -moz-box-shadow: 1px 1px 3px #000;
+	    -webkit-box-shadow: 1px 1px 3px #000;
+	    box-shadow: 1px 1px 3px #000;
+	}
+	.close:hover {
+	    background: #00d9ff;
+	}
+
+
+
+	/* pic testin */
+	#changingPic {
+	  height: 100vh;
+	  width: 100%;
+	  position: fixed;
+	  bottom: 0;
+	  left: 0;
+	  z-index: -1;
+	  background-size: cover;
+	}
+
+	#changingPic img.opaque {
+	    opacity:1;
+	    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	    filter: alpha(opacity=1);
+	  }
+
+	  .shadow {
+	    -webkit-box-shadow: 5px 5px 5px #aaa;
+	    -moz-box-shadow: 5px 5px 5px #aaa;
+	    box-shadow: 5px 5px 5px #aaa;
+	    margin-bottom: 10px;
+	  }
+
+	  #changingPic img {
+	    -webkit-transition: opacity 1s ease-in-out;
+	    -moz-transition: opacity 1s ease-in-out;
+	    -o-transition: opacity 1s ease-in-out;
+	    transition: opacity 1s ease-in-out;
+	    opacity:0;
+	    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	    filter: alpha(opacity=0);
+	    height: 100vh;
+	    width: 100%;
+	    position: fixed;
+	    bottom: 0;
+	    left: 0;
+	    z-index: -1;
+	    background-size: cover;
+	  }
+
+	/* pic testing ends */
+
+
+
+	#loader{
+		display: none;
+	}
+
+	    /* Safari */
+	/*@-webkit-keyframes spin {
+	    0% { -webkit-transform: rotate(0deg); }
+	    100% { -webkit-transform: rotate(360deg); }
+	}*/
+
+	/*@keyframes spin {
+	    0% { transform: rotate(0deg); }
+	    100% { transform: rotate(360deg); }
+	}*/
+	/* loading indicator end */
+	.rejectKinnectButton {
+	   cursor: pointer;
+	   border: none;
+	   color: white;
+	   padding: 10px;
+	   margin: 10px;
+	   font-size: .9em;
+	  text-decoration: none;
+	}
+
+}

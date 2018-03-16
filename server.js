@@ -4,16 +4,15 @@ var path = require("path");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 var server = require("http").Server(app);
-
 var session = require("express-session");
 var io = require("socket.io")(server);
-
 var passport = require("./config/passport");
-
+var db = require("./models");
 
 var PORT = process.env.PORT || 8000;
 
-var db = require("./models");
+// Method override for RESTFul form submissions
+app.use(methodOverride("_method"));
 
 app.use(bodyParser({limit: "50mb"}));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,7 +24,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require("./routes/apiRoutes.js")(app);
+require("./routes/chatApiRoutes.js")(app);
 require("./routes/htmlRoutes.js")(app);
+
 
 //changed force to false for testing filter
 
@@ -36,9 +37,16 @@ db.sequelize.sync({ force: false }).then(function() {
   });
 });
 
-// io.on('connection', function(socket){
-//   socket.on('chat message', function(msg){
-//     io.emit('chat message', msg);
-//     console.log("test connection2");
-//   });
-// });
+
+io.on('connection', function (socket) {
+  console.log('connection established');
+
+  socket.on('chat message', function (msg) {
+    io.emit('chat message', msg);
+  });
+
+  // socket.on('disconnect', function () {
+  //   console.log('user disconnected   ' + socket.id);
+  // });
+
+});
