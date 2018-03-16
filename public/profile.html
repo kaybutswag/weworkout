@@ -12,6 +12,7 @@
 
 		<!-- our css -->
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/mobile.css">
 
 		<!-- font awesome -->
 		<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
@@ -39,15 +40,15 @@
 <!-- post request for users data -->
 		<header>
 			<div class="headerDiv">
-				<a href="/profile"><button class="profileLink">
-					<i class="fas fa-user"></i>
-				</button></a>
-				<a href="/judgement"><button class="judgementLink" >
-					<img class="headLogo" src="img/logoBlack.png">
-				</button></a>
-				<a href="/matches"><button class="matchesLink" >
-					<i class="fas fa-comment-alt"></i>
-				</button></a>
+                <a href="/profile"><button class="profileLink" >
+                    <img class="headLogoActive" src="img/profileLogoNew.png">
+                </button></a>
+                <a href="/judgement"><button class="judgementLink" >
+                    <img class="headLogo" src="img/logoBlack.png">
+                </button></a>
+                <a href="/matches"><button class="matchesLink" >
+                    <img class="headLogo" src="img/messageLogoNew.png">
+                </button></a>
 			</div>
 		</header>
 
@@ -87,7 +88,7 @@
 				  	<option value="Male">Male</option>
 				  	<option value="Female">Female</option>
 				  	<option value="Other">Other</option>
-				</select><br>
+				</select>
 
 				<label for="dob">Date of Birth: </label>
 				<input type="date" name="dob" id="dob" placeholder="mm/dd/yyyy"><br>
@@ -98,7 +99,7 @@
 
 				<input type="text" name="location" placeholder="City, State" id="primaryLocation"><br>
 
-				<h3>
+				<h3 class="profileSecTitle">
 					<label for="interests">How do you like to be active?</label><br>
 				</h3>
 
@@ -197,18 +198,18 @@
 			        		</div>
 				        </div>
 				        <br>
-				        <div class="subDiv">
+				        <div class="actSubDiv">
 				        	<a href="#close" id="submitActivities">Submit</a>
 				        </div>
 
 				    </div>
 				</div>
 
-				<h3>Short Bio</h3>
+				<h3 class="profileSecTitle">Short Bio</h3>
 				<textarea placeholder="Let everyone get to know you! Feel free to list your gym memberships and any stats such as 'I run 8 minute miles' or 'I bench press 150 lbs.'" name="bio" maxlength="250" id="bio"></textarea><br>
 			</div>
 			<break></break>
-			<div>
+			<div class="profSubDiv">
 				<input type="submit" name="profileSubmit" value="Submit" id="formSubmit">
 			</div>
 		</div>

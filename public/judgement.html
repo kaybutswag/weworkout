@@ -7,9 +7,6 @@
 		<!-- reset -->
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
-		<!-- font -->
-		<!-- <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,800" rel="stylesheet"> -->
-
 		<link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
 
 		<!-- font awesome -->
@@ -17,6 +14,7 @@
 
 		<!-- our css -->
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/mobile.css">
 
 		<!-- jquery -->
 		<script src="https://code.jquery.com/jquery.js"></script>
@@ -40,15 +38,15 @@
 
 		<header>
 			<div class="headerDiv">
-				<a href="/profile"><button class="profileLink">
-					<i class="fas fa-user"></i>
-				</button></a>
-				<a href="/judgement"><button class="judgementLink" >
-					<img class="headLogo" src="img/logoBlack.png">
-				</button></a>
-				<a href="/matches"><button class="matchesLink" >
-					<i class="fas fa-comment-alt"></i>
-				</button></a>
+                <a href="/profile"><button class="profileLink" >
+                    <img class="headLogo" src="img/profileLogoNew.png">
+                </button></a>
+                <a href="/judgement"><button class="judgementLink" >
+                    <img class="headLogoActive" src="img/logoBlack.png">
+                </button></a>
+                <a href="/matches"><button class="matchesLink" >
+                    <img class="headLogo" src="img/messageLogoNew.png">
+                </button></a>
 			</div>
 		</header>
 
@@ -174,7 +172,7 @@
 							<input type="checkbox" id="skateboard" data-text="Skateboarding"/>Skateboarding</label>
 		        		</div>
 				    </div>
-			        <div class="subDiv">
+			        <div class="actSubDiv">
 			        	<a href="#close" id="submitActivities">Submit</a>
 			        </div>
 			        
@@ -196,7 +194,9 @@
 
 				<!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
 				<!-- may want to change this to class="userCardName" -->
-				<h2 id = "name" user-id = ""></h2>
+				<div class="nameDiv">
+					<h2 id = "name" user-id = ""></h2>
+				</div>
 			</div>
 
 			<div class="box2">
