@@ -1,18 +1,5 @@
 body {
   background: black;
-	/* background-image: url('../img/crunch.jpg'); */
-  /* background-color: red; */
-  /* url("../img/crunch.jpg"),
-  url("../img/bikes.jpg"),
-  url("../img/tennis.jpg"),
-  url("../img/hiking.jpeg"),
-  url("../img/highFive.jpg"),
-  url("../img/weights.jpeg"),
-  url("../img/yoga.jpeg"),
-  url("../img/weightBar.jpeg"),
-  url("../img/Golf.jpeg"),
-  url("../img/streching.jpeg"),
-  url("../img/jumpRope.jpeg"); */
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -32,7 +19,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
-} 
+}
 
 /*need to look at this.*/
 textarea {
@@ -176,7 +163,16 @@ break {
 	/*not reactive*/
 	margin: 100px 100px 20px 100px;
 	max-width: 1100px;
-	width: 70%
+	width: 70%;
+  	position:relative;
+}
+
+.rejected{
+  background-color: red;
+}
+
+.kinnected{
+  background-color: green;
 }
 
 .kinectionsBench {
@@ -474,20 +470,14 @@ break {
 
 /* pic testing ends */
 
-
+#loader_judgement{
+	font-size: 80px;
+	position: absolute;
+	top: 50%;
+	color: #212121;
+	text-align: center;
+}
 
 #loader{
 	display: none;
 }
-
-    /* Safari */
-/*@-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-}*/
-
-/*@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}*/
-/* loading indicator end */

@@ -16,9 +16,8 @@ module.exports = function(app) {
       res.sendFile(path.join(__dirname, "../public/testChat.html"));
   });
 
-
-  app.get("/judgement", isAuthenticated, function(req, res){   
-    db.Form.findOne({
+app.get("/judgement", isAuthenticated, function(req, res){
+  db.Form.findOne({
       where: {
         email: req.user.email
       }
@@ -26,9 +25,9 @@ module.exports = function(app) {
       if(response !== null)
         res.sendFile(path.join(__dirname, "../public/judgement.html"));
       else
-        res.redirect("/profile");   
+        res.redirect("/profile");
     });
-  }); 
+  });
 
 
 
@@ -41,8 +40,8 @@ module.exports = function(app) {
       if(response !== null)
         res.sendFile(path.join(__dirname, "../public/matches.html"));
       else
-        res.redirect("/profile");   
-    });    
+        res.redirect("/profile");
+    });
   });
 
   app.get("/profile", isAuthenticated, function(req, res) {
@@ -55,6 +54,6 @@ module.exports = function(app) {
     else
       res.redirect("/");
   });
-  
+
 
 };
