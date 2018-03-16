@@ -12,8 +12,7 @@
 
 	body {
 		font-family: 'Lato', sans-serif;
-		/*background-image: url('../img/signIn.jpg');*/
-
+		background-image: url('../img/signIn.jpg');
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: inherit;
