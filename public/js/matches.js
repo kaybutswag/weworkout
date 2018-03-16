@@ -1,6 +1,17 @@
 // you need slick
 // http://kenwheeler.github.io/slick/
 var idforcontent;
+var counter = 0;
+
+function photoSlideshow() {
+  if(counter > 0)
+    $("#changingPic img").eq(counter - 1).removeClass("opaque");
+  else
+    $("#changingPic img").last().removeClass("opaque");
+  $("#changingPic img").eq(counter).addClass("opaque");
+  counter = (counter + 1) % $("#changingPic img").length;
+}
+
 function cardImgSize() {
 	$('.userCardImg').each(function() {
 		$(this).height($(this).width());
@@ -8,6 +19,7 @@ function cardImgSize() {
 		// $('#viewChat').width($(this).width());
 		// $('#viewBio').width($(this).width());
 	})
+
 }
 
 function slickInit() {
@@ -131,7 +143,6 @@ function showThings(number){
     });
 }
 
-
 $(document).ready(function(){
   $.get("/api/myMatches", function(data) {
       if(data==="nada"){
@@ -140,9 +151,8 @@ $(document).ready(function(){
         $(".newKinectionsDiv").html("<p>Sorry, no matches at the moment. We suggest broadening your preferences.</p><a href='/judgement'><button>Adjust Preferences</button></a>");
       }
       else{
-        console.log(data);
+        $(".newKinectionsDiv").empty();
         for(var i=0;i<data.length;i++){
-          $(".newKinectionsDiv").empty();
           var thisCard=$("<div>");
           thisCard.addClass("userCard");
           thisCard.attr("data-value",data[i].UserId);
@@ -153,7 +163,6 @@ $(document).ready(function(){
           thisCard.append("<h4 id='name'>"+data[i].name+"</h4>");
           $(".newKinectionsDiv").append(thisCard);
           cardImgSize();
-
         }
       }
     });
@@ -200,29 +209,11 @@ $(document).ready(function(){
 
 	slickInit();
 	cardImgSize();
+  setInterval(photoSlideshow, 9000);
 });
-
 
 $(window).resize(function() {
 	// little buggy
 	slickInit();
 	cardImgSize();
 });
-
-//pic looping starts//
-$(document).ready(function() {
-  var counter = 0;
-  setInterval(myFunc, 9000);
-  function myFunc() {
-    var newImage = counter;
-    $("#changingPic img").eq(newImage).addClass("opaque");
-    counter++;
-    if(counter === 13){
-			counter = 0;
-			for(var i=0; i<13; i++){
-				$("#changingPic img").eq(i).removeClass("opaque");
-			}
-		}
-  }
-});
-// pic looping ends//

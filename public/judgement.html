@@ -21,19 +21,19 @@
 	</head>
 	<body>
 		<div id="changingPic" class="shadow">
-			<img class='opaque'src="/img/crunch.jpg" />
-				<img  src="/img/bikes.jpg"/>
-				<img  src="/img/deadlift.jpg"/>
-				<img  src="/img/tennis.jpg"/>
-				<img  src="/img/hiking.jpeg"/>
-				<img  src="/img/highFive.jpg"/>
-				<img  src="/img/waterBottles.jpg"/>
-				<img  src="/img/weights.jpeg"/>
-				<img  src="/img/yoga.jpeg"/>
-				<img  src="/img/weightBar.jpeg"/>
-				<img  src="/img/Golf.jpeg"/>
-				<img  src="/img/streching.jpeg"/>
-				<img  src="/img/jumpRope.jpeg"/>
+			<img src="/img/crunch.jpg" />
+			<img src="/img/bikes.jpg"/>
+			<img src="/img/deadlift.jpg"/>
+			<img src="/img/tennis.jpg"/>
+			<img src="/img/hiking.jpeg"/>
+			<img src="/img/highFive.jpg"/>
+			<img src="/img/waterBottles.jpg"/>
+			<img src="/img/weights.jpeg"/>
+			<img src="/img/yoga.jpeg"/>
+			<img src="/img/weightBar.jpeg"/>
+			<img src="/img/Golf.jpeg"/>
+			<img src="/img/streching.jpeg"/>
+			<img src="/img/jumpRope.jpeg"/>
 		</div>
 
 		<header>
@@ -58,7 +58,6 @@
 
 		<div id="openModal" class="modalDialog">
 		    <div>	<a href="#close" title="Close" class="close"><i class="fas fa-times"></i></a>
-
 
 		        <h2>Search</h2>
 
@@ -176,13 +175,14 @@
 			        <div class="actSubDiv">
 			        	<a href="#close" id="submitActivities">Submit</a>
 			        </div>
-
-
+			        
 		    </div>
 
 		</div>
 
-		<form id="matchBox" class="content">
+		<div id="loader_judgement"><i class="fas fa-spinner fa-spin"></i></div>
+
+		<form class="content display-none">
 
 			<p id="error-message"></p>
 
@@ -199,9 +199,7 @@
 				</div>
 			</div>
 
-
-
-			<div id="box2" class="box2">
+			<div class="box2">
 
 				<h3>Basics</h3>
 
@@ -215,14 +213,11 @@
 				<p id="bio"></p>
 
 			</div>
+
 			<break></break>
 			<div class="judgement">
-				<button  id="reject">
-					<a class="rejectKinnectButton" href="#close">Reject </a>
-				 </button> &emsp; &emsp;
-				<button  id="kinect">
-					<a class="rejectKinnectButton" href="#close">Kinect </a>
-				</button>
+				<button  id="reject">Reject</button>
+				<button  id="kinect">Kinect</button>
 			</div>
 		</form>
 
