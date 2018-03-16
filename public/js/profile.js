@@ -1,26 +1,18 @@
 var expanded = false;
+var counter = 0;
 
 function clearContents(element) {
   element.value = '';
 }
 
-//pic looping starts//
-$(document).ready(function() {
-  var counter = 0;
-  setInterval(myFunc, 9000);
-  function myFunc() {
-    var newImage = counter;
-    $("#changingPic img").eq(newImage).addClass("opaque");
-    counter++;
-    if(counter === 13){
-			counter = 0;
-			for(var i=0; i<13; i++){
-				$("#changingPic img").eq(i).removeClass("opaque");
-			}
-		}
-  }
-});
-// pic looping ends//
+function photoSlideshow() {
+  if(counter > 0)
+    $("#changingPic img").eq(counter - 1).removeClass("opaque");
+  else
+    $("#changingPic img").last().removeClass("opaque");
+  $("#changingPic img").eq(counter).addClass("opaque");
+  counter = (counter + 1) % $("#changingPic img").length;
+}
 
 $(document).ready(function(){
   $("#logout").on("click", function(){
@@ -78,7 +70,10 @@ $(document).ready(function(){
   $('#imgUploadBtn').click(function(event){
     event.preventDefault();
     $('#imgUpload').trigger('click');
-  })
+  });
+
+  setInterval(photoSlideshow, 9000);
+
 });
 
 

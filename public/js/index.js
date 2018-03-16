@@ -1,3 +1,14 @@
+var counter = 0;
+
+function photoSlideshow() {
+  if(counter > 0)
+    $("#changingPic img").eq(counter - 1).removeClass("opaque");
+  else
+    $("#changingPic img").last().removeClass("opaque");
+  $("#changingPic img").eq(counter).addClass("opaque");
+  counter = (counter + 1) % $("#changingPic img").length;
+}
+
 function getLocation(email, password) {
 	showIndicator();
 	if(navigator.geolocation) {
@@ -31,13 +42,13 @@ function createNewUser(email, password, latitude, longitude) {
 		if(result === "success")
 			logInUser(email, password, "newUser");
 		else {
-			if("errors" in error) {
-				if(error.errors[0].path === "email")
+			if("errors" in result) {
+				if(result.errors[0].path === "email")
 					$("form p").text("The email you entered is not valid.");
-				else if(error.errors[0].path === "password")
+				else if(result.errors[0].path === "password")
 					$("form p").text("The password you entered is not valid.");
 			}
-			else if ("original" in error && "code" in error.original && error.original.code === "ER_DUP_ENTRY")
+			else if ("original" in result && "code" in result.original && result.original.code === "ER_DUP_ENTRY")
 				$("form p").text("That email already exists");
 			else
 				$("form p").text("Please allow us to access your location.");
@@ -71,14 +82,19 @@ function logInUser(email, password, type) {
 	});
 }
 
+function showIndicator(){
+    $("#loader").css("display","block");
+}
+
+function hideLoader(){
+    $("#loader").css("display","none");
+}
+
 $(document).ready(function(){
 	$(".signUp").on("click", function(event){
 		event.preventDefault();
 		var newEmail = $("input[name=email]").val();
 		var newPassword = $("input[name=password]").val();
-
-		$("input[name=email]").val("");
-		$("input[name=password]").val("");
 
 		getLocation(newEmail, newPassword);
 	});
@@ -94,31 +110,6 @@ $(document).ready(function(){
 		logInUser(email, password, "oldUser");
 
 	});
+	
+	setInterval(photoSlideshow, 9000);
 });
-
-
-function showIndicator(){
-    $("#loader").css("display","block");
-}
-
-function hideLoader(){
-    $("#loader").css("display","none");
-}
-
-//pic looping starts//
-$(document).ready(function() {
-  var counter = 0;
-  setInterval(myFunc, 9000);
-  function myFunc() {
-    var newImage = counter;
-    $("#changingPic img").eq(newImage).addClass("opaque");
-    counter++;
-		if(counter === 13){
-			counter = 0;
-			for(var i=0; i<13; i++){
-				$("#changingPic img").eq(i).removeClass("opaque");
-			}
-		}
-  }
-});
-// pic looping ends//

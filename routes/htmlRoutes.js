@@ -24,7 +24,7 @@ app.get("/judgement", isAuthenticated, function(req, res){
       }
     }).then(function(response) {
       if(response !== null)
-        res.sendFile(path.join(__dirname, "../public/judgement.html?param=close"));
+        res.sendFile(path.join(__dirname, "../public/judgement.html"));
       else
         res.redirect("/profile");
     });
