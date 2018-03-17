@@ -21,11 +21,11 @@
 	</head>
 	<body>
 		<div id="changingPic" class="shadow">
-			<img src="/img/crunch.jpg" />
 			<img src="/img/bikes.jpg"/>
 			<img src="/img/deadlift.jpg"/>
 			<img src="/img/tennis.jpg"/>
 			<img src="/img/hiking.jpeg"/>
+			<img src="/img/crunch.jpg" />
 			<img src="/img/highFive.jpg"/>
 			<img src="/img/waterBottles.jpg"/>
 			<img src="/img/weights.jpeg"/>
@@ -52,8 +52,39 @@
 
 		<div>
 			<!-- Tiggers search modal -->
-
 			<a href="#openModal"><i class="fas fa-search" id="search"></i></a>
+		</div>
+		<a href="#matchModal" id="matchLink"></a>
+
+		<!-- this will be the match modal -->
+		<div id="matchModal" class="modalDialog">
+
+			<div class="content">
+	            <h2>You're Kinected!</h2>
+
+	            <break></break>
+	            <div class="userCard">
+	                <div class="userCardImg" id="matchOneImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
+
+	                <div class="nameDiv">
+	                    <h4 id = "matchOneName" user-id = "">James</h4>
+	                </div>
+	            </div>
+
+                <img class="matchLogo" src="img/logoBlack.png">
+
+	            <div class="userCard">
+	                <div class="userCardImg" id="matchTwoImg" style="background-image: url('https://usatftw.files.wordpress.com/2017/11/harden-rockets.jpg?w=1000&h=600&crop=1')"></div>
+
+	                <div class="nameDiv">
+	                    <h4 id = "matchTwoName" user-id = "">James</h4>
+	                </div>
+	            </div>
+	            <break></break>
+		        <div style="margin-top: 20px">
+		        	<a href="#close" id="continue">Find More Kinections</a>
+		        </div>
+			</div>
 		</div>
 
 		<div id="openModal" class="modalDialog">
@@ -180,7 +211,7 @@
 
 		</div>
 
-		<div id="loader_judgement"><i class="fas fa-spinner fa-spin"></i></div>
+		<div id="loader_judgement" class="fa-spin"><img src="img/logoTransparent.png"></div>
 
 		<form class="content display-none">
 
@@ -192,8 +223,6 @@
 				<div id="noMatches"></div>
 				<div id="userCardImg" class="userCardImg" style="background-image: url('img/logoBlack.png')"></div>
 
-				<!-- <input type="text" name="name" placeholder="First Name" id="name"><br> -->
-				<!-- may want to change this to class="userCardName" -->
 				<div class="nameDiv">
 					<h2 id = "name" user-id = ""></h2>
 				</div>
@@ -206,10 +235,10 @@
 				<p><span id="gender"></span>, <span id="age"></span></p>
 				<p><strong>Location: </strong> <span id="location"></span></p>
 
-				<h3>Activities</h3>
+				<h3 class="secTitle">Activities</h3>
 				<p id="activities"></p>
 
-				<h3>Bio</h3>
+				<h3 class="secTitle">Bio</h3>
 				<p id="bio"></p>
 
 			</div>

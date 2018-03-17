@@ -14,6 +14,16 @@ function shuffleArray(arr){
 	return arr;
 }
 
+function openMatchModal (a, b, c, d) {
+	$('#matchOneImg').attr("style", "background-image: url("+a+")");
+	$('#matchOneName').text(b);
+	$('#matchTwoImg').attr("style", "background-image: url("+c+")");
+	$('#matchTwoName').text(d);
+  	$('.userCardImg').height($('.userCardImg').width());
+    var href = $('#matchLink').attr('href');
+    window.location.href = href;
+}
+ 
 function photoSlideshow() {
   if(counter > 0)
     $("#changingPic img").eq(counter - 1).removeClass("opaque");
@@ -113,6 +123,7 @@ function sendPreferences(userAge) {
 		myBigArray = matches;
 		currentProfile = 0;
 		$("#loader_judgement").addClass("display-none");
+		$("#loader_judgement").removeClass("fa-spin");
 		$("form").first().removeClass("display-none");
 		$(".exhausted-options").addClass("display-none");
 		showCard();
@@ -132,6 +143,7 @@ function showCard(){
 		var theirAge = moment().diff(moment(theirDOB), "years")
 		$("#name").text(myBigArray[currentProfile].name);
 		$("#name").attr("user-id", myBigArray[currentProfile].UserId);
+		console.log(myBigArray[currentProfile].UserId);
 		$(".userCardImg").empty();
 		$(".userCardImg").attr("style","background-image: url('"+myBigArray[currentProfile].img+"')");
 		$('.userCardImg').height($('.userCardImg').width());
@@ -169,6 +181,7 @@ function showCard(){
 
 function addLike(){
 	var likeId=$("#name").attr("user-id");
+	console.log(likeId);
 
 	var currentUser={
 		likeId:likeId
@@ -244,6 +257,7 @@ $(document).ready(function(){
 
 	$("#submitActivities").on("click", function(){
 		if(userAge > 0) {
+			$("#loader_judgement").attr("class", "fa-spin")
 			$("#loader_judgement").removeClass("display-none");
 			$("form").first().addClass("display-none");
 			$(".exhausted-options").addClass("display-none");
@@ -252,7 +266,7 @@ $(document).ready(function(){
 	});
 
 	$('.userCardImg').height($('.userCardImg').width());
-
+	
 	setInterval(photoSlideshow, 9000);
 });
 

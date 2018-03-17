@@ -5,10 +5,6 @@ var readerResult;
 function previewFile(input) {
     if(input.files && input.files[0]) {
         reader.onload = function() {
-            // var previewImage = $("<img width = 'auto' height = '100%'>");
-            // previewImage.attr("src", reader.result);
-            // $(".userCardImg").empty();
-            // $(".userCardImg").append(previewImage);
             $(".userCardImg").attr("style", "background-image: url('"+reader.result+"')");
             $('.userCardImg').height($('.userCardImg').width());
             readerResult = reader.result;
@@ -27,7 +23,7 @@ function fillInForm(preferences) {
 
     if(preferences.img !== null) {
         $(".userCardImg").attr("style", "background-image: url('"+preferences.img+"')");
-        $('.userCardImg').height($('.userCardImg').width());
+        $(".userCardImg").height($(".userCardImg").width());
     }
 
         for(var i = 0; i < fieldsToFill.length; i++) {
