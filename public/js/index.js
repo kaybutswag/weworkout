@@ -83,11 +83,11 @@ function logInUser(email, password, type) {
 }
 
 function showIndicator(){
-    $("#loader").css("display","block");
+    $(".loginLogo").attr("class","loginLogo fa-spin");
 }
 
 function hideLoader(){
-    $("#loader").css("display","none");
+    $(".loginLogo").attr("class","loginLogo");
 }
 
 $(document).ready(function(){

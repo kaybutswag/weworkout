@@ -30,7 +30,6 @@ $(document).ready(function(){
     $('input[class="activity"]:checked').each(function() {
       activities.push($(this).data('text'));
     });
-    console.log(activities);
     for (i=0;i<activities.length;i++) {
       if (i==activities.length - 1) {
         var entry = $("<span>"+activities[i]+"</span>");
@@ -49,18 +48,6 @@ $(document).ready(function(){
     $(".userCardImg").attr("style", "background-image: url('img/logoBlack.png')");
     $('.userCardImg').height($('.userCardImg').width());
     // $("input[name=picture]").value('')
-  })
-
-  $(".profileLink").click(function(){
-    console.log("you clicked the profile link");
-  });
-
-  $(".judgementLink").click(function(){
-    console.log("you clicked the judgement link");
-  })
-
-  $(".matchesLink").click(function(){
-    console.log("you clicked the matches link");
   })
 
   $('.userCardImg').height($('.userCardImg').width());
