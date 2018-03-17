@@ -27,15 +27,16 @@ $(document).ready(function(){
   $("#submitActivities").click(function(event){
     $("#userActivities").empty();
     var activities = [];
+    var entry;
     $('input[class="activity"]:checked').each(function() {
       activities.push($(this).data('text'));
     });
     for (i=0;i<activities.length;i++) {
-      if (i==activities.length - 1) {
-        var entry = $("<span>"+activities[i]+"</span>");
+      if (i===(activities.length - 1)) {
+        entry = $("<span>"+activities[i]+"</span>");
         $("#userActivities").append(entry);
       } else {
-        var entry = $("<span>"+activities[i]+", </span>");
+        entry = $("<span>"+activities[i]+", </span>");
         $("#userActivities").append(entry);
       }
     }

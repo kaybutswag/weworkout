@@ -37,6 +37,7 @@ function fillInForm(preferences) {
                     if($("#userActivities").text() === "Click to add activities") {
                         $("#userActivities").empty();
                         $("#userActivities").text($("#" + fieldsToFill[i]).attr("data-text"));
+
                     }
                     else
                         $("#userActivities").append(", " + $("#" + fieldsToFill[i]).attr("data-text"));

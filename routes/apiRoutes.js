@@ -193,6 +193,7 @@ module.exports = function(app) {
     },
       include:[db.User]
     }).then(function(data){
+      console.log("test1");
       filterResults(res,req,data,maxdistance)
       });    
   });
@@ -220,6 +221,7 @@ module.exports = function(app) {
     }
     
     Promise.all(promises).then(function(){
+      console.log("test2");
       removeMatches(res, req, nearOptions)
     });
   }
@@ -253,6 +255,7 @@ module.exports = function(app) {
             showOptions.push(lessUsers[i]);
           }
         }
+        console.log("test3");
         getFormData(res, showOptions);
     });
   }
@@ -277,6 +280,7 @@ module.exports = function(app) {
     }
     
     Promise.all(promises).then(function(){
+      console.log("test4");
       res.json(cardOptions);
     });
   }

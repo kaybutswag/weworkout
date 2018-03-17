@@ -4,7 +4,7 @@ $(function () {
 
   var socket = io();
 
-  var FriendId;
+  var screenFriendId;
 
   var myId;
 
@@ -17,12 +17,12 @@ $.get("/api/myId",function(data){
 
 
   $('.newKinectionsBench').on("click",".userCard",function () {
-    FriendId = $(this).attr("data-value");
+    screenFriendId = $(this).attr("data-value");
 
-    console.log(FriendId);
+    console.log(screenFriendId);
 
     var chathistory={
-      FriendId:FriendId
+      FriendId:screenFriendId
     };
 
     $.post("/api/oldChat/", chathistory )
@@ -31,10 +31,9 @@ $.get("/api/myId",function(data){
       if(data===null){
           return;
       }
-
       for(var i=0; i<data.length;i++){
 
-      if(parseInt(data[i].UserId)===parseInt(FriendId)){
+      if(parseInt(data[i].UserId)===parseInt(screenFriendId)){
           console.log("their match");
 
         var theirMessage=$("<div>");
@@ -49,7 +48,7 @@ $.get("/api/myId",function(data){
         $('#message_block').append($('<li>').html(myMessage));
 
       }
-      $('.history').stop().animate({scrollTop:$(".history")[0].scrollHeight},1000);
+      $('.history').scrollTop($(".history")[0].scrollHeight);
     }
     });
 
@@ -63,7 +62,7 @@ $.get("/api/myId",function(data){
   $('#messageSend').on("click", function (event) {
     event.preventDefault();
 
-    FriendId = $('.userCard2').attr("data-value");
+    var FriendId = $('.userCard2').attr("data-value");
     var chat_messages = $('#m').val().trim();
     var chat={
       FriendId:FriendId,
@@ -88,10 +87,13 @@ $.get("/api/myId",function(data){
       var newMessage=$("<div>");
       console.log(myId);
       console.log(msg.FriendId);
+      console.log(screenFriendId);
       if(parseInt(myId)===parseInt(msg.FriendId))
         newMessage.addClass('friendMsg');
-      else
+      else if(parseInt(screenFriendId)===parseInt(msg.FriendId))
         newMessage.addClass('userMsg');
+      else
+        return;
 
       newMessage.text(msg.chat_messages);
       // $(".history").append(newMessage);
