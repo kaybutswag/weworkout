@@ -304,6 +304,14 @@
 		padding: 10px;
 		margin: 10px;
 		font-size: .9em;
+		color: #212121;
+	}
+
+	#continue {
+		background-color: #fff;
+		padding: 10px;
+		text-decoration: none;
+		color: #212121;
 	}
 
 	input[name="profileSubmit"], #viewChat, #viewBio {
@@ -496,6 +504,46 @@
 	    /*border-radius: 10px;*/
 	    background: #fff;
 	}
+	#matchModal:target {
+	    opacity:1;
+	    pointer-events: auto;
+	}
+	#matchModal > .content {
+		align-items: center;
+		background-color: rgba(0,0,0,0);
+		max-width: 800px;
+	}
+	#matchModal {
+		padding: 50px;
+	}
+	.matchLogo {
+		max-width: 170px;
+		max-height: 170px;
+	}
+	.content > h2 {
+		color: white;
+	}
+	#matchModal {
+		position: fixed;
+	    top: 0;
+	    right: 0;
+	    bottom: 0;
+	    left: 0;
+	    background: rgba(0, 0, 0, 0.8);
+	    z-index: 99999;
+	    opacity:0;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    /*-webkit-transition: opacity 400ms ease-in;*/
+	    /*-moz-transition: opacity 400ms ease-in;*/
+	    transition: opacity 300ms ease-in;
+	    pointer-events: none;
+	}
+	#matchModal > .close {
+		right: 150px;
+		top: 150px;
+	}
 	.close {
 	    background: #fff;
 	    color: #212121;
@@ -564,11 +612,14 @@
 	/* pic testing ends */
 
 	#loader_judgement{
-		font-size: 80px;
 		position: absolute;
-		top: 50%;
-		color: white;
-		text-align: center;
+		top: 250px;
+	}
+
+	#loader_judgement > img {
+		max-width: 300px;
+		max-height: 300px;
+		opacity: .5;
 	}
 
 	#loader{
