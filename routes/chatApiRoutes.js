@@ -16,7 +16,7 @@ module.exports = function (app) {
     });
   });
 
-app.post("/api/pushChat", function(req, res) {
+  app.post("/api/pushChat", function(req, res) {
 
     var myChats;
     var theirChats;
@@ -26,51 +26,47 @@ app.post("/api/pushChat", function(req, res) {
     var theirId=req.body.FriendId;
 
     db.Match.findOne({
-        where:{
-          UserId: myUserId
+      where:{
+        UserId: myUserId
+      }
+      }).then(function(results2){
+        myChats=results2.dataValues.myChats;
+        if(myChats===null)
+          myChats=theirId;
+        else{
+          var myArray=results2.dataValues.myChats.split(",");
+            if(myArray.indexOf(theirId)!==-1){
+              res.end();
+            }
+            else
+              myChats+=","+theirId;
         }
-        }).then(function(results2){
-          myChats=results2.dataValues.myChats;
-          if(myChats===null)
-            myChats=theirId;
+  
+        db.Match.update({
+            myChats: myChats
+          }, {
+            where: {
+              UserId: myUserId
+            }
+        });    
+
+        db.Match.findOne({
+            where:{
+              UserId: theirId
+            }
+          }).then(function(results3){
+            theirChats=results3.dataValues.myChats;
+          if(theirChats===null)
+            theirChats=myUserId;
           else{
-            var myArray=results2.dataValues.myChats.split(",");
-                if(myArray.indexOf(theirId)!==-1){
+            var Array2=results3.dataValues.myChats.split(",");
+                if(theirChats.indexOf(myUserId)!==-1){
                   res.end();
                 }
                 else
-                  myChats+=","+theirId;
+                  theirChats+=","+myUserId;
           }
-
-
         
-          db.Match.update({
-              myChats: myChats
-            }, {
-              where: {
-                UserId: myUserId
-              }
-            });    
-
-          db.Match.findOne({
-              where:{
-                UserId: theirId
-              }
-            }).then(function(results3){
-              theirChats=results3.dataValues.myChats;
-            if(theirChats===null)
-              theirChats=myUserId;
-            else{
-              var Array2=results3.dataValues.myChats.split(",");
-                  if(theirChats.indexOf(myUserId)!==-1){
-                    res.end();
-                  }
-                  else
-                    theirChats+=","+myUserId;
-            }
-
-
-          
           db.Match.update({
               myChats: theirChats
             }, {
@@ -80,9 +76,8 @@ app.post("/api/pushChat", function(req, res) {
             });
 
         });
-
+    });
   });
-});
 //ends api
 
     app.post("/api/oldChat", function (req, res) {
