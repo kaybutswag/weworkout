@@ -28,7 +28,7 @@ require("./routes/chatApiRoutes.js")(app);
 require("./routes/htmlRoutes.js")(app);
 
 
-//changed force to false for testing filter
+//changed force to false for testing
 
 db.sequelize.sync({ force: false }).then(function() {
   server.listen(PORT, function() {

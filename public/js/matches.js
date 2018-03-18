@@ -214,7 +214,6 @@ $(document).ready(function(){
               thisCard.append(thisCardImg);
               thisCard.append("<h4 id='name'>"+data[i].name+"</h4>");
               $(".newKinectionsDiv").append(thisCard);
-
         }
       }
       // slickInit();
@@ -290,7 +289,6 @@ $(document).ready(function(){
 		$("#viewChat").hide();
 	})
 
-	// cardImgSize();
   setInterval(photoSlideshow, 12000);
 });
 
