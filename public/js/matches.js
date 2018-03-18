@@ -143,11 +143,9 @@ $(document).ready(function(){
   $.get("/api/myMatches", function(data) {
       if(data==="nada"){
         console.log("test front");
-        $(".newKinectionsDiv").empty();
-        $(".newKinectionsDiv").html("<p>Sorry, no matches at the moment. We suggest broadening your preferences.</p><a href='/judgement'><button>Adjust Preferences</button></a>");
+        $(".newKinectionsDiv").html("<p>Keep Kinnecting!</p><a href='/judgement'><button>Adjust Preferences</button></a>");
       }
       else{
-        $(".newKinectionsDiv").empty();
         for(var i=0;i<data.length;i++){
           var thisCard=$("<div>");
           thisCard.addClass("userCard");
@@ -159,7 +157,6 @@ $(document).ready(function(){
           } else {
             thisCardImg.attr("style","background-image: url('"+data[i].img+"')");
           };
-          // thisCardImg.attr("style","background-image: url('"+data[i].img+"')");
           thisCard.append(thisCardImg);
           thisCard.append("<h4 id='name'>"+data[i].name+"</h4>");
           $(".newKinectionsDiv").append(thisCard);
@@ -209,7 +206,6 @@ $(document).ready(function(){
 		$("#viewChat").hide();
 	})
 
-	// cardImgSize();
   setInterval(photoSlideshow, 12000);
 });
 
