@@ -168,6 +168,7 @@ module.exports = function(app) {
     var sportsArray = [];
     var list1=[];
 
+
     for(var i = 0; i < req.body.sports.length; i++) {
       var sport = req.body.sports[i];
       var newSport = {};

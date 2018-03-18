@@ -1,10 +1,12 @@
 var db = require("../models");
 var passport = require("../config/passport.js");
+var intid;
+var myId;
 
 module.exports = function (app) {
 
   app.post("/api/newChat", function (req, res) {
-  	var intid=parseInt(req.body.FriendId);
+  	intid=parseInt(req.body.FriendId);
     db.Message.create({
       UserId: req.session.passport.user.id,
       FriendId: intid,
@@ -15,6 +17,84 @@ module.exports = function (app) {
     	res.json(error);
     });
   });
+
+app.post("/api/pushChat", function(req, res) {
+
+    var myChats;
+    var theirChats;
+
+    myId=req.session.passport.user.id;
+
+    intid=parseInt(req.body.FriendId);
+
+    db.Message.findAll({
+      where:{
+        $or: [
+          {
+            $and: [{UserId: myId}, {FriendId: intid}]
+          },
+          {
+            $and: [{FriendId: myId}, {UserId: intid}]
+          }
+        ]
+      }
+    }).then(function(results){
+      if(results !== null){
+        console.log("not null")
+        res.end();
+      }
+      else
+        console.log("null")
+        db.Match.findOne({
+        where:{
+          UserId: myId
+        }
+        }).then(function(results2){
+          if(results2.dataValues.myChats!==null){
+            myChats=results2.dataValues.myChats+","+req.body.FriendId;
+          }
+          else {
+            myChats=req.body.FriendId;
+          }
+
+        
+        db.Match.update({
+            myChats: myChats
+          }, {
+            where: {
+              UserId: myId
+            }
+          });    
+
+          db.Match.findOne({
+            where:{
+              UserId: intid
+            }
+          }).then(function(results3){
+            if(results3.dataValues.myChats!==null){
+              theirChats=results3.dataValues.myChats+","+myId;
+            }
+            else {
+              theirChats=myId;
+            }
+
+            
+          db.Match.update({
+              myChats: theirChats
+            }, {
+              where: {
+                UserId: intid
+              }
+            });
+
+          });
+
+
+  });
+  //end then
+  });
+});
+//ends api
 
     app.post("/api/oldChat", function (req, res) {
     var intid=parseInt(req.body.FriendId);
@@ -40,8 +120,8 @@ module.exports = function (app) {
   });
 
   app.get("/api/myId", function(req,res){
-      
-      var myId=req.session.passport.user.id;
+      myId=req.session.passport.user.id;
+      intid=parseInt(req.body.FriendId);
       var randoObject={
         myId:myId
       };

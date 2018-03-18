@@ -9,6 +9,9 @@ module.exports = function(sequelize, DataTypes) {
     },
     myLikes:{
       type: DataTypes.TEXT("long")
+    },
+    myChats:{
+      type: DataTypes.TEXT("long")
     }
   });
   Match.associate=function(models){

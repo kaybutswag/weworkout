@@ -69,6 +69,13 @@ $.get("/api/myId",function(data){
       chat_messages:chat_messages
     };
 
+    $.post("/api/pushChat", chat)
+          // On success, run the following code
+          .then(function (data) {
+            // Log the data we found
+            console.log("chat rows maybe updated");
+    });
+
     socket.emit('chat message', chat);
 
         $.post("/api/newChat", chat)
@@ -77,6 +84,7 @@ $.get("/api/myId",function(data){
             // Log the data we found
             console.log("chat row inserted");
           });
+      
       
 
     $('#m').val('');
@@ -102,4 +110,5 @@ $.get("/api/myId",function(data){
       $('.history').stop().animate({scrollTop:$(".history")[0].scrollHeight},1000);
     });
 });
+
 
