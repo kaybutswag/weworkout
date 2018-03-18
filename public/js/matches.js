@@ -268,11 +268,7 @@ $(document).ready(function(){
   });
 
 	$('#returnMatch').click(function() {
-		$(".newKinectionsBench").show();
-		$(".kinectionsBench").show();
-		$(".content").hide();
-		cardImgSize();
-		$("#returnMatch").hide();
+    location.reload();
 	});
 
 	$('#viewBio').click(function() {
@@ -288,6 +284,7 @@ $(document).ready(function(){
 		$("#viewBio").show();
 		$("#viewChat").hide();
 	})
+
 
   setInterval(photoSlideshow, 12000);
 });
