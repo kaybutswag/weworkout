@@ -144,7 +144,7 @@ $(document).ready(function(){
       if(data==="nada"){
         console.log("test front");
         $(".newKinectionsDiv").empty();
-        $(".newKinectionsDiv").html("<p>Sorry, no matches at the moment. We suggest broadening your preferences.</p><a href='/judgement'><button>Adjust Preferences</button></a>");
+        $(".newKinectionsDiv").html("<div class='noKinections'><p>No Kinections yet!</p><br><a href='/judgement'><button class='keepSwiping'>Keep swiping!</button></a></div>");
       }
       else{
         $(".newKinectionsDiv").empty();
@@ -164,9 +164,9 @@ $(document).ready(function(){
           thisCard.append("<h4 id='name'>"+data[i].name+"</h4>");
           $(".newKinectionsDiv").append(thisCard);
         }
+        slickInit();
+        cardImgSize();
       }
-      slickInit();
-      cardImgSize();
     });
 
 	$('.newKinectionsBench').on("click",".userCard",function () {
