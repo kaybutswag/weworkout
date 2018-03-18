@@ -420,19 +420,34 @@ module.exports = function(app) {
         UserID:req.session.passport.user.id
       }
     }).then(function(matchdata){
+      var chats=matchdata.dataValues.myChats;
       var matches=matchdata.dataValues.myMatches;
       if(matches===null){
         res.send("nada");
       }
       else{
-        var arrayOfIds = matches.split(",");
-        pullForms(res,arrayOfIds);
+        var arrayOfMatches = matches.split(",");
+        var arrayOfChats = chats.split(",");
+        var matchNoChat=[];
+
+        for(var i=0;i<arrayOfMatches.length;i++){
+          if(arrayOfChats.indexOf(arrayOfMatches[i])===-1)
+            matchNoChat.push(arrayOfMatches[i]);
+        }
+        if(matchNoChat.length===0){
+          res.send("nada");
+        }
+        else{
+        pullMatches(res,matchNoChat);
+      }
       }
   });
 
 });
 
-function pullForms(res,matches){
+
+function pullMatches(res,matches){
+
     var MatchCards=[];
     var promises=[];
 
@@ -452,6 +467,51 @@ function pullForms(res,matches){
     
     Promise.all(promises).then(function(){
       res.json(MatchCards);
+    });
+  }
+
+
+  app.get("/api/myChats",function(req,res){
+    db.Match.findOne({
+      where:{
+        UserID:req.session.passport.user.id
+      }
+    }).then(function(matchdata){
+      var chats=matchdata.dataValues.myChats;
+      if(chats===null){
+        res.send("nochats");
+      }
+      else{
+        var arrayOfChats = chats.split(",");
+
+        pullChats(res,arrayOfChats);
+      }
+  });
+
+});
+
+
+function pullChats(res,chats){
+
+    var ChatCards=[];
+    var promises=[];
+
+    for(var i=0;i<chats.length;i++){
+      thisChat=chats[i];
+
+      var promise=db.Form.findOne({
+          where: {
+          UserId: thisChat
+        }
+      }).then(function(chatforms){
+          ChatCards.push(chatforms);
+    });
+
+      promises.push(promise);
+    }
+    
+    Promise.all(promises).then(function(){
+      res.json(ChatCards);
     });
   }
 

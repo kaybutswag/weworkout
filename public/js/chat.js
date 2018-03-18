@@ -15,17 +15,15 @@ $.get("/api/myId",function(data){
 });
 
 
-
-  $('.newKinectionsBench').on("click",".userCard",function () {
+    $('.kinectionsBench').on("click",".userCard",function () {
+      $('#message_block').empty();
     screenFriendId = $(this).attr("data-value");
-
-    console.log(screenFriendId);
 
     var chathistory={
       FriendId:screenFriendId
     };
 
-    $.post("/api/oldChat/", chathistory )
+    $.post("/api/oldChat/", chathistory)
         .then(function (data) {
             console.log(data);
       if(data===null){

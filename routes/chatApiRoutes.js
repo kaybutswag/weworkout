@@ -1,7 +1,5 @@
 var db = require("../models");
 var passport = require("../config/passport.js");
-var intid;
-var myId;
 
 module.exports = function (app) {
 
@@ -23,75 +21,66 @@ app.post("/api/pushChat", function(req, res) {
     var myChats;
     var theirChats;
 
-    myId=req.session.passport.user.id;
+    var myUserId=req.session.passport.user.id;
 
-    intid=parseInt(req.body.FriendId);
+    var theirId=req.body.FriendId;
 
-    db.Message.findAll({
-      where:{
-        $or: [
-          {
-            $and: [{UserId: myId}, {FriendId: intid}]
-          },
-          {
-            $and: [{FriendId: myId}, {UserId: intid}]
-          }
-        ]
-      }
-    }).then(function(results){
-      if(results !== null){
-        console.log("not null")
-        res.end();
-      }
-      else
-        console.log("null")
-        db.Match.findOne({
+    db.Match.findOne({
         where:{
-          UserId: myId
+          UserId: myUserId
         }
         }).then(function(results2){
-          if(results2.dataValues.myChats!==null){
-            myChats=results2.dataValues.myChats+","+req.body.FriendId;
+          myChats=results2.dataValues.myChats;
+          if(myChats===null)
+            myChats=theirId;
+          else{
+            var myArray=results2.dataValues.myChats.split(",");
+                if(myArray.indexOf(theirId)!==-1){
+                  res.end();
+                }
+                else
+                  myChats+=","+theirId;
           }
-          else {
-            myChats=req.body.FriendId;
-          }
+
 
         
-        db.Match.update({
-            myChats: myChats
-          }, {
-            where: {
-              UserId: myId
-            }
-          });    
+          db.Match.update({
+              myChats: myChats
+            }, {
+              where: {
+                UserId: myUserId
+              }
+            });    
 
           db.Match.findOne({
-            where:{
-              UserId: intid
-            }
-          }).then(function(results3){
-            if(results3.dataValues.myChats!==null){
-              theirChats=results3.dataValues.myChats+","+myId;
-            }
-            else {
-              theirChats=myId;
+              where:{
+                UserId: theirId
+              }
+            }).then(function(results3){
+              theirChats=results3.dataValues.myChats;
+            if(theirChats===null)
+              theirChats=myUserId;
+            else{
+              var Array2=results3.dataValues.myChats.split(",");
+                  if(theirChats.indexOf(myUserId)!==-1){
+                    res.end();
+                  }
+                  else
+                    theirChats+=","+myUserId;
             }
 
-            
+
+          
           db.Match.update({
               myChats: theirChats
             }, {
               where: {
-                UserId: intid
+                UserId: theirId
               }
             });
 
-          });
+        });
 
-
-  });
-  //end then
   });
 });
 //ends api
@@ -120,8 +109,8 @@ app.post("/api/pushChat", function(req, res) {
   });
 
   app.get("/api/myId", function(req,res){
-      myId=req.session.passport.user.id;
-      intid=parseInt(req.body.FriendId);
+      var myId=req.session.passport.user.id;
+      var intid=parseInt(req.body.FriendId);
       var randoObject={
         myId:myId
       };
