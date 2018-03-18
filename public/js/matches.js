@@ -87,7 +87,7 @@ function slickInit() {
 	});
 }
 
-function showThings(number){
+function showMatches(number){
   var data2=[];
   $.get("/api/myMatches", function(data) {
         for(var i=0;i<data.length;i++){
@@ -139,14 +139,68 @@ function showThings(number){
     });
 }
 
+function showCards(number){
+  var data2=[];
+  $.get("/api/myChats", function(data) {
+        for(var i=0;i<data.length;i++){
+
+          if(parseInt(data[i].UserId)===parseInt(number)){
+            data2.push(data[i]);
+          }
+        }
+          $(".userCard2").empty();
+          var thisCardImg2=$("<div>");
+          thisCardImg2.addClass("userCardImg");
+          if (data2[0].img == null) {
+            thisCardImg2.attr("style","background-image: url('img/logoBlack.png')");
+          } else {
+            thisCardImg2.attr("style","background-image: url('"+data2[0].img+"')");
+          }
+          $(".userCard2").append(thisCardImg2);
+          $(".userCard2").attr("data-value",number);
+          $(".userCard2").append("<h4 id='name2'>"+data2[0].name+"</h4>");
+          cardImgSize();
+
+          $('#gender').text(data2[0].gender);
+          $('#location').text(data2[0].primaryLocation);
+          $('#age').text(moment().diff(moment(data2[0].dob),"years"));
+          $('#bio').text(data2[0].bio);
+
+          var sports2="";
+
+          var fieldsToFill = ["weightlift", "run", "walk", "swim", "surf", "bike", "yoga", "pilates", "cardio", "dance", "rock", "gymnastics", "bowl", 
+          "rowing", "tennis", "baseball", "basketball", "football", "soccer", "rugby", "volleyball", "golf", "hockey", "ice", "skateboard"];
+
+          var actualActivity = ["Weightlifting", "Running", "Walking", "Swimming", "Surfing", "Biking", "Yoga", "Pilates", "Cardio", "Dancing",
+          "Rock Climbing", "Gymnastics", "Bowling", "Rowing", "Tennis", "Baseball", "Basketball", "Football", "Soccer", "Rugby", "Volleyball", 
+          "Golfing", "Hockey", "Ice Skating", "Skateboarding"];
+
+
+          for(var i = 0; i < fieldsToFill.length; i++) {
+              var activity = fieldsToFill[i];
+              if(data2[0][activity] === true) {
+                  if(sports2 === "") {
+                    sports2 += actualActivity[i];
+                  }
+                  else
+                    sports2 += ", " + actualActivity[i];
+              }
+          }
+
+          $("#activities").text(sports2);
+    });
+}
+
+
 $(document).ready(function(){
-  $.get("/api/myMatches", function(data) {
+    $.get("/api/myMatches", function(data) {
       if(data==="nada"){
-        console.log("test front");
+        console.log("No matches");
         $(".newKinectionsDiv").empty();
-        $(".newKinectionsDiv").html("<div class='noKinections'><p>No Kinections yet!</p><br><a href='/judgement'><button class='keepSwiping'>Keep swiping!</button></a></div>");
+        $(".newKinectionsDiv").html("<div class='noKinections'><p>No Kinections yet!</p><br><a href='/judgement'><button class='keepSwiping'>Start Kinecting!</button></a></div>");
       }
       else{
+        console.log("matches");
         $(".newKinectionsDiv").empty();
         for(var i=0;i<data.length;i++){
           var thisCard=$("<div>");
@@ -158,11 +212,40 @@ $(document).ready(function(){
             thisCardImg.attr("style","background-image: url('img/logoBlack.png')");
           } else {
             thisCardImg.attr("style","background-image: url('"+data[i].img+"')");
-          };
-          // thisCardImg.attr("style","background-image: url('"+data[i].img+"')");
+          }
           thisCard.append(thisCardImg);
           thisCard.append("<h4 id='name'>"+data[i].name+"</h4>");
           $(".newKinectionsDiv").append(thisCard);
+        }
+        slickInit();
+        cardImgSize();
+      }
+    });
+
+  $.get("/api/myChats", function(data2) {
+      if(data2==="nochats"){
+        console.log("no Chats");
+        $(".kinectionsDiv").empty();
+        $(".kinectionsDiv").attr("style", "display: none");
+        $(".newKinectionsBench").attr("style", "margin-bottom: 300px;")
+      }
+      else{
+        console.log("Chats");
+        $(".kinectionsDiv").empty();
+        for(var i=0;i<data2.length;i++){
+          var thatCard=$("<div>");
+          thatCard.addClass("userCard");
+          thatCard.attr("data-value",data2[i].UserId);
+          var thatCardImg=$("<div>");
+          thatCardImg.addClass("userCardImg");
+          if (data2[i].img == null) {
+            thatCardImg.attr("style","background-image: url('img/logoBlack.png')");
+          } else {
+            thatCardImg.attr("style","background-image: url('"+data2[i].img+"')");
+          };
+          thatCard.append(thatCardImg);
+          thatCard.append("<h4 id='name'>"+data2[i].name+"</h4>");
+          $(".kinectionsDiv").append(thatCard);
         }
         slickInit();
         cardImgSize();
@@ -173,26 +256,29 @@ $(document).ready(function(){
 		$(".newKinectionsBench").hide();
 		$(".kinectionsBench").hide();
     idforcontent=$(this).attr("data-value");
-    showThings(idforcontent);
+    showMatches(idforcontent);
 		$(".content").show();
 		$("#returnMatch").show();
 		cardImgSize();
 	});
 
-  $('.KinectionsBench').on("click",".userCardImg",function () {
+  $('.kinectionsBench').on("click",".userCard",function () {
     $(".newKinectionsBench").hide();
     $(".kinectionsBench").hide();
+    idforcontent=$(this).attr("data-value");
+    showCards(idforcontent);
     $(".content").show();
     $("#returnMatch").show();
     cardImgSize();
   });
 
 	$('#returnMatch').click(function() {
-		$(".newKinectionsBench").show();
-		$(".kinectionsBench").show();
-		$(".content").hide();
-		cardImgSize();
-		$("#returnMatch").hide();
+    location.reload();
+		// $(".newKinectionsBench").show();
+		// $(".kinectionsBench").show();
+		// $(".content").hide();
+		// cardImgSize();
+		// $("#returnMatch").hide();
 	});
 
 	$('#viewBio').click(function() {
@@ -209,7 +295,6 @@ $(document).ready(function(){
 		$("#viewChat").hide();
 	})
 
-	// cardImgSize();
   setInterval(photoSlideshow, 12000);
 });
 

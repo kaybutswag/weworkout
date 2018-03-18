@@ -13,16 +13,6 @@ function shuffleArray(arr){
 	}
 	return arr;
 }
-
-function openMatchModal (a, b, c, d) {
-	$('#matchOneImg').attr("style", "background-image: url("+a+")");
-	$('#matchOneName').text(b);
-	$('#matchTwoImg').attr("style", "background-image: url("+c+")");
-	$('#matchTwoName').text(d);
-  	$('.userCardImg').height($('.userCardImg').width());
-    var href = $('#matchLink').attr('href');
-    window.location.href = href;
-}
  
 function photoSlideshow() {
   if(counter > 0)
@@ -63,6 +53,7 @@ function updateUserLocation(latitude, longitude, userAge) {
 			("#error-message").text("Could not update your location");
 		sendPreferences(userAge);
 	});
+	console.log("location updated");
 }
 
 function autoPopulateModal() {
@@ -73,11 +64,10 @@ function autoPopulateModal() {
 		for(var i = 0; i < sportsPreferences.length; i++)
 			$("#" + sportsPreferences[i]).attr("checked", true);
 	});
-	$("#search-radius").val(5); //will need to update based on how search radius bar works
 }
 
 function sendPreferences(userAge) {
-	var miles = $("#miles").text();
+	var miles = $("#maxRadius").text();
 
 	var minAge = $("#minAge").val();
 
@@ -197,22 +187,26 @@ function addLike(){
 	});
 }
 
-//will write to front-end once match modal is designed
 function notifyAboutMatch(myName, theirName, myPhoto, theirPhoto) {
-	console.log(myName);
-	console.log(theirName);
-	if(myPhoto !== null)
-		console.log(myPhoto.charAt(1));
-	else
-		console.log("null");
-	if(theirPhoto !== null)
-		console.log(theirPhoto.charAt(1));
-	else
-		console.log("null");
+	$('#matchOneImg').attr("style", "background-image: url("+myPhoto+")");
+	$('#matchOneName').text(myName);
+	$('#matchTwoImg').attr("style", "background-image: url("+theirPhoto+")");
+	$('#matchTwoName').text(theirName);
+  	$('.userCardImg').height($('.userCardImg').width());
+    var href = $('#matchLink').attr('href');
+    window.location.href = href;
 }
 
 $(document).ready(function(){
 	var userAge = -2;
+
+	var slider = document.getElementById("myRadius")
+	var output = document.getElementById("maxRadius");
+	output.innerHTML = slider.value;
+
+	slider.oninput = function() {
+		output.innerHTML = this.value;
+	}
 
 	$.ajax({
 		type: "POST",

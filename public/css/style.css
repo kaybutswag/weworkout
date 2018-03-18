@@ -208,6 +208,7 @@
 		background-color: rgba(255,255,255,.5);
 		/*not reactive*/
 		/*margin: 150px 150px 20px 150px;*/
+		margin-top: 90px;
 		margin-bottom: 20px;
 		max-width: 1100px;
 		width: 70%;
@@ -229,7 +230,7 @@
 
 	.kinectionsBench {
 		background-color: rgba(255,255,255,.5);
-		margin: 20px 100px 10px 100px; */
+		margin: 20px 100px 10px 100px;
 		max-width: 1100px;
 		width: 70%;
 		/*max-height: 300px;*/
@@ -595,7 +596,20 @@
 	    background: #eee;
 	}
 
+	.slider {
+		-webkit-appearance: none;
+		appearance: none;
+		height: 10px;
+		border-radius: 5px;
+		background: #212121;
+		opacity: .7;
+		outline: none;
+		width: 30%;
+	}
 
+	.slider:hover{
+		opacity: 1;
+	}
 
 	/* pic testin */
 	#changingPic {

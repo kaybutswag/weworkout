@@ -1,36 +1,30 @@
-
-
 $(function () {
 
   var socket = io();
 
-  var screenFriendId;
-
   var myId;
 
+  var screenFriendId;
 
-$.get("/api/myId",function(data){
-  myId=data.myId;
+  $.get("/api/myId",function(data){
+    myId=data.myId;
+  });
 
-});
-
-
-
-  $('.newKinectionsBench').on("click",".userCard",function () {
+  $('.kinectionsBench').on("click",".userCard",function () {
+    $('#message_block').empty();
     screenFriendId = $(this).attr("data-value");
-
-    console.log(screenFriendId);
 
     var chathistory={
       FriendId:screenFriendId
     };
 
-    $.post("/api/oldChat/", chathistory )
+    $.post("/api/oldChat/", chathistory)
         .then(function (data) {
             console.log(data);
       if(data===null){
-          return;
+        return;
       }
+      $("#message_block").empty();
       for(var i=0; i<data.length;i++){
 
       if(parseInt(data[i].UserId)===parseInt(screenFriendId)){
@@ -51,23 +45,26 @@ $.get("/api/myId",function(data){
       $('.history').scrollTop($(".history")[0].scrollHeight);
     }
     });
-
-    
   });
 
-  
-
-
-//this upates with new chats
+//this updates with new chats
   $('#messageSend').on("click", function (event) {
     event.preventDefault();
 
-    var FriendId = $('.userCard2').attr("data-value");
+    var FriendId = $('.userCard2').attr('data-value');
     var chat_messages = $('#m').val().trim();
     var chat={
       FriendId:FriendId,
+      SenderId: myId,
       chat_messages:chat_messages
     };
+
+    $.post("/api/pushChat", chat)
+          // On success, run the following code
+          .then(function (data) {
+            // Log the data we found
+            console.log("chat rows maybe updated");
+    });
 
     socket.emit('chat message', chat);
 
@@ -77,6 +74,7 @@ $.get("/api/myId",function(data){
             // Log the data we found
             console.log("chat row inserted");
           });
+      
       
 
     $('#m').val('');
@@ -88,9 +86,9 @@ $.get("/api/myId",function(data){
       console.log(myId);
       console.log(msg.FriendId);
       console.log(screenFriendId);
-      if(parseInt(myId)===parseInt(msg.FriendId))
+      if(parseInt(myId)===parseInt(msg.FriendId) && parseInt(screenFriendId) === parseInt(msg.SenderId))
         newMessage.addClass('friendMsg');
-      else if(parseInt(screenFriendId)===parseInt(msg.FriendId))
+      else if(parseInt(screenFriendId)===parseInt(msg.FriendId) && parseInt(myId) === parseInt(msg.SenderId))
         newMessage.addClass('userMsg');
       else
         return;
@@ -102,4 +100,5 @@ $.get("/api/myId",function(data){
       $('.history').stop().animate({scrollTop:$(".history")[0].scrollHeight},1000);
     });
 });
+
 
