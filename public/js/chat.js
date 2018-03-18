@@ -10,8 +10,14 @@ $(function () {
     myId=data.myId;
   });
 
+  $('.newKinectionsBench').on("click",".userCard",function () {
+
+    screenFriendId = $(this).attr("data-value");
+
+  });
+
   $('.kinectionsBench').on("click",".userCard",function () {
-    $('#message_block').empty();
+
     screenFriendId = $(this).attr("data-value");
 
     var chathistory={
