@@ -8,22 +8,21 @@ $(function () {
 
   $.get("/api/myId",function(data){
     myId=data.myId;
-});
+  });
 
-  $('.newKinectionsBench').on("click",".userCard",function () {
+  $('.kinectionsBench').on("click",".userCard",function () {
+    $('#message_block').empty();
     screenFriendId = $(this).attr("data-value");
-
-    console.log(screenFriendId);
 
     var chathistory={
       FriendId:screenFriendId
     };
 
-    $.post("/api/oldChat/", chathistory )
+    $.post("/api/oldChat/", chathistory)
         .then(function (data) {
             console.log(data);
       if(data===null){
-          return;
+        return;
       }
       $("#message_block").empty();
       for(var i=0; i<data.length;i++){
@@ -60,6 +59,13 @@ $(function () {
       chat_messages:chat_messages
     };
 
+    $.post("/api/pushChat", chat)
+          // On success, run the following code
+          .then(function (data) {
+            // Log the data we found
+            console.log("chat rows maybe updated");
+    });
+
     socket.emit('chat message', chat);
 
         $.post("/api/newChat", chat)
@@ -68,6 +74,7 @@ $(function () {
             // Log the data we found
             console.log("chat row inserted");
           });
+      
       
 
     $('#m').val('');
@@ -93,4 +100,5 @@ $(function () {
       $('.history').stop().animate({scrollTop:$(".history")[0].scrollHeight},1000);
     });
 });
+
 

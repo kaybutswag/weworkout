@@ -53,6 +53,7 @@ function updateUserLocation(latitude, longitude, userAge) {
 			("#error-message").text("Could not update your location");
 		sendPreferences(userAge);
 	});
+	console.log("location updated");
 }
 
 function autoPopulateModal() {
