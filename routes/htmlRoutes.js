@@ -6,10 +6,12 @@ var isAuthenticated = require("../config/middleware/isAuthenticated.js");
 module.exports = function(app) {
 
   app.get("/", function(req, res) {
-    if(req.user)
+    if(req.user) {
       res.redirect("/judgement");
-    else
+    }
+    else {
       res.sendFile(path.join(__dirname, "../public/index.html"));
+    }
   });
 
 app.get("/judgement", isAuthenticated, function(req, res){
@@ -24,8 +26,6 @@ app.get("/judgement", isAuthenticated, function(req, res){
         res.redirect("/profile");
     });
   });
-
-
 
   app.get("/matches", isAuthenticated, function(req, res){
     db.Form.findOne({
