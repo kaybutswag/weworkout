@@ -136,12 +136,10 @@ function showInfo(number){
 $(document).ready(function(){
     $.get("/api/myMatches", function(data) {
       if(data==="nada") {
-        console.log("No matches");
         $(".newKinectionsDiv").empty();
         $(".newKinectionsDiv").html("<div class='noKinections'><p>No Kinections yet!</p><br><a href='/judgement'><button class='keepSwiping'>Start Kinecting!</button></a></div>");
       }
       else {
-        console.log("matches");
         $(".newKinectionsDiv").empty();
         for(var i=0;i<data.length;i++){
           var thisCard=$("<div>");
@@ -157,21 +155,20 @@ $(document).ready(function(){
           thisCard.append(thisCardImg);
           thisCard.append("<h4 id='name'>"+data[i].name+"</h4>");
           $(".newKinectionsDiv").append(thisCard);
+          slickInit();
         }
-        // slickInit();
       }
         cardImgSize();
     });
 
   $.get("/api/myChats", function(data2) {
       if(data2==="nochats"){
-        console.log("no Chats");
         $(".kinectionsDiv").empty();
-        $(".kinectionsDiv").attr("style", "display: none");
+        $(".kinectionsBench").css('display','none');
         $(".newKinectionsBench").attr("style", "margin-bottom: 300px;")
       }
       else{
-        console.log("Chats");
+        $(".kinectionsBench").css('display','block');
         $(".kinectionsDiv").empty();
         for(var i=0;i<data2.length;i++){
           var thatCard=$("<div>");
@@ -187,8 +184,9 @@ $(document).ready(function(){
           thatCard.append(thatCardImg);
           thatCard.append("<h4 id='name'>"+data2[i].name+"</h4>");
           $(".kinectionsDiv").append(thatCard);
+          slickInit();
         }
-        slickInit();
+        
         cardImgSize();
       }
     });
