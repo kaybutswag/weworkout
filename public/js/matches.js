@@ -51,9 +51,6 @@ function slickInit() {
         slidesToScroll: 1
       }
     }
-    // You can unslick at a given breakpoint now by adding:
-    // settings: "unslick"
-    // instead of a settings object
   ]
 	});
 
@@ -80,9 +77,6 @@ function slickInit() {
         slidesToScroll: 2
       }
     }
-    // You can unslick at a given breakpoint now by adding:
-    // settings: "unslick"
-    // instead of a settings object
   ]
 	});
 }
@@ -140,58 +134,63 @@ function showInfo(number){
 }
 
 $(document).ready(function(){
-  $.get("/api/myMatches", function(data) {
-      if(data==="nada"){
+    $.get("/api/myMatches", function(data) {
+      if(data==="nada") {
+        console.log("No matches");
         $(".newKinectionsDiv").empty();
-        $(".newKinectionsDiv").html("<p>Sorry, no matches at the moment. We suggest broadening your preferences.</p><a href='/judgement'><button>Adjust Preferences</button></a>");
+        $(".newKinectionsDiv").html("<div class='noKinections'><p>No Kinections yet!</p><br><a href='/judgement'><button class='keepSwiping'>Start Kinecting!</button></a></div>");
       }
-      else{
+      else {
+        console.log("matches");
         $(".newKinectionsDiv").empty();
-            for(var i=0;i<data.length;i++){
-              var thisCard=$("<div>");
-              thisCard.addClass("userCard");
-              thisCard.attr("data-value",data[i].UserId);
-              var thisCardImg=$("<div>");
-              thisCardImg.addClass("userCardImg");
-              if (data[i].img == null) {
-                thisCardImg.attr("style","background-image: url('img/logoBlack.png')");
-              } else {
-                thisCardImg.attr("style","background-image: url('"+data[i].img+"')");
-              }
-              thisCard.append(thisCardImg);
-              thisCard.append("<h4 id='name'>"+data[i].name+"</h4>");
-              $(".newKinectionsDiv").append(thisCard);
+        for(var i=0;i<data.length;i++){
+          var thisCard=$("<div>");
+          thisCard.addClass("userCard");
+          thisCard.attr("data-value",data[i].UserId);
+          var thisCardImg=$("<div>");
+          thisCardImg.addClass("userCardImg");
+          if (data[i].img == null) {
+            thisCardImg.attr("style","background-image: url('img/logoBlack.png')");
+          } else {
+            thisCardImg.attr("style","background-image: url('"+data[i].img+"')");
+          }
+          thisCard.append(thisCardImg);
+          thisCard.append("<h4 id='name'>"+data[i].name+"</h4>");
+          $(".newKinectionsDiv").append(thisCard);
         }
+        // slickInit();
       }
-      // slickInit();
-      cardImgSize();
+        cardImgSize();
     });
 
   $.get("/api/myChats", function(data2) {
       if(data2==="nochats"){
+        console.log("no Chats");
         $(".kinectionsDiv").empty();
-        $(".kinectionsDiv").html("<p>Looks like no chats have been started.</p>");
+        $(".kinectionsDiv").attr("style", "display: none");
+        $(".newKinectionsBench").attr("style", "margin-bottom: 300px;")
       }
       else{
+        console.log("Chats");
         $(".kinectionsDiv").empty();
-          for(var i=0;i<data2.length;i++){
-              var thatCard=$("<div>");
-              thatCard.addClass("userCard");
-              thatCard.attr("data-value",data2[i].UserId);
-              var thatCardImg=$("<div>");
-              thatCardImg.addClass("userCardImg");
-              if (data2[i].img == null) {
-                thatCardImg.attr("style","background-image: url('img/logoBlack.png')");
-              } else {
-                thatCardImg.attr("style","background-image: url('"+data2[i].img+"')");
-              };
-              thatCard.append(thatCardImg);
-              thatCard.append("<h4 id='name'>"+data2[i].name+"</h4>");
-              $(".kinectionsDiv").append(thatCard);
-          }
+        for(var i=0;i<data2.length;i++){
+          var thatCard=$("<div>");
+          thatCard.addClass("userCard");
+          thatCard.attr("data-value",data2[i].UserId);
+          var thatCardImg=$("<div>");
+          thatCardImg.addClass("userCardImg");
+          if (data2[i].img == null) {
+            thatCardImg.attr("style","background-image: url('img/logoBlack.png')");
+          } else {
+            thatCardImg.attr("style","background-image: url('"+data2[i].img+"')");
+          };
+          thatCard.append(thatCardImg);
+          thatCard.append("<h4 id='name'>"+data2[i].name+"</h4>");
+          $(".kinectionsDiv").append(thatCard);
+        }
+        slickInit();
+        cardImgSize();
       }
-      slickInit();
-      cardImgSize();
     });
 
 	$('.newKinectionsBench').on("click",".userCard",function () {
