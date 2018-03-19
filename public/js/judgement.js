@@ -29,12 +29,14 @@ function updateLocation(userAge) {
 			updateUserLocation(position.coords.latitude, position.coords.longitude, userAge);
 		}, function(error){
 			$("#location-unavailable").text("Could not update your location");
-			sendPreferences(userAge);
+			updateUserLocation('a', 'a', userAge);
+			//sendPreferences(userAge);
 		});
 	}
 	else {
 		$("#location-unavailable").text("Your browser did not let us store your location.");
-		sendPreferences(userAge);
+		updateUserLocation('a', 'a', userAge);
+		//sendPreferences(userAge);
 	}
 }
 
@@ -50,23 +52,27 @@ function updateUserLocation(latitude, longitude, userAge) {
 		data: updatedLocation
 	}).then(function(error){
 		if(error)
-			("#error-message").text("Could not update your location");
+			("#error-message").text("Unable to find potential Kinections.");
 		sendPreferences(userAge);
 	});
-	console.log("location updated");
 }
 
-function autoPopulateModal() {
-	$.ajax({
+function autoPopulateModal(userAge) {
+	var promise = $.ajax({
 		type: "POST",
 		url: "/api/get-default-filter"
 	}).then(function(sportsPreferences){
 		for(var i = 0; i < sportsPreferences.length; i++)
 			$("#" + sportsPreferences[i]).attr("checked", true);
 	});
+
+	Promise.all([promise]).then(function(){
+		updateLocation(userAge);
+	});
 }
 
 function sendPreferences(userAge) {
+	console.log("in sendPreferences");
 	var miles = $("#maxRadius").text();
 
 	var minAge = $("#minAge").val();
@@ -95,6 +101,8 @@ function sendPreferences(userAge) {
             sports.push(fieldId);
         }
     }
+
+    console.log(sports);
 
 	var preferences = {
 		genderselect: genderselect,
@@ -135,7 +143,10 @@ function showCard(){
 		$("#name").attr("user-id", myBigArray[currentProfile].UserId);
 		console.log(myBigArray[currentProfile].UserId);
 		$(".userCardImg").empty();
-		$(".userCardImg").attr("style","background-image: url('"+myBigArray[currentProfile].img+"')");
+		if(myBigArray[currentProfile].img !== null)
+			$(".userCardImg").attr("style","background-image: url('"+myBigArray[currentProfile].img+"')");
+		else
+			$(".userCardImg").attr("style","background-image: url('img/logoBlack.png')");
 		$('.userCardImg').height($('.userCardImg').width());
 		$('#gender').text(myBigArray[currentProfile].gender);
 		$('#location').text(myBigArray[currentProfile].primaryLocation);
@@ -188,9 +199,15 @@ function addLike(){
 }
 
 function notifyAboutMatch(myName, theirName, myPhoto, theirPhoto) {
-	$('#matchOneImg').attr("style", "background-image: url("+myPhoto+")");
+	if(myPhoto !== null)
+		$('#matchOneImg').attr("style", "background-image: url("+myPhoto+")");
+	else 
+		$('#matchOneImg').attr("style", "background-image: url('img/logoBlack.png')");
+	if(theirPhoto !== null)
+		$('#matchTwoImg').attr("style", "background-image: url("+theirPhoto+")");
+	else
+		$('#matchTwoImg').attr("style", "background-image: url('img/logoBlack.png')");
 	$('#matchOneName').text(myName);
-	$('#matchTwoImg').attr("style", "background-image: url("+theirPhoto+")");
 	$('#matchTwoName').text(theirName);
   	$('.userCardImg').height($('.userCardImg').width());
     var href = $('#matchLink').attr('href');
@@ -216,7 +233,6 @@ $(document).ready(function(){
 		userAge = moment().diff(moment(userDOB), "years");
 		$("#minAge").val(userAge - 5);
 		$("#maxAge").val(userAge + 5);
-		updateLocation(userAge);
 		autoPopulateModal(userAge);
 	});
 

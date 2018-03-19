@@ -121,16 +121,30 @@ module.exports = function(app) {
   app.put("/api/update-location", function(req, res) {
     myLatitude = req.body.latitude;
     myLongitude = req.body.longitude;
-    db.User.update({
-      latitude: myLatitude,
-      longitude: myLongitude
-    }, {
-      where: {
-        email: req.user.email
-      }
-    }).then(function(response){
-      res.end();
-    });
+    
+    if(myLatitude !== 'a' && myLongitude !== 'a') {
+      db.User.update({
+        latitude: myLatitude,
+        longitude: myLongitude
+      }, {
+        where: {
+          email: req.user.email
+        }
+      }).then(function(response){
+        res.end();
+      });
+    }
+    else {
+      db.User.findOne({
+        where: {
+          email: req.user.email
+        }
+      }).then(function(response){
+        myLatitude = response.dataValues.latitude;
+        myLongitude = response.dataValues.longitude;
+        res.end();
+      });
+    }
   });
 
   //gets user's age
@@ -385,7 +399,6 @@ module.exports = function(app) {
         }).then(function(myInfo){
           myName = myInfo.dataValues.name;
           myPhoto = myInfo.dataValues.img;
-          console.log(myPhoto);
           response.myName = myName; 
           response.myPhoto = myPhoto;
         });
@@ -427,7 +440,11 @@ module.exports = function(app) {
       }
       else{
         var arrayOfMatches = matches.split(",");
-        var arrayOfChats = chats.split(",");
+        var arrayOfChats;
+        if(chats !== null)
+          arrayOfChats = chats.split(",");
+        else 
+          arrayOfChats = [];
         var matchNoChat=[];
 
         for(var i=0;i<arrayOfMatches.length;i++){
@@ -474,7 +491,7 @@ function pullMatches(res,matches){
   app.get("/api/myChats",function(req,res){
     db.Match.findOne({
       where:{
-        UserID:req.session.passport.user.id
+        UserId:req.session.passport.user.id
       }
     }).then(function(matchdata){
       var chats=matchdata.dataValues.myChats;
@@ -500,7 +517,7 @@ function pullChats(res,chats){
       thisChat=chats[i];
 
       var promise=db.Form.findOne({
-          where: {
+        where: {
           UserId: thisChat
         }
       }).then(function(chatforms){
@@ -515,6 +532,15 @@ function pullChats(res,chats){
     });
   }
 
+  app.post("/api/getUserInfo", function(req, res){
+    db.Form.findOne({
+      where: {
+        UserId: req.body.id 
+      }
+    }).then(function(userInfo){
+      res.json(userInfo);
+    });
+  });
 
 
 //logout but saves function
