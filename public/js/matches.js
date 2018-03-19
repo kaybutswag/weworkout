@@ -210,17 +210,17 @@ $(document).ready(function(){
           thisCard.append(thisCardImg);
           thisCard.append("<h4 id='name'>"+data[i].name+"</h4>");
           $(".newKinectionsDiv").append(thisCard);
-        }
         // slickInit();
-      }
         cardImgSize();
+        }
+      }
     });
 
   $.get("/api/myChats", function(data2) {
       if(data2==="nochats"){
         console.log("no Chats");
         $(".kinectionsDiv").empty();
-        $(".kinectionsDiv").attr("style", "display: none");
+        $(".kinectionsDiv").hide();
         $(".newKinectionsBench").attr("style", "margin-bottom: 300px;")
       }
       else{
