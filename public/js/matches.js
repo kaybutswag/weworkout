@@ -51,9 +51,6 @@ function slickInit() {
         slidesToScroll: 1
       }
     }
-    // You can unslick at a given breakpoint now by adding:
-    // settings: "unslick"
-    // instead of a settings object
   ]
 	});
 
@@ -80,9 +77,6 @@ function slickInit() {
         slidesToScroll: 2
       }
     }
-    // You can unslick at a given breakpoint now by adding:
-    // settings: "unslick"
-    // instead of a settings object
   ]
 	});
 }
@@ -194,12 +188,12 @@ function showCards(number){
 
 $(document).ready(function(){
     $.get("/api/myMatches", function(data) {
-      if(data==="nada"){
+      if(data==="nada") {
         console.log("No matches");
         $(".newKinectionsDiv").empty();
         $(".newKinectionsDiv").html("<div class='noKinections'><p>No Kinections yet!</p><br><a href='/judgement'><button class='keepSwiping'>Start Kinecting!</button></a></div>");
       }
-      else{
+      else {
         console.log("matches");
         $(".newKinectionsDiv").empty();
         for(var i=0;i<data.length;i++){
@@ -217,9 +211,9 @@ $(document).ready(function(){
           thisCard.append("<h4 id='name'>"+data[i].name+"</h4>");
           $(".newKinectionsDiv").append(thisCard);
         }
-        slickInit();
-        cardImgSize();
+        // slickInit();
       }
+        cardImgSize();
     });
 
   $.get("/api/myChats", function(data2) {
