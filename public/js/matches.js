@@ -167,12 +167,13 @@ $(document).ready(function(){
       if(data2==="nochats"){
         console.log("no Chats");
         $(".kinectionsDiv").empty();
-        $(".kinectionsDiv").hide();
+        $(".kinectionsBench").hide();
         $(".newKinectionsBench").attr("style", "margin-bottom: 300px;")
       }
       else{
         console.log("Chats");
         $(".kinectionsDiv").empty();
+        $(".kinectionsBench").show();
         for(var i=0;i<data2.length;i++){
           var thatCard=$("<div>");
           thatCard.addClass("userCard");
