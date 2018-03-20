@@ -1,10 +1,12 @@
 {
   "development": {
     "username": "root",
-    "password": "",
+    "password": "root",
     "database": "kinnections_users",
     "host": "127.0.0.1",
+    "port":"8889",
     "dialect": "mysql",
+    "port": "8889",
     "logging": false
   },
   "test": {
@@ -15,10 +17,7 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "root",
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "use_env_variable": "JAWSDB_URL",
     "dialect": "mysql"
   }
 }

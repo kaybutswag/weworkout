@@ -72,7 +72,6 @@ function autoPopulateModal(userAge) {
 }
 
 function sendPreferences(userAge) {
-	console.log("in sendPreferences");
 	var miles = $("#maxRadius").text();
 
 	var minAge = $("#minAge").val();
@@ -102,7 +101,6 @@ function sendPreferences(userAge) {
         }
     }
 
-    console.log(sports);
 
 	var preferences = {
 		genderselect: genderselect,
@@ -129,9 +127,7 @@ function sendPreferences(userAge) {
 }
 
 function showCard(){
-	console.log("showed card");
 	if(currentProfile + 1 > myBigArray.length) {
-		console.log("options exhausted");
 		$("form").first().addClass("display-none");
 		$(".exhausted-options").removeClass("display-none");
 	}
@@ -141,7 +137,6 @@ function showCard(){
 		var theirAge = moment().diff(moment(theirDOB), "years")
 		$("#name").text(myBigArray[currentProfile].name);
 		$("#name").attr("user-id", myBigArray[currentProfile].UserId);
-		console.log(myBigArray[currentProfile].UserId);
 		$(".userCardImg").empty();
 		if(myBigArray[currentProfile].img !== null)
 			$(".userCardImg").attr("style","background-image: url('"+myBigArray[currentProfile].img+"')");
@@ -182,7 +177,6 @@ function showCard(){
 
 function addLike(){
 	var likeId=$("#name").attr("user-id");
-	console.log(likeId);
 
 	var currentUser={
 		likeId:likeId

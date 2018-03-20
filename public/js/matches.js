@@ -134,14 +134,12 @@ function showInfo(number){
 }
 
 $(document).ready(function(){
-    $.get("/api/myMatches", function(data) {
+    var promiseOne = $.get("/api/myMatches", function(data) {
       if(data==="nada") {
-        console.log("No matches");
         $(".newKinectionsDiv").empty();
-        $(".newKinectionsDiv").html("<div class='noKinections'><p>No Kinections yet!</p><br><a href='/judgement'><button class='keepSwiping'>Start Kinecting!</button></a></div>");
+        $(".newKinectionsDiv").html("<div class='noKinections'><p>No new Kinections!</p><br><a href='/judgement'><button class='keepSwiping'>Start Kinecting!</button></a></div>");
       }
       else {
-        console.log("matches");
         $(".newKinectionsDiv").empty();
         for(var i=0;i<data.length;i++){
           var thisCard=$("<div>");
@@ -157,42 +155,42 @@ $(document).ready(function(){
           thisCard.append(thisCardImg);
           thisCard.append("<h4 id='name'>"+data[i].name+"</h4>");
           $(".newKinectionsDiv").append(thisCard);
-        // slickInit();
-        cardImgSize();
         }
       }
     });
 
-  $.get("/api/myChats", function(data2) {
-      if(data2==="nochats"){
-        console.log("no Chats");
-        $(".kinectionsDiv").empty();
-        $(".kinectionsBench").hide();
-        $(".newKinectionsBench").attr("style", "margin-bottom: 300px;")
+  var promiseTwo = $.get("/api/myChats", function(data2) {
+    if(data2==="nochats"){
+      $(".kinectionsDiv").empty();
+      $(".kinectionsBench").hide();
+      $(".newKinectionsBench").attr("style", "margin-bottom: 300px;")
+    }
+    else{
+      $(".kinectionsBench").css('display','block');
+      $(".kinectionsDiv").empty();
+      $(".kinectionsBench").show();
+      for(var i=0;i<data2.length;i++){
+        var thatCard=$("<div>");
+        thatCard.addClass("userCard");
+        thatCard.attr("data-value",data2[i].UserId);
+        var thatCardImg=$("<div>");
+        thatCardImg.addClass("userCardImg");
+        if (data2[i].img == null) {
+          thatCardImg.attr("style","background-image: url('img/logoBlack.png')");
+        } else {
+          thatCardImg.attr("style","background-image: url('"+data2[i].img+"')");
+        };
+        thatCard.append(thatCardImg);
+        thatCard.append("<h4 id='name'>"+data2[i].name+"</h4>");
+        $(".kinectionsDiv").append(thatCard);
       }
-      else{
-        console.log("Chats");
-        $(".kinectionsDiv").empty();
-        $(".kinectionsBench").show();
-        for(var i=0;i<data2.length;i++){
-          var thatCard=$("<div>");
-          thatCard.addClass("userCard");
-          thatCard.attr("data-value",data2[i].UserId);
-          var thatCardImg=$("<div>");
-          thatCardImg.addClass("userCardImg");
-          if (data2[i].img == null) {
-            thatCardImg.attr("style","background-image: url('img/logoBlack.png')");
-          } else {
-            thatCardImg.attr("style","background-image: url('"+data2[i].img+"')");
-          };
-          thatCard.append(thatCardImg);
-          thatCard.append("<h4 id='name'>"+data2[i].name+"</h4>");
-          $(".kinectionsDiv").append(thatCard);
-        }
-        slickInit();
-        cardImgSize();
-      }
-    });
+    }
+  });
+
+  Promise.all([promiseOne, promiseTwo]).then(function(){
+    slickInit();
+    cardImgSize();
+  })
 
 	$('.newKinectionsBench').on("click",".userCard",function () {
 		$(".newKinectionsBench").hide();

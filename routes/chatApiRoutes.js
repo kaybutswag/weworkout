@@ -82,7 +82,6 @@ module.exports = function (app) {
 
     app.post("/api/oldChat", function (req, res) {
     var intid=parseInt(req.body.FriendId);
-    console.log(intid);
 
     db.Message.findAll({
       where:{
