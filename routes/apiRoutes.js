@@ -240,15 +240,15 @@ module.exports = function(app) {
   }
 
   function getDistance(latitude1,longitude1,latitude2,longitude2) {
-    var p = 0.017453292519943295;    //This is  Math.PI / 180
-    var c = Math.cos;
-    var a = 0.5 - c((latitude2 - latitude1) * p)/2 +
-            c(latitude1 * p) * c(latitude2 * p) *
-            (1 - c((longitude2 - longitude1) * p))/2;
-    var R = 6371; //  Earth distance in km so it will return the distance in km
-    var dist = 2 * R * Math.asin(Math.sqrt(a));
-    dist = dist/1.60934 ;
-    return dist;
+    var radlatitude1 = Math.PI * latitude1 / 180;
+    var radlatitude2 = Math.PI * latitude2 / 180;
+    var theta = longitude1 - longitude2;
+    var radtheta = Math.PI * theta / 180;
+    var distance = Math.sin(radlatitude1) * Math.sin(radlatitude2) + Math.cos(radlatitude1) * Math.cos(radlatitude2) * Math.cos(radtheta);
+    distance = Math.acos(distance);
+    distance = distance * 180 / Math.PI;
+    distance = distance * 60 * 1.1515;
+    return distance;
   }
 
   function removeMatches(res, req, lessUsers){
