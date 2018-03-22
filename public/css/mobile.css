@@ -40,7 +40,7 @@
 	}
 
 	#dob {
-		width: 175px;
+		width: 160px;
 	}
 
 	select[name="gender"] {
@@ -125,8 +125,17 @@
 		overflow: hidden;
 	}
 
+	.browserBreak {
+		display: none !important;
+	}
+
+	.mobileTitle {
+		margin: 10px 0 10px 0;
+	}
+
 	.activityCol {
 		flex: 1;
+		word-wrap: break-word;
 	}
 
 	.actSubDiv {
@@ -342,6 +351,10 @@
 		font-size: .9em;
 	}
 
+	input[type="range"] {
+
+	}
+
 	.profileLink, .judgementLink, .matchesLink {
 		cursor: pointer;
 		border: none;
@@ -395,7 +408,7 @@
 	#search, #returnMatch, #logout {
 		cursor: pointer;
 		position: fixed;
-		z-index: 20;
+		z-index: 501;
 		background-color: white;
 		padding: 7px;
 		border-radius: 50%;
@@ -410,6 +423,19 @@
 		border-radius: 50%;
 		color: #212121;
 		border: 2px solid #212121;
+	}
+
+	#mobileLogout {
+		margin-top: 16px;
+		background-color: white;
+		padding: 6px;
+		border-radius: 50%;
+		color: #212121;
+		border: 2px solid #212121;
+		height: 38px;
+		width: 38px;
+		text-align: center;
+		box-sizing: border-box;
 	}
 
 	.nRTitle {
@@ -488,16 +514,16 @@
 	}
 
 	.box2 {
-		margin: 20px 20px 10px 20px;
+		margin: 10px 20px 20px 20px;
 	}
 
 	.userCard {
-		margin: 20px 20px 0px 20px;
+		margin: 20px 20px 10px 20px;
 	}
 
 	.userCard, .userCard2  {
 		flex: 1;
-		/*min-width: 200px;*/
+		min-width: 200px;
 	}
 
 	.userCardImg {
@@ -536,7 +562,7 @@
 	    pointer-events: auto;
 	}
 	.modalDialog > div {
-	    width: 70%;
+	    width: 82%;
 	    position: relative;
 	    margin: 10% auto;
 	    padding: 5px 20px 13px 20px;
