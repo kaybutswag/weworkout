@@ -67,6 +67,7 @@ module.exports = function(app) {
         gender: req.body.gender,
         dob: req.body.dob,
         img: req.body.img,
+        fileName: req.body.fileName,
         primaryLocation: req.body.primaryLocation,
         weightlift: req.body.weightlift,
         run: req.body.run,
@@ -106,7 +107,7 @@ module.exports = function(app) {
   });
 
 //
-  app.post("/api/user-preferences", function(req, res) {
+  app.get("/api/user-preferences", function(req, res) {
     db.Form.findOne({
       where: {
         email: req.user.email
