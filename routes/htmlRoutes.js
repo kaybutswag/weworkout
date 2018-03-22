@@ -10,7 +10,7 @@ module.exports = function(app) {
       res.redirect("/judgement");
     }
     else {
-      res.sendFile(path.join(__dirname, "../public/index.html"));
+      res.sendFile(path.join(__dirname, "../public/login.html"));
     }
   });
 
