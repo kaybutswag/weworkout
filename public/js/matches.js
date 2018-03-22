@@ -14,10 +14,7 @@ function cardImgSize() {
 	$('.userCardImg').each(function() {
 		$(this).height($(this).width());
 		$('.history').height($(this).width()-20);
-		// $('#viewChat').width($(this).width());
-		// $('#viewBio').width($(this).width());
 	})
-
 }
 
 function slickInit() {
@@ -238,3 +235,6 @@ $(window).resize(function() {
 	slickInit();
 	cardImgSize();
 });
+
+// prevents rotation
+lockedAllowed = window.screen.lockOrientation(orientation);

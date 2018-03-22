@@ -2,6 +2,7 @@
 <html lang="en-us">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Kinections | People</title>
 
 		<!-- reset -->
@@ -106,13 +107,13 @@
 
 					<h3>Age Range</h3>
 					<label for="minAge">
-					Minimum Age:
+					Minimum Age: <br class="mobileBreak">
 					<input type="number" name="minAge" id="minAge"> years old
 					</label><br>
 
 
 					<label for="maxAge">
-					Maximum Age:
+					Maximum Age: <br class="mobileBreak">
 					<input type="number" name="minAge" id="maxAge"> years old
 					</label>
 
@@ -263,6 +264,10 @@
 			</p>
 			</div>
 		</form>
+
+		<footer class="mobileFooter">
+			<a href="#openModal"><i class="fas fa-search" id="mobileSearch"></i></a>
+		</footer>
 
 	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 	<script type="text/javascript" src="js/judgement.js"></script>
