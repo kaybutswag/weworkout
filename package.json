@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/kaybutswag/weworkout#readme",
   "dependencies": {
+    "aws-sdk": "^2.212.1",
     "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "fs": "0.0.1-security",
