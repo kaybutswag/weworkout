@@ -129,8 +129,16 @@
 		display: none;
 	}
 
-	.activityCol {
+	.activityFlexDiv {
+		display: flex;
+		justify-content: space-between;
+		flex-flow: row wrap;
+		width: 90%;
+	}
+
+	.actEnt{
 		flex: 1;
+		min-width: 134px;
 	}
 
 	.actSubDiv {

@@ -39,6 +39,18 @@
 		font-family: 'Lato', sans-serif;
 	}
 
+	.activityFlexDiv {
+		display: flex;
+		justify-content: space-between;
+		flex-flow: row wrap;
+		width: 90%;
+	}
+
+	.actEnt{
+		flex: 1;
+		min-width: 134px;
+	}
+
 	#dob {
 		width: 160px;
 	}
@@ -131,11 +143,6 @@
 
 	.mobileTitle {
 		margin: 10px 0 10px 0;
-	}
-
-	.activityCol {
-		flex: 1;
-		word-wrap: break-word;
 	}
 
 	.actSubDiv {
@@ -536,6 +543,14 @@
 		align-items: flex-end;
 	}
 
+	#matchModal > .content > h2 {
+		font-size: 1.2em;
+	}
+
+	#matchModal > .content > .userCard {
+		min-width: 100px;
+	}
+
 	.box2 {
 		flex: 2;
 	}
@@ -579,10 +594,11 @@
 	}
 	#matchModal {
 		padding: 50px;
+		overflow: scroll;
 	}
 	.matchLogo {
-		max-width: 170px;
-		max-height: 170px;
+		max-width: 90px;
+		max-height: 90px;
 	}
 	.content > h2 {
 		color: white;
