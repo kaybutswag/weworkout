@@ -25,6 +25,7 @@ app.use(passport.session());
 
 require("./routes/apiRoutes.js")(app);
 require("./routes/chatApiRoutes.js")(app);
+require("./routes/awsRoutes.js")(app);
 require("./routes/htmlRoutes.js")(app);
 
 //changed force to false for testing
