@@ -524,6 +524,9 @@
 	    opacity:1;
 	    pointer-events: auto;
 	}
+	.modalDiv {
+		width: 950px;
+	}
 	.modalDialog > div {
 	    width: 70%;
 	    position: relative;
