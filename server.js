@@ -8,6 +8,7 @@ var session = require("express-session");
 var io = require("socket.io")(server);
 var passport = require("./config/passport");
 var db = require("./models");
+// var Upload = require('s3-uploader');
 
 var PORT = process.env.PORT || 8000;
 
@@ -27,6 +28,9 @@ require("./routes/apiRoutes.js")(app);
 require("./routes/chatApiRoutes.js")(app);
 require("./routes/htmlRoutes.js")(app);
 
+//AWS
+// var s3 = new AWS.S3();
+// var bucketName='kinections';
 //changed force to false for testing
 
 db.sequelize.sync({ force: true }).then(function() {
