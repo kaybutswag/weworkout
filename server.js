@@ -26,6 +26,7 @@ app.use(passport.session());
 
 require("./routes/apiRoutes.js")(app);
 require("./routes/chatApiRoutes.js")(app);
+require("./routes/awsRoutes.js")(app);
 require("./routes/htmlRoutes.js")(app);
 
 //AWS
@@ -33,7 +34,7 @@ require("./routes/htmlRoutes.js")(app);
 // var bucketName='kinections';
 //changed force to false for testing
 
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({ force: false }).then(function() {
   server.listen(PORT, function() {
     console.info(
       "==> Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
