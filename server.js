@@ -20,19 +20,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-app.use(session({ secret: "W929Ugh5TY3rz", resave: true, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
 
 require("./routes/apiRoutes.js")(app);
 require("./routes/chatApiRoutes.js")(app);
 require("./routes/awsRoutes.js")(app);
 require("./routes/htmlRoutes.js")(app);
 
-//AWS
-// var s3 = new AWS.S3();
-// var bucketName='kinections';
-//changed force to false for testing
+
 
 db.sequelize.sync({ force: false }).then(function() {
   server.listen(PORT, function() {
