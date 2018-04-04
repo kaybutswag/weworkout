@@ -19,7 +19,7 @@ function cardImgSize() {
 
 function slickInit() {
 	$('.newKinectionsDiv').slick({
-  dots: true,
+  // dots: true,
   infinite: false,
   speed: 300,
   slidesToShow: 4,
@@ -56,7 +56,7 @@ function slickInit() {
   infinite: false,
   speed: 300,
   slidesToShow: 4,
-  slidesToScroll: 1,
+  slidesToScroll: 4,
   responsive: [
     {
       breakpoint: 1024,
@@ -68,10 +68,17 @@ function slickInit() {
       }
     },
     {
-      breakpoint: 1003,
+      breakpoint: 600,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
       }
     }
   ]
@@ -195,7 +202,9 @@ $(document).ready(function(){
     idforcontent=$(this).attr("data-value");
     showInfo(idforcontent);
 		$(".content").show();
-		$("#returnMatch").show();
+    if ($(window).width() > 1003) {
+      $("#returnMatch").show();
+    }
 		cardImgSize();
 	});
 
@@ -205,13 +214,19 @@ $(document).ready(function(){
     idforcontent=$(this).attr("data-value");
     showInfo(idforcontent);
     $(".content").show();
-    $("#returnMatch").show();
+    if ($(window).width() > 1003) {
+      $("#returnMatch").show();
+    }
     cardImgSize();
   });
 
 	$('#returnMatch').click(function() {
     location.reload();
 	});
+
+  $('.returnMatchMobile').click(function() {
+    location.reload();
+  });
 
 	$('#viewBio').click(function() {
 		$(".chat").hide();
@@ -235,6 +250,3 @@ $(window).resize(function() {
 	slickInit();
 	cardImgSize();
 });
-
-// prevents rotation
-lockedAllowed = window.screen.lockOrientation(orientation);
