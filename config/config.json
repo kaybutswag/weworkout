@@ -1,10 +1,11 @@
 {
   "development": {
     "username": "root",
-    "password": "",
+    "password": "root",
     "database": "kinnections_users",
     "host": "127.0.0.1",
     "dialect": "mysql",
+    "port":8889
     "logging": false
   },
   "test": {
