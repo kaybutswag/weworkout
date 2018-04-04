@@ -24,6 +24,15 @@ $(document).ready(function(){
     });
   });
 
+  $("#mobileLogout").on("click", function(){
+    $.ajax({
+      method: "GET",
+      url: "/logout"
+    }).then(function(data){
+      window.location.reload();
+    });
+  });
+
   $("#submitActivities").click(function(event){
     $("#userActivities").empty();
     var activities = [];

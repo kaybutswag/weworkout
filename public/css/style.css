@@ -18,7 +18,6 @@
 		min-height: 100%;
 		display: flex;
 		justify-content: center;
-		/*align-items: space-around;*/
 		align-items: center;
 		flex-wrap: wrap;
 		background-attachment: fixed;
@@ -26,7 +25,6 @@
 	    overflow-y: scroll;
 	}
 
-	/*need to look at this.*/
 	textarea {
 		width: 97%;
 		min-height: 150px;
@@ -55,9 +53,9 @@
 		padding: 0;
 	}
 
-	 input[name="location"] {
-	 	width: 150px;
-	 }
+	input[name="location"] {
+		width: 150px;
+	}
 
 	input[name="email"], input[type="password"] {
 		margin: 10px;
@@ -127,8 +125,20 @@
 		overflow: hidden;
 	}
 
-	.activityCol {
+	.mobileBreak {
+		display: none;
+	}
+
+	.activityFlexDiv {
+		display: flex;
+		justify-content: space-between;
+		flex-flow: row wrap;
+		width: 90%;
+	}
+
+	.actEnt{
 		flex: 1;
+		min-width: 134px;
 	}
 
 	.actSubDiv {
@@ -207,8 +217,6 @@
 
 	.content, .newKinectionsBench {
 		background-color: rgba(255,255,255,.5);
-		/*not reactive*/
-		/*margin: 150px 150px 20px 150px;*/
 		margin-top: 90px;
 		margin-bottom: 20px;
 		max-width: 1100px;
@@ -225,7 +233,6 @@
 	}
 
 	.newKinectionsBench {
-		/*max-height: 300px;*/
 		margin-top: 100px;
 	}
 
@@ -234,13 +241,11 @@
 		margin: 20px 100px 10px 100px;
 		max-width: 1100px;
 		width: 70%;
-		/*max-height: 300px;*/
 	}
 
 	.imgPlace {
 		background-color: #ddd;
 		width: 100%;
-		/*padding-top: 80%;*/
 		position: relative;
 		display: flex;
 		justify-content: center;
@@ -275,15 +280,12 @@
 		border-radius: 50%;
 	}
 
-
 	.headLogo:focus {
 		outline:0;
 	}
 
 	button:focus {outline:0;}
 
-
-	/*hacky, but I don't care.*/
 	.headLogoActive {
 		border-bottom: 3px solid #eee;
 	}
@@ -436,9 +438,6 @@
 	}
 
 	#exhausted-options {
-		/*font-weight: 600;*/
-		/*font-size: 1.5em;*/
-		/*line-height: 1.5;*/
 		background-color: white;
 		width: 50%;
 		padding: 20px;
@@ -455,7 +454,6 @@
 	}
 
 	.signInPanel {
-		/*margin: 150px auto;*/
 		margin-bottom: 50px;
 		text-align: center;
 		width: 14%;
@@ -519,8 +517,6 @@
 	    background: rgba(0, 0, 0, 0.8);
 	    z-index: 99999;
 	    opacity:0;
-	    /*-webkit-transition: opacity 400ms ease-in;*/
-	    /*-moz-transition: opacity 400ms ease-in;*/
 	    transition: opacity 400ms ease-in;
 	    pointer-events: none;
 	}
@@ -528,12 +524,14 @@
 	    opacity:1;
 	    pointer-events: auto;
 	}
+	.modalDiv {
+		width: 950px;
+	}
 	.modalDialog > div {
-	    width: 70%;
+	    width: 75%;
 	    position: relative;
 	    margin: 10% auto;
 	    padding: 5px 20px 13px 20px;
-	    /*border-radius: 10px;*/
 	    background: #fff;
 	}
 	#matchModal:target {
@@ -567,8 +565,6 @@
 	    display: flex;
 	    justify-content: center;
 	    align-items: center;
-	    /*-webkit-transition: opacity 400ms ease-in;*/
-	    /*-moz-transition: opacity 400ms ease-in;*/
 	    transition: opacity 300ms ease-in;
 	    pointer-events: none;
 	}
@@ -590,8 +586,6 @@
 	    -webkit-border-radius: 12px;
 	    -moz-border-radius: 12px;
 	    border-radius: 12px;
-	    /*-moz-box-shadow: 1px 1px 3px #000;*/
-	    /*-webkit-box-shadow: 1px 1px 3px #000;*/
 	    box-shadow: 1px 1px 3px #000;
 	}
 	.close:hover {
@@ -631,16 +625,10 @@
 	  }
 
 	  .shadow {
-/*	    -webkit-box-shadow: 5px 5px 5px #aaa;
-	    -moz-box-shadow: 5px 5px 5px #aaa;
-	    box-shadow: 5px 5px 5px #aaa;*/
 	    margin-bottom: 10px;
 	  }
 
 	  #changingPic img {
-/*	    -webkit-transition: opacity 1s ease-in-out;
-	    -moz-transition: opacity 1s ease-in-out;
-	    -o-transition: opacity 1s ease-in-out;*/
 	    transition: opacity 1s ease-in-out;
 	    opacity:0;
 	    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
@@ -671,17 +659,6 @@
 		display: none;
 	}
 
-	    /* Safari */
-	/*@-webkit-keyframes spin {
-	    0% { -webkit-transform: rotate(0deg); }
-	    100% { -webkit-transform: rotate(360deg); }
-	}*/
-
-	/*@keyframes spin {
-	    0% { transform: rotate(0deg); }
-	    100% { transform: rotate(360deg); }
-	}*/
-	/* loading indicator end */
 	.rejectKinnectButton {
 	   cursor: pointer;
 	   border: none;
@@ -690,6 +667,10 @@
 	   margin: 10px;
 	   font-size: .9em;
 	  text-decoration: none;
+	}
+
+	.mobileFooter {
+		display: none;
 	}
 
 }

@@ -2,6 +2,7 @@
 <html lang="en-us">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Kinections | Profile</title>
 
 		<!-- reset -->
@@ -53,7 +54,7 @@
 			</div>
 		</header>
 
-        <div id="logout">
+        <div class="browserBreak" id="logout">
 			<i class="fas fa-sign-out-alt"></i>
         </div>
 
@@ -63,7 +64,8 @@
 				<div class=fullrow>
 					<h6 id="errorMes"></h6>
 				</div>
-			</div><break></break>
+			</div>
+			<break></break>
 			<div class="userCard">
 					<!-- path changes with handlebars -->
 					<div class="userCardImg" style="background-image: url('img/logoBlack.png')">
@@ -91,11 +93,11 @@
 				  	<option value="Other">Other</option>
 				</select>
 
+				<br class="mobileBreak">
+
 				<label for="dob">Date of Birth: </label>
 				<input type="date" name="dob" id="dob" placeholder="mm/dd/yyyy"><br>
 
-				<!-- search form will default to this location if we are unable to determine their current location -->
-				<!-- will need some tooling to validate and give us usable info -->
 				<label for="location">Primary Location: </label>
 
 				<input type="text" name="location" placeholder="City, State" id="primaryLocation"><br>
@@ -110,94 +112,86 @@
 				<div id="openModal" class="modalDialog">
 				    <div class="modalDiv">	<a href="#close" title="Close" class="close"><i class="fas fa-times"></i></a>
 
-				        <h2>Activities</h2>
-				        <hr>
-			        	<div class="activityFlex">
-			        		<div class="activityCol">
-
-				        		<label for="weightlift">
-								<input type="checkbox" id="weightlift" class="activity" data-text="Weightlifting"/>Weightlifting</label>
-								<br>
-								<label for="run">
-								<input type="checkbox" id="run" class="activity" data-text="Running"/>Running</label>
-								<br>
-								<label for="walk">
-								<input type="checkbox" id="walk"  class="activity" data-text="Walking"/>Walking</label>
-								<br>
-								<label for="swim">
-								<input type="checkbox" id="swim"  class="activity" data-text="Swimming"/>Swimming</label>
-								<br>
-								<label for="surf">
-								<input type="checkbox" id="surf"  class="activity" data-text="Surfing"/>Surfing</label>
-			        		</div>
-			        		<div class="activityCol">
-
-								<label for="bike">
-								<input type="checkbox" id="bike"  class="activity" data-text="Biking"/>Biking</label>
-								<br>
-								<label for="yoga">
-								<input type="checkbox" id="yoga"  class="activity" data-text="Yoga"/>Yoga</label>
-								<br>
-								<label for="pilates">
-								<input type="checkbox" id="pilates"  class="activity" data-text="Pilates"/>Pilates</label>
-								<br>
-								<label for="cardio">
-								<input type="checkbox" id="cardio"  class="activity" data-text="Cardio"/>Cardio</label>
-								<br>
-								<label for="dance">
-								<input type="checkbox" id="dance"  class="activity" data-text="Dancing"/>Dancing</label>
-			        		</div>
-			        		<div class="activityCol">
-
-								<label for="rock">
-								<input type="checkbox" id="rock"  class="activity" data-text="Rock Climbing"/>Rock Climbing</label>
-								<br>
-								<label for="gymnastics">
-								<input type="checkbox" id="gymnastics"  class="activity" data-text="Gymnastics"/>Gymnastics</label>
-								<br>
-								<label for="bowl">
-								<input type="checkbox" id="bowl"  class="activity" data-text="Bowling"/>Bowling</label>
-								<br>
-								<label for="rowing">
-								<input type="checkbox" id="rowing"  class="activity" data-text="Rowing"/>Rowing</label>
-								<br>
-								<label for="tennis">
-								<input type="checkbox" id="tennis"  class="activity" data-text="Tennis"/>Tennis</label>
-			        		</div>
-			        		<div class="activityCol">
-								<label for="baseball">
-								<input type="checkbox" id="baseball"  class="activity" data-text="Baseball"/>Baseball</label>
-								<br>
-								<label for="basketball">
-								<input type="checkbox" id="basketball"  class="activity" data-text="Basketball"/>Basketball</label>
-								<br>
-								<label for="football">
-								<input type="checkbox" id="football"  class="activity" data-text="Football"/>Football</label>
-								<br>
-								<label for="soccer">
-								<input type="checkbox" id="soccer"  class="activity" data-text="Soccer"/>Soccer</label>
-								<br>
-								<label for="rugby">
-								<input type="checkbox" id="rugby"  class="activity" data-text="Rugby"/>Rugby</label>
-								<br>
-				        		</div>
-			        		<div class="activityCol">
-								<label for="volleyball">
-								<input type="checkbox" id="volleyball" class="activity" data-text="Volleyball"/>Volleyball</label>
-								<br>
-								<label for="golf">
-								<input type="checkbox" id="golf"  class="activity" data-text="Golf"/>Golf</label>
-								<br>
-								<label for="hockey">
-								<input type="checkbox" id="hockey"  class="activity" data-text="Hockey"/>Hockey</label>
-								<br>
-								<label for="ice">
-								<input type="checkbox" id="ice" class="activity" data-text="Ice Skating"/>Ice Skating</label>
-								<br>
-								<label for="skateboard">
-								<input type="checkbox" id="skateboard" class="activity" data-text="Skateboarding"/>Skateboarding</label>
-			        		</div>
-				        </div>
+				    <h3 class="mobileTitle">Activities</h3>
+		        	<div class="activityFlex">
+		        			<div class="activityFlexDiv">
+		        				
+			        		<label for="weightlift" class="actEnt">
+							<input type="checkbox" id="weightlift" class="activity" data-text="Weightlifting"/>Weightlifting</label>
+							<br>
+							<label for="run" class="actEnt">
+							<input type="checkbox" id="run" class="activity" data-text="Running"/>Running</label>
+							<br>
+							<label for="walk" class="actEnt">
+							<input type="checkbox" id="walk"  class="activity" data-text="Walking"/>Walking</label>
+							<br>
+							<label for="swim" class="actEnt">
+							<input type="checkbox" id="swim"  class="activity" data-text="Swimming"/>Swimming</label>
+							<br>
+							<label for="surf" class="actEnt">
+							<input type="checkbox" id="surf"  class="activity" data-text="Surfing"/>Surfing</label>
+							<br>
+							<label for="bike" class="actEnt">
+							<input type="checkbox" id="bike"  class="activity" data-text="Biking"/>Biking</label>
+							<br>
+							<label for="yoga" class="actEnt">
+							<input type="checkbox" id="yoga"  class="activity" data-text="Yoga"/>Yoga</label>
+							<br>
+							<label for="pilates" class="actEnt">
+							<input type="checkbox" id="pilates"  class="activity" data-text="Pilates"/>Pilates</label>
+							<br>
+							<label for="cardio" class="actEnt">
+							<input type="checkbox" id="cardio"  class="activity" data-text="Cardio"/>Cardio</label>
+							<br>
+							<label for="dance" class="actEnt">
+							<input type="checkbox" id="dance"  class="activity" data-text="Dancing"/>Dancing</label>
+							<br>
+							<label for="ice" class="actEnt">
+							<input type="checkbox" id="ice" data-text="Ice Skating"/>Ice Skating</label>
+							<br>
+							<label for="gymnastics" class="actEnt">
+							<input type="checkbox" id="gymnastics"  class="activity" data-text="Gymnastics"/>Gymnastics</label>
+							<br>
+							<label for="bowl" class="actEnt">
+							<input type="checkbox" id="bowl"  class="activity" data-text="Bowling"/>Bowling</label>
+							<br>
+							<label for="rowing" class="actEnt">
+							<input type="checkbox" id="rowing"  class="activity" data-text="Rowing"/>Rowing</label>
+							<br>
+							<label for="tennis" class="actEnt">
+							<input type="checkbox" id="tennis"  class="activity" data-text="Tennis"/>Tennis</label>
+							<br>
+							<label for="baseball" class="actEnt">
+							<input type="checkbox" id="baseball"  class="activity" data-text="Baseball"/>Baseball</label>
+							<br>
+							<label for="basketball" class="actEnt">
+							<input type="checkbox" id="basketball"  class="activity" data-text="Basketball"/>Basketball</label>
+							<br>
+							<label for="football" class="actEnt">
+							<input type="checkbox" id="football"  class="activity" data-text="Football"/>Football</label>
+							<br>
+							<label for="soccer" class="actEnt">
+							<input type="checkbox" id="soccer"  class="activity" data-text="Soccer"/>Soccer</label>
+							<br>
+							<label for="rugby" class="actEnt">
+							<input type="checkbox" id="rugby"  class="activity" data-text="Rugby"/>Rugby</label>
+							<br>
+							<label for="volleyball" class="actEnt">
+							<input type="checkbox" id="volleyball" class="activity" data-text="Volleyball"/>Volleyball</label>
+							<br>
+							<label for="golf" class="actEnt">
+							<input type="checkbox" id="golf"  class="activity" data-text="Golf"/>Golf</label>
+							<br>
+							<label for="rock" class="actEnt">
+							<input type="checkbox" id="rock"  class="activity" data-text="Rock Climbing"/>Climbing</label>
+							<br>
+							<label for="hockey" class="actEnt">
+							<input type="checkbox" id="hockey"  class="activity" data-text="Hockey"/>Hockey</label>
+							<br>
+							<label for="skateboard" class="actEnt">
+							<input type="checkbox" id="skateboard" data-text="Skateboarding"/>Skateboarding</label>
+		        			</div>
+				    </div>
 				        <br>
 				        <div class="actSubDiv">
 				        	<a href="#close" id="submitActivities">Submit</a>
@@ -214,6 +208,12 @@
 				<input type="submit" name="profileSubmit" value="Submit" id="formSubmit">
 			</div>
 		</div>
+
+		<footer class="mobileFooter">
+	        <div id="mobileLogout">
+				<i class="fas fa-sign-out-alt"></i>
+	        </div>
+		</footer>
 	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 	<script type="text/javascript" src="js/profile.js"></script>
 	<script type="text/javascript" src="js/formLogic.js"></script>

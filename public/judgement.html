@@ -2,6 +2,7 @@
 <html lang="en-us">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Kinections | People</title>
 
 		<!-- reset -->
@@ -93,121 +94,115 @@
 
 		        <h2>Search</h2>
 
-		        	<h3>Search radius: </h3>
+		        	<h3 class="mobileTitle">Search radius: </h3>
 		        	<input type="range" min="1" max="35" value="5" class="slider" id="myRadius">
 					<p>Maximum Distance:  <span id = "maxRadius"></span> miles</p>
 
-					<label for="gender"><h3>I want to connect with: </h3></label>
+					<label for="gender"><h3 class="mobileTitle">I want to connect with: </h3></label>
 					<select name="gender" id="genderPref">
 					  	<option value="all">Anyone</option>
 					  	<option value="male">Men Only</option>
 					  	<option value="female">Women Only</option>
 					</select>
 
-					<h3>Age Range</h3>
+					<h3 class="mobileTitle">Age Range</h3>
 					<label for="minAge">
-					Minimum Age:
+					Minimum Age: <br class="mobileBreak">
 					<input type="number" name="minAge" id="minAge"> years old
 					</label><br>
 
 
 					<label for="maxAge">
-					Maximum Age:
+					Maximum Age: <br class="mobileBreak">
 					<input type="number" name="minAge" id="maxAge"> years old
 					</label>
 
 
-		        	<h3>Activities</h3>
-		        	<div class="activityFlex">
-		        		<div class="activityCol">
-
-			        		<label for="weightlift">
+		        	<h3 class="mobileTitle">Activities</h3>
+					<div class="activityFlex">
+		        			<div class="activityFlexDiv">
+		        				
+			        		<label for="weightlift" class="actEnt">
 							<input type="checkbox" id="weightlift" class="activity" data-text="Weightlifting"/>Weightlifting</label>
 							<br>
-							<label for="run">
+							<label for="run" class="actEnt">
 							<input type="checkbox" id="run" class="activity" data-text="Running"/>Running</label>
 							<br>
-							<label for="walk">
+							<label for="walk" class="actEnt">
 							<input type="checkbox" id="walk"  class="activity" data-text="Walking"/>Walking</label>
 							<br>
-							<label for="swim">
+							<label for="swim" class="actEnt">
 							<input type="checkbox" id="swim"  class="activity" data-text="Swimming"/>Swimming</label>
 							<br>
-							<label for="surf">
+							<label for="surf" class="actEnt">
 							<input type="checkbox" id="surf"  class="activity" data-text="Surfing"/>Surfing</label>
-		        		</div>
-		        		<div class="activityCol">
-
-							<label for="bike">
+							<br>
+							<label for="bike" class="actEnt">
 							<input type="checkbox" id="bike"  class="activity" data-text="Biking"/>Biking</label>
 							<br>
-							<label for="yoga">
+							<label for="yoga" class="actEnt">
 							<input type="checkbox" id="yoga"  class="activity" data-text="Yoga"/>Yoga</label>
 							<br>
-							<label for="pilates">
+							<label for="pilates" class="actEnt">
 							<input type="checkbox" id="pilates"  class="activity" data-text="Pilates"/>Pilates</label>
 							<br>
-							<label for="cardio">
+							<label for="cardio" class="actEnt">
 							<input type="checkbox" id="cardio"  class="activity" data-text="Cardio"/>Cardio</label>
 							<br>
-							<label for="dance">
+							<label for="dance" class="actEnt">
 							<input type="checkbox" id="dance"  class="activity" data-text="Dancing"/>Dancing</label>
-		        		</div>
-		        		<div class="activityCol">
-
-							<label for="rock">
-							<input type="checkbox" id="rock"  class="activity" data-text="Rock Climbing"/>Rock Climbing</label>
 							<br>
-							<label for="gymnastics">
-							<input type="checkbox" id="gymnastics"  class="activity" data-text="Gymnastics"/>Gymnastics</label>
-							<br>
-							<label for="bowl">
-							<input type="checkbox" id="bowl"  class="activity" data-text="Bowling"/>Bowling</label>
-							<br>
-							<label for="rowing">
-							<input type="checkbox" id="rowing"  class="activity" data-text="Rowing"/>Rowing</label>
-							<br>
-							<label for="tennis">
-							<input type="checkbox" id="tennis"  class="activity" data-text="Tennis"/>Tennis</label>
-		        		</div>
-		        		<div class="activityCol">
-							<label for="baseball">
-							<input type="checkbox" id="baseball"  class="activity" data-text="Baseball"/>Baseball</label>
-							<br>
-							<label for="basketball">
-							<input type="checkbox" id="basketball"  class="activity" data-text="Basketball"/>Basketball</label>
-							<br>
-							<label for="football">
-							<input type="checkbox" id="football"  class="activity" data-text="Football"/>Football</label>
-							<br>
-							<label for="soccer">
-							<input type="checkbox" id="soccer"  class="activity" data-text="Soccer"/>Soccer</label>
-							<br>
-							<label for="rugby">
-							<input type="checkbox" id="rugby"  class="activity" data-text="Rugby"/>Rugby</label>
-							<br>
-			        		</div>
-		        		<div class="activityCol">
-							<label for="volleyball">
-							<input type="checkbox" id="volleyball" class="activity" data-text="Volleyball"/>Volleyball</label>
-							<br>
-							<label for="golf">
-							<input type="checkbox" id="golf"  class="activity" data-text="Golf"/>Golf</label>
-							<br>
-							<label for="hockey">
-							<input type="checkbox" id="hockey"  class="activity" data-text="Hockey"/>Hockey</label>
-							<br>
-							<label for="ice">
+							<label for="ice" class="actEnt">
 							<input type="checkbox" id="ice" data-text="Ice Skating"/>Ice Skating</label>
 							<br>
-							<label for="skateboard">
+							<label for="gymnastics" class="actEnt">
+							<input type="checkbox" id="gymnastics"  class="activity" data-text="Gymnastics"/>Gymnastics</label>
+							<br>
+							<label for="bowl" class="actEnt">
+							<input type="checkbox" id="bowl"  class="activity" data-text="Bowling"/>Bowling</label>
+							<br>
+							<label for="rowing" class="actEnt">
+							<input type="checkbox" id="rowing"  class="activity" data-text="Rowing"/>Rowing</label>
+							<br>
+							<label for="tennis" class="actEnt">
+							<input type="checkbox" id="tennis"  class="activity" data-text="Tennis"/>Tennis</label>
+							<br>
+							<label for="baseball" class="actEnt">
+							<input type="checkbox" id="baseball"  class="activity" data-text="Baseball"/>Baseball</label>
+							<br>
+							<label for="basketball" class="actEnt">
+							<input type="checkbox" id="basketball"  class="activity" data-text="Basketball"/>Basketball</label>
+							<br>
+							<label for="football" class="actEnt">
+							<input type="checkbox" id="football"  class="activity" data-text="Football"/>Football</label>
+							<br>
+							<label for="soccer" class="actEnt">
+							<input type="checkbox" id="soccer"  class="activity" data-text="Soccer"/>Soccer</label>
+							<br>
+							<label for="rugby" class="actEnt">
+							<input type="checkbox" id="rugby"  class="activity" data-text="Rugby"/>Rugby</label>
+							<br>
+							<label for="volleyball" class="actEnt">
+							<input type="checkbox" id="volleyball" class="activity" data-text="Volleyball"/>Volleyball</label>
+							<br>
+							<label for="golf" class="actEnt">
+							<input type="checkbox" id="golf"  class="activity" data-text="Golf"/>Golf</label>
+							<br>
+							<label for="rock" class="actEnt">
+							<input type="checkbox" id="rock"  class="activity" data-text="Rock Climbing"/>Climbing</label>
+							<br>
+							<label for="hockey" class="actEnt">
+							<input type="checkbox" id="hockey"  class="activity" data-text="Hockey"/>Hockey</label>
+							<br>
+							<label for="skateboard" class="actEnt">
 							<input type="checkbox" id="skateboard" data-text="Skateboarding"/>Skateboarding</label>
-		        		</div>
+		        			</div>
 				    </div>
+
+
 			        <div class="actSubDiv">
 			        	<a href="#close" id="submitActivities">Submit</a>
 			        </div>
-			        
 		    </div>
 
 		</div>
@@ -229,6 +224,15 @@
 				</div>
 			</div>
 
+			<break class="mobileBreak"></break>
+
+			<div class="judgement mobileBreak">
+				<button  id="reject">Reject</button>
+				<button  id="kinect">Kinect</button>
+			</div>
+
+			<break class="mobileBreak"></break>
+
 			<div class="box2">
 
 				<h3>Basics</h3>
@@ -245,7 +249,7 @@
 			</div>
 
 			<break></break>
-			<div class="judgement">
+			<div class="judgement browserBreak">
 				<button  id="reject">Reject</button>
 				<button  id="kinect">Kinect</button>
 			</div>
@@ -263,6 +267,10 @@
 			</p>
 			</div>
 		</form>
+
+		<footer class="mobileFooter">
+			<a href="#openModal"><i class="fas fa-search" id="mobileSearch"></i></a>
+		</footer>
 
 	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 	<script type="text/javascript" src="js/judgement.js"></script>

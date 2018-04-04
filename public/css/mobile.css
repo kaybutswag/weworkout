@@ -5,50 +5,72 @@
 	}
 
 	body {
-	  background: black;
-	  /*background-size: fill;*/
-	  background-repeat: no-repeat;
-	}
-
-	 body {
+	  	background: black;
 		font-family: 'Lato', sans-serif;
-		/*background-image: url('../img/signIn.jpg');*/
-
+		background-image: url('../img/signIn.jpg');
 		background-size: cover;
 		background-repeat: no-repeat;
-		background-position: center;
+		background-position: 20%;
 		color: #212121;
-		font-size: 25px;
+		font-size: 20px;
 		box-sizing: border-box;
 		min-height: 100%;
 		display: flex;
 		justify-content: center;
-		align-items: space-around;
 		align-items: center;
 		flex-wrap: wrap;
 		background-attachment: fixed;
+	    overflow-x: hidden;
+	    overflow-y: scroll;
 	}
 
-	/*need to look at this.*/
 	textarea {
-		width: 100%;
-		height: 23%;
+		width: 97%;
+		min-height: 150px;
 		resize: none;
 		font-family: 'Lato', sans-serif;
 		font-size: 20px;
-		min-height: 100px;
 	}
 
-	input[name="email"], input[type="password"], textarea, input[type="number"], select[name="gender"], input[name="location"], select, #dob {
+	input[name="email"], input[type="password"], textarea, input[type="number"], input[name="location"], select, #dob {
 		border: 1px #ddd solid;
 		padding: 5px;
 		margin: 3px;
 		font-family: 'Lato', sans-serif;
 	}
 
-	input[name="email"], input[type="password"], {
+	.activityFlexDiv {
+		display: flex;
+		justify-content: space-between;
+		flex-flow: row wrap;
+		width: 90%;
+	}
+
+	.actEnt{
+		flex: 1;
+		min-width: 134px;
+	}
+
+	#dob {
+		width: 160px;
+	}
+
+	select[name="gender"] {
+		width: 100px;
+	}
+
+	input[type="number"], select[name="gender"], input[name="location"], #dob {
+		font-size: 20px;
+		padding: 0;
+	}
+
+	input[name="location"] {
+		width: 150px;
+	}
+
+	input[name="email"], input[type="password"] {
 		margin: 10px;
-		width: 70%;
+		width: 80%;
 	}
 
 	#age {
@@ -64,6 +86,7 @@
 		width: 100%;
 		background-color: white;
 		height: 70px;
+		box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
 		z-index: 500;
 	}
 
@@ -77,7 +100,8 @@
 
 	footer {
 		bottom: 0;
-		z-index: -1;
+		display: flex;
+		justify-content: center;
 	}
 
 	h3 {
@@ -94,17 +118,13 @@
 		width: 100%;
 	}
 
-	.profileSecTitle {
-		margin-top: 10px;
-	}
-
 	h2{
 		font-size: 1.9em;
 		font-weight: 600;
 	}
 
 	input[placeholder="First Name"] {
-		font-size: 1.5em;
+		font-size: 2em;
 		max-width: 100%;
 		border: 1px #ddd solid;
 	}
@@ -117,8 +137,12 @@
 		overflow: hidden;
 	}
 
-	.activityCol {
-		flex: 1;
+	.browserBreak {
+		display: none !important;
+	}
+
+	.mobileTitle {
+		margin: 10px 0 10px 0;
 	}
 
 	.actSubDiv {
@@ -176,7 +200,7 @@
 		display: flex;
 	}
 
-	#message {
+	#m {
 		margin-top: 3px;
 		width: 100%;
 		border: 1px #ddd solid;
@@ -184,18 +208,32 @@
 		font-family: 'Lato', sans-serif;
 	}
 
-	.headerDiv, .abilityInput, .newKinectionsDiv, .kinectionsDiv {
+	.content, .headerDiv, .abilityInput, .newKinectionsDiv, .kinectionsDiv .exhausted-options {
 		display: flex;
 		justify-content: space-around;
 		flex-flow: row wrap;
 	}
 
+	.secTitle {
+		margin-top: 10px;
+		margin-bottom: 5px;
+	}
+
 	.content, .newKinectionsBench {
 		/*background-color: rgba(255,255,255,.5);*/
-		margin: 100px 50px 20px 50px;
+		margin-top: 70px;
+		margin-bottom: 20px;
 		max-width: 1100px;
-		width: 85%;
-		position:relative;
+		width: 100%;
+	  	position:relative;
+	}
+
+	.newKinectionsBench, .kinectionsBench {
+		max-width: 85%;
+	}
+
+	.content {
+		margin-bottom: 70px;
 	}
 
 	.rejected{
@@ -207,22 +245,21 @@
 	}
 
 	.newKinectionsBench {
-		/*max-height: 300px;*/
-		margin-top: 100px;
+		/*margin-top: 100px;*/
 	}
 
 	.kinectionsBench {
-		background-color: rgba(255,255,255,.5);
-		margin: 20px 100px 10px 100px; */
-		max-width: 1100px;
-		width: 70%;
-		/*max-height: 300px;*/
+		/*background-color: rgba(255,255,255,.5);*/
+		/*margin: 20px 100px 10px 100px;*/
+		/*margin-top: 70px;*/
+		margin-bottom: 70px;
+		/*max-width: 1100px;*/
+		width: 100%;
 	}
 
 	.imgPlace {
 		background-color: #ddd;
 		width: 100%;
-		/*padding-top: 80%;*/
 		position: relative;
 		display: flex;
 		justify-content: center;
@@ -252,9 +289,19 @@
 		max-height: 70px;
 	}
 
-	/*hacky, but I don't care.*/
+	.headLogo:hover {
+		background-color: #eee;
+		border-radius: 50%;
+	}
+
+	.headLogo:focus {
+		outline:0;
+	}
+
+	button:focus {outline:0;}
+
 	.headLogoActive {
-		border-bottom: 3px solid #ddd;
+		border-bottom: 3px solid #eee;
 	}
 
 	.benchTitle {
@@ -264,6 +311,19 @@
 		margin-left: 10px;
 		background-color: white;
 		min-width: 120px;
+		text-align: center;
+	}
+
+	.noKinections, .noRecommend {
+		background-color: white;
+    	text-align: center;
+    	padding: 20px;
+    	margin: 20px;
+	}
+
+	.noKinections {
+    	font-weight: 600;
+    	min-width: 170px;
 	}
 
 	/*****************************button styles****************************/
@@ -275,6 +335,21 @@
 		padding: 10px;
 		margin: 10px;
 		font-size: .9em;
+	}
+
+	.keepSwiping {
+		cursor: pointer;
+		border: none;
+		color: white;
+		padding: 10px;
+		font-size: .9em;	
+	}
+
+	#continue {
+		background-color: #fff;
+		padding: 10px;
+		text-decoration: none;
+		color: #212121;
 	}
 
 	input[name="profileSubmit"], #viewChat, #viewBio {
@@ -289,29 +364,22 @@
 		font-size: .9em;
 	}
 
+	input[type="range"] {
+
+	}
+
 	.profileLink, .judgementLink, .matchesLink {
 		cursor: pointer;
 		border: none;
 		background: transparent;
 	}
 
-	.rightCaret, .leftCaret {
-		cursor: pointer;
-		border: none;
-		background: transparent;
-		color: #212121;
-		width: 50px;
-		font-size: 5em;
-		display: flex;
-		align-content: center;
-	}
-
 	.signUp, input[name="profileSubmit"], #viewChat, #viewBio {
-		background-color: #8492ff;
+		background-color: #6a7afb;
 	}
 
-	.signIn, #kinect, #submitActivities, #messageSend, #imgUploadBtn {
-		background-color: #66ab5f;
+	.signIn, #kinect, #submitActivities, #messageSend, #imgUploadBtn, .keepSwiping {
+		background-color: #66ab5f;	
 	}
 
 	#messageSend, #imgUploadBtn, #clear {
@@ -343,7 +411,7 @@
 	#kinect, #reject {
 		font-size: 2em;
 		font-weight: 700;
-		padding: 20px;
+		/*padding: 20px;*/
 	}
 
 	#reject, #clear {
@@ -353,7 +421,7 @@
 	#search, #returnMatch, #logout {
 		cursor: pointer;
 		position: fixed;
-		z-index: 20;
+		z-index: 501;
 		background-color: white;
 		padding: 7px;
 		border-radius: 50%;
@@ -361,8 +429,46 @@
 		top: 100px;
 	}
 
+	#mobileSearch {
+		margin-top: 16px;
+		background-color: white;
+		padding: 7px;
+		border-radius: 50%;
+		color: #212121;
+		border: 2px solid #212121;
+	}
+
+	#mobileLogout {
+		margin-top: 16px;
+		background-color: white;
+		padding: 6px;
+		border-radius: 50%;
+		color: #212121;
+		border: 2px solid #212121;
+		height: 38px;
+		width: 38px;
+		text-align: center;
+		box-sizing: border-box;
+	}
+
+	.nRTitle {
+		margin-bottom: 20px;
+		font-size: 1.3em;
+	}
+
+	.search {
+		/*display: none;*/
+		cursor: pointer;
+		color: #212121;
+		border-radius: 50%;
+		text-decoration: none;
+		font-style: italic;
+		font-weight: 600;
+	}
+
 	#search, #logout {
 		right: 20px;
+		display: none;
 	}
 
 	#returnMatch {
@@ -374,19 +480,22 @@
 	}
 
 	#exhausted-options {
-		font-weight: 600;
-		font-size: 32px;
-		line-height: 1.5;
+		/*background-color: white;*/
+		width: 50%;
+		padding: 20px;
+		margin: 20px;
+	}
+
+	.m2 {
+		color: #555;
 	}
 
 	.exhausted-options {
-		position: absolute;
-		top: 160px;
-		margin-left: auto;
+		/*background-color: rgba(255,255,255,.5);*/
+		margin-bottom: 300px;
 	}
 
 	.signInPanel {
-		/*margin: 150px auto;*/
 		margin-bottom: 50px;
 		text-align: center;
 		width: 14%;
@@ -394,7 +503,6 @@
 		font-weight: 800;
 		background-color: rgba(255,255,255,.5);
 		padding: 20px;
-		/*this isn't responsive*/
 		min-width: 300px;
 	}
 
@@ -403,35 +511,37 @@
 	}
 
 	.title {
-		margin-top: -133px;
+		margin-top: -60px; 
 		/*have to adjust with media query*/
-		margin-left: 100px;
+		/*margin-left: 100px;*/
 		color: white;
 		font-weight: 800;
-		font-size: 150px;
+		font-size: 68px;
+    	text-shadow: 3px -2px rgba(0,0,0,.2);
 	}
 
 	.userCard, .box2, .userCard2 {
 		background-color: rgba(255, 255, 255, 1);
-		margin: 100px;
 		padding: 20px;
 		margin: 20px;
 	}
 
 	.box2 {
-		margin-bottom: 0px;
+		margin: 10px 20px 20px 20px;
+	}
+
+	.userCard {
+		margin: 20px 20px 10px 20px;
 	}
 
 	.userCard, .userCard2  {
-		max-width: 500px;
-		margin-left: auto;
-		margin-right: auto;
-		/*flex: 1;*/
-		/*width: 200px;*/
+		flex: 1;
+		min-width: 200px;
 	}
 
 	.userCardImg {
 		width: 100%;
+		/*min-width: 295px;*/
 		background-size: cover;
 		background-position: center;
 		display: flex;
@@ -439,8 +549,16 @@
 		align-items: flex-end;
 	}
 
+	#matchModal > .content > h2 {
+		font-size: 1.2em;
+	}
+
+	#matchModal > .content > .userCard {
+		min-width: 100px;
+	}
+
 	.box2 {
-		/*flex: 2;*/
+		flex: 2;
 	}
 
 	.abilityDiv {
@@ -457,8 +575,6 @@
 	    background: rgba(0, 0, 0, 0.8);
 	    z-index: 99999;
 	    opacity:0;
-	    -webkit-transition: opacity 400ms ease-in;
-	    -moz-transition: opacity 400ms ease-in;
 	    transition: opacity 400ms ease-in;
 	    pointer-events: none;
 	}
@@ -467,12 +583,50 @@
 	    pointer-events: auto;
 	}
 	.modalDialog > div {
-	    width: 85%;
+	    width: 82%;
 	    position: relative;
 	    margin: 10% auto;
 	    padding: 5px 20px 13px 20px;
-	    /*border-radius: 10px;*/
 	    background: #fff;
+	}
+	#matchModal:target {
+	    opacity:1;
+	    pointer-events: auto;
+	}
+	#matchModal > .content {
+		align-items: center;
+		background-color: rgba(0,0,0,0);
+		max-width: 800px;
+	}
+	#matchModal {
+		padding: 50px;
+		overflow: scroll;
+	}
+	.matchLogo {
+		max-width: 90px;
+		max-height: 90px;
+	}
+	.content > h2 {
+		color: white;
+	}
+	#matchModal {
+		position: fixed;
+	    top: 0;
+	    right: 0;
+	    bottom: 0;
+	    left: 0;
+	    background: rgba(0, 0, 0, 0.8);
+	    z-index: 99999;
+	    opacity:0;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    transition: opacity 300ms ease-in;
+	    pointer-events: none;
+	}
+	#matchModal > .close {
+		right: 150px;
+		top: 150px;
 	}
 	.close {
 	    background: #fff;
@@ -488,20 +642,33 @@
 	    -webkit-border-radius: 12px;
 	    -moz-border-radius: 12px;
 	    border-radius: 12px;
-	    -moz-box-shadow: 1px 1px 3px #000;
-	    -webkit-box-shadow: 1px 1px 3px #000;
 	    box-shadow: 1px 1px 3px #000;
 	}
 	.close:hover {
-	    background: #00d9ff;
+	    background: #eee;
 	}
 
+	.slider {
+		-webkit-appearance: none;
+		appearance: none;
+		height: 10px;
+		border-radius: 5px;
+		background: #212121;
+		opacity: .7;
+		outline: none;
+		width: 30%;
+	}
 
+	.slider:hover{
+		opacity: 1;
+	}
 
 	/* pic testin */
 	#changingPic {
 	  height: 100vh;
 	  width: 100%;
+	  margin-left: auto;
+	  margin-right: auto;
 	  position: fixed;
 	  bottom: 0;
 	  left: 0;
@@ -516,48 +683,40 @@
 	  }
 
 	  .shadow {
-	    -webkit-box-shadow: 5px 5px 5px #aaa;
-	    -moz-box-shadow: 5px 5px 5px #aaa;
-	    box-shadow: 5px 5px 5px #aaa;
 	    margin-bottom: 10px;
 	  }
 
 	  #changingPic img {
-	    -webkit-transition: opacity 1s ease-in-out;
-	    -moz-transition: opacity 1s ease-in-out;
-	    -o-transition: opacity 1s ease-in-out;
 	    transition: opacity 1s ease-in-out;
 	    opacity:0;
 	    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 	    filter: alpha(opacity=0);
 	    height: 100vh;
-	    width: 100%;
+	    /*width: 100%;*/
 	    position: fixed;
 	    bottom: 0;
-	    left: 0;
+	    /*left: -50%;*/
 	    z-index: -1;
 	    background-size: cover;
 	  }
 
 	/* pic testing ends */
 
+	#loader_judgement{
+		position: absolute;
+		top: 250px;
+	}
 
+	#loader_judgement > img {
+		max-width: 300px;
+		max-height: 300px;
+		opacity: .5;
+	}
 
 	#loader{
 		display: none;
 	}
 
-	    /* Safari */
-	/*@-webkit-keyframes spin {
-	    0% { -webkit-transform: rotate(0deg); }
-	    100% { -webkit-transform: rotate(360deg); }
-	}*/
-
-	/*@keyframes spin {
-	    0% { transform: rotate(0deg); }
-	    100% { transform: rotate(360deg); }
-	}*/
-	/* loading indicator end */
 	.rejectKinnectButton {
 	   cursor: pointer;
 	   border: none;
@@ -567,5 +726,4 @@
 	   font-size: .9em;
 	  text-decoration: none;
 	}
-
 }
