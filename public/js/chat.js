@@ -6,7 +6,7 @@ function generateChatHistory(screenFriendId) {
 
   $.post("/api/oldChat", chathistory)
   .then(function (data) {
-    console.log(data);
+    // console.log(data);
     if(data===null)
       return;
     for(var i=0; i<data.length;i++){
@@ -83,11 +83,11 @@ $(function () {
   });
 
   socket.on('chat message', function (msg) {
-    console.log("received chat message");
+    // console.log("received chat message");
     var newMessage=$("<div>");
-    console.log(myId);
-    console.log(msg.FriendId);
-    console.log(screenFriendId);
+    // console.log(myId);
+    // console.log(msg.FriendId);
+    // console.log(screenFriendId);
     if(parseInt(myId)===parseInt(msg.FriendId) && parseInt(screenFriendId) === parseInt(msg.SenderId))
       newMessage.addClass('friendMsg');
     else if(parseInt(screenFriendId)===parseInt(msg.FriendId) && parseInt(myId) === parseInt(msg.SenderId))

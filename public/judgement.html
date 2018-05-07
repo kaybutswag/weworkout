@@ -92,30 +92,37 @@
 		<div id="openModal" class="modalDialog">
 		    <div>	<a href="#close" title="Close" class="close"><i class="fas fa-times"></i></a>
 
-		        <h2>Search</h2>
+		        <h2 class="modalTitle">Search</h2>
+		        	<div class="searchModalTopForm">
+			        	<div>
+				        	<h3 class="mobileTitle">Search radius:</h3>
+				        	<input type="range" min="1" max="35" value="5" class="slider" id="myRadius">
+							<p>Maximum Distance:  <span id = "maxRadius"></span> miles</p>
+				        </div>
+			        		
+			        	<div class="kinectWith">
+							<label for="gender"><h3 class="mobileTitle">Kinect With:</h3></label>
+							<select name="gender" id="genderPref">
+							  	<option value="all">Anyone</option>
+							  	<option value="male">Men Only</option>
+							  	<option value="female">Women Only</option>
+							</select>
+			        	</div>
 
-		        	<h3 class="mobileTitle">Search radius: </h3>
-		        	<input type="range" min="1" max="35" value="5" class="slider" id="myRadius">
-					<p>Maximum Distance:  <span id = "maxRadius"></span> miles</p>
-
-					<label for="gender"><h3 class="mobileTitle">I want to connect with: </h3></label>
-					<select name="gender" id="genderPref">
-					  	<option value="all">Anyone</option>
-					  	<option value="male">Men Only</option>
-					  	<option value="female">Women Only</option>
-					</select>
-
-					<h3 class="mobileTitle">Age Range</h3>
-					<label for="minAge">
-					Minimum Age: <br class="mobileBreak">
-					<input type="number" name="minAge" id="minAge"> years old
-					</label><br>
+			        	<div>
+							<h3 class="mobileTitle">Age Range:</h3>
+							<label for="minAge">
+							Minimum Age: <br class="mobileBreak">
+							<input type="number" name="minAge" id="minAge"> years old
+							</label>
+							<label for="maxAge"><br>
+							Maximum Age: <br class="mobileBreak">
+							<input type="number" name="minAge" id="maxAge"> years old
+							</label>
+			        	</div>
+		        	</div>
 
 
-					<label for="maxAge">
-					Maximum Age: <br class="mobileBreak">
-					<input type="number" name="minAge" id="maxAge"> years old
-					</label>
 
 
 		        	<h3 class="mobileTitle">Activities</h3>
