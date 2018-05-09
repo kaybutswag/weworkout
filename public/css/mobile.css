@@ -13,12 +13,20 @@
 		background-position: 20%;
 		color: #212121;
 		font-size: 20px;
-		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		        box-sizing: border-box;
 		min-height: 100%;
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-wrap: wrap;
+		-webkit-box-pack: center;
+		    -ms-flex-pack: center;
+		        justify-content: center;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		        align-items: center;
+		-ms-flex-wrap: wrap;
+		    flex-wrap: wrap;
 		background-attachment: fixed;
 	    overflow-x: hidden;
 	    overflow-y: scroll;
@@ -40,14 +48,23 @@
 	}
 
 	.activityFlexDiv {
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
-		justify-content: space-between;
-		flex-flow: row wrap;
+		-webkit-box-pack: justify;
+		    -ms-flex-pack: justify;
+		        justify-content: space-between;
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: normal;
+		    -ms-flex-flow: row wrap;
+		        flex-flow: row wrap;
 		width: 90%;
 	}
 
 	.actEnt{
-		flex: 1;
+		-webkit-box-flex: 1;
+		    -ms-flex: 1;
+		        flex: 1;
 		min-width: 134px;
 	}
 
@@ -86,7 +103,8 @@
 		width: 100%;
 		background-color: white;
 		height: 70px;
-		box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+		-webkit-box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+		        box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
 		z-index: 500;
 	}
 
@@ -100,8 +118,12 @@
 
 	footer {
 		bottom: 0;
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
-		justify-content: center;
+		-webkit-box-pack: center;
+		    -ms-flex-pack: center;
+		        justify-content: center;
 	}
 
 	h3 {
@@ -131,7 +153,8 @@
 
 	break {
 		display: inline-block;
-		flex-basis: 100%;
+		-ms-flex-preferred-size: 100%;
+		    flex-basis: 100%;
 		width: 0px;
 		height: 0px;
 		overflow: hidden;
@@ -146,23 +169,34 @@
 	}
 
 	.actSubDiv {
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
-		justify-content: flex-end;
+		-webkit-box-pack: end;
+		    -ms-flex-pack: end;
+		        justify-content: flex-end;
 		width: 100%;
-		text-align: right
 		padding: 15px;
 	}
 
 	.profSubDiv {
 		width: 100%;
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
-		justify-content: flex-end;
+		-webkit-box-pack: end;
+		    -ms-flex-pack: end;
+		        justify-content: flex-end;
 		margin: 0;
 	}
 
 	.activityFlex {
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
-		justify-content: space-between;
+		-webkit-box-pack: justify;
+		    -ms-flex-pack: justify;
+		        justify-content: space-between;
 		margin-top: 10px;
 		margin-bottom: 10px;
 	}
@@ -197,6 +231,8 @@
 	}
 
 	.messageDiv {
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
 	}
 
@@ -209,9 +245,15 @@
 	}
 
 	.content, .headerDiv, .abilityInput, .newKinectionsDiv, .kinectionsDiv .exhausted-options {
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
-		justify-content: space-around;
-		flex-flow: row wrap;
+		-ms-flex-pack: distribute;
+		    justify-content: space-around;
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: normal;
+		    -ms-flex-flow: row wrap;
+		        flex-flow: row wrap;
 	}
 
 	.secTitle {
@@ -261,9 +303,15 @@
 		background-color: #ddd;
 		width: 100%;
 		position: relative;
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
-		justify-content: center;
-		align-items: center;
+		-webkit-box-pack: center;
+		    -ms-flex-pack: center;
+		        justify-content: center;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		        align-items: center;
 	}
 
 	.imageForm {
@@ -400,6 +448,8 @@
 
 	#imgUploadForm {
 		width: 100%;
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
 	}
 
@@ -448,7 +498,8 @@
 		height: 38px;
 		width: 38px;
 		text-align: center;
-		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		        box-sizing: border-box;
 	}
 
 	.nRTitle {
@@ -535,18 +586,25 @@
 	}
 
 	.userCard, .userCard2  {
-		flex: 1;
+		-webkit-box-flex: 1;
+		    -ms-flex: 1;
+		        flex: 1;
 		min-width: 200px;
 	}
 
 	.userCardImg {
 		width: 100%;
-		/*min-width: 295px;*/
 		background-size: cover;
 		background-position: center;
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
-		justify-content: space-between;
-		align-items: flex-end;
+		-webkit-box-pack: justify;
+		    -ms-flex-pack: justify;
+		        justify-content: space-between;
+		-webkit-box-align: end;
+		    -ms-flex-align: end;
+		        align-items: flex-end;
 	}
 
 	#matchModal > .content > h2 {
@@ -557,12 +615,20 @@
 		min-width: 100px;
 	}
 
+	#openModal {
+		overflow-y: scroll;
+	}
+
 	.box2 {
-		flex: 2;
+		-webkit-box-flex: 2;
+		    -ms-flex: 2;
+		        flex: 2;
 	}
 
 	.abilityDiv {
-		flex: 1;
+		-webkit-box-flex: 1;
+		    -ms-flex: 1;
+		        flex: 1;
 	}
 
 	/*for modal*/
@@ -575,6 +641,8 @@
 	    background: rgba(0, 0, 0, 0.8);
 	    z-index: 99999;
 	    opacity:0;
+	    -webkit-transition: opacity 400ms ease-in;
+	    -o-transition: opacity 400ms ease-in;
 	    transition: opacity 400ms ease-in;
 	    pointer-events: none;
 	}
@@ -594,7 +662,9 @@
 	    pointer-events: auto;
 	}
 	#matchModal > .content {
-		align-items: center;
+		-webkit-box-align: center;
+		    -ms-flex-align: center;
+		        align-items: center;
 		background-color: rgba(0,0,0,0);
 		max-width: 800px;
 	}
@@ -618,9 +688,17 @@
 	    background: rgba(0, 0, 0, 0.8);
 	    z-index: 99999;
 	    opacity:0;
+	    display: -webkit-box;
+	    display: -ms-flexbox;
 	    display: flex;
-	    justify-content: center;
-	    align-items: center;
+	    -webkit-box-pack: center;
+	        -ms-flex-pack: center;
+	            justify-content: center;
+	    -webkit-box-align: center;
+	        -ms-flex-align: center;
+	            align-items: center;
+	    -webkit-transition: opacity 300ms ease-in;
+	    -o-transition: opacity 300ms ease-in;
 	    transition: opacity 300ms ease-in;
 	    pointer-events: none;
 	}
@@ -639,10 +717,9 @@
 	    width: 24px;
 	    text-decoration: none;
 	    font-weight: bold;
-	    -webkit-border-radius: 12px;
-	    -moz-border-radius: 12px;
 	    border-radius: 12px;
-	    box-shadow: 1px 1px 3px #000;
+	    -webkit-box-shadow: 1px 1px 3px #000;
+	            box-shadow: 1px 1px 3px #000;
 	}
 	.close:hover {
 	    background: #eee;
@@ -650,7 +727,8 @@
 
 	.slider {
 		-webkit-appearance: none;
-		appearance: none;
+		-moz-appearance: none;
+		     appearance: none;
 		height: 10px;
 		border-radius: 5px;
 		background: #212121;
@@ -687,6 +765,8 @@
 	  }
 
 	  #changingPic img {
+	    -webkit-transition: opacity 1s ease-in-out;
+	    -o-transition: opacity 1s ease-in-out;
 	    transition: opacity 1s ease-in-out;
 	    opacity:0;
 	    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
