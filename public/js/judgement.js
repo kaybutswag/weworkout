@@ -236,8 +236,9 @@ $(document).ready(function(){
 		autoPopulateModal(userAge);
 	});
 
-	$("#kinect").on("click",function(event){
+	$(".judgement").on("click",'#kinect',function(event){
 		event.preventDefault();
+
 		$("form").first().animate({
 			left: "1200px"
 		}, function(){
@@ -251,7 +252,7 @@ $(document).ready(function(){
 		});
 	});
 
-	$("#reject").on("click",function(event){
+	$(".judgement").on("click",'#reject',function(event){
 		event.preventDefault();
 		$("form").first().animate({
 			left: "-1200px"
